@@ -2191,6 +2191,7 @@ a {
   top: -14px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
   background: var(--navy-btn);
   color: #fff;
   font-size: 0.7rem;
