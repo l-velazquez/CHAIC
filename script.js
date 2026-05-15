@@ -1,4 +1,10 @@
-// Countdown to September 25, 2026
+// CHAIC 2026 — interactive behaviors
+
+const prefersReducedMotion = window.matchMedia(
+  '(prefers-reduced-motion: reduce)'
+).matches;
+
+/* ── Countdown to September 25, 2026 ── */
 const TARGET = new Date('2026-09-25T00:00:00');
 
 const elDays    = document.getElementById('cd-days');
@@ -35,32 +41,223 @@ function tick() {
 tick();
 setInterval(tick, 1000);
 
-// Hamburger menu
+/* ── Mobile nav ── */
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu   = document.querySelector('.nav-menu');
 
 navToggle.addEventListener('click', () => {
   const open = navMenu.classList.toggle('open');
   navToggle.classList.toggle('open', open);
-  navToggle.setAttribute('aria-expanded', open);
+  navToggle.setAttribute('aria-expanded', String(open));
 });
 
 navMenu.querySelectorAll('a').forEach(link => {
   link.addEventListener('click', () => {
     navMenu.classList.remove('open');
     navToggle.classList.remove('open');
-    navToggle.setAttribute('aria-expanded', false);
+    navToggle.setAttribute('aria-expanded', 'false');
   });
 });
 
-// Agenda day tabs
-document.querySelectorAll('.agenda-day-btn').forEach(btn => {
+/* ── Avatar initials renderer ──
+   For any .speaker-avatar or .agenda-speaker-avatar that has data-initials
+   and no nested <img>, render the initials as text. */
+function renderInitials() {
+  const avatars = document.querySelectorAll(
+    '.speaker-avatar[data-initials], .agenda-speaker-avatar[data-initials]'
+  );
+  avatars.forEach(avatar => {
+    if (avatar.querySelector('img')) return;
+    if (avatar.querySelector('.avatar-initials')) return;
+    const initials = avatar.getAttribute('data-initials') || '';
+    if (!initials) return;
+    const span = document.createElement('span');
+    span.className = 'avatar-initials';
+    span.textContent = initials;
+    avatar.appendChild(span);
+  });
+}
+
+renderInitials();
+
+/* ── Sponsor carousel: duplicate the base 4 cards 3 more times ──
+   so the marquee loops seamlessly (track moves -25% per cycle). */
+function duplicateSponsorTrack() {
+  const track = document.getElementById('sponsors-track');
+  if (!track) return;
+  const originals = Array.from(track.children);
+  if (originals.length === 0) return;
+
+  for (let i = 0; i < 3; i++) {
+    originals.forEach(card => {
+      const clone = card.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      const img = clone.querySelector('img');
+      if (img) img.removeAttribute('loading');
+      track.appendChild(clone);
+    });
+  }
+}
+
+duplicateSponsorTrack();
+
+/* ── Agenda day tabs with sliding pill + fade swap + stats update ── */
+const dayTabs = document.querySelector('.agenda-day-tabs');
+const dayButtons = document.querySelectorAll('.agenda-day-btn');
+const dayContents = document.querySelectorAll('.agenda-day-content');
+const agendaTitle = document.getElementById('agenda-day-title');
+const agendaStats = document.getElementById('agenda-stats');
+
+function computeDayStats(dayId) {
+  const day = document.getElementById(dayId);
+  if (!day) return null;
+
+  const cards = day.querySelectorAll('.agenda-card');
+  if (cards.length === 0) {
+    // Placeholder day (Day 2 currently)
+    return null;
+  }
+
+  let totalMinutes = 0;
+  const speakers = new Set();
+
+  cards.forEach(card => {
+    const durEl = card.querySelector('.agenda-duration');
+    if (durEl) {
+      const match = durEl.textContent.match(/(\d+)/);
+      if (match) totalMinutes += parseInt(match[1], 10);
+    }
+    const speakerName = card.querySelector('.agenda-speaker-name');
+    if (speakerName) speakers.add(speakerName.textContent.trim());
+  });
+
+  const hours = Math.round(totalMinutes / 60);
+
+  return {
+    sessions: cards.length,
+    hours,
+    speakers: speakers.size,
+  };
+}
+
+function renderDayStats(stats) {
+  if (!agendaStats) return;
+
+  if (!stats) {
+    agendaStats.innerHTML = `
+      <span class="agenda-stat"><strong>Full</strong>&nbsp;program announcing</span>
+      <span class="agenda-stat"><strong>Aug</strong>&nbsp;2026</span>
+    `;
+    return;
+  }
+
+  const speakerWord = stats.speakers === 1 ? 'speaker' : 'speakers';
+  const sessionWord = stats.sessions === 1 ? 'session' : 'sessions';
+  agendaStats.innerHTML = `
+    <span class="agenda-stat"><strong>${stats.sessions}</strong>&nbsp;${sessionWord}</span>
+    <span class="agenda-stat"><strong>${stats.hours || '<1'}</strong>&nbsp;${stats.hours === 1 ? 'hour' : 'hours'}</span>
+    <span class="agenda-stat"><strong>${stats.speakers}</strong>&nbsp;${speakerWord}</span>
+  `;
+}
+
+function switchDay(targetDay, label) {
+  dayButtons.forEach(b => {
+    const active = b.dataset.day === targetDay;
+    b.classList.toggle('active', active);
+    b.setAttribute('aria-selected', String(active));
+  });
+
+  if (dayTabs) dayTabs.setAttribute('data-active', targetDay);
+
+  if (agendaTitle) {
+    agendaTitle.innerHTML = `${label} <span class="agenda-title-accent">Agenda</span>`;
+  }
+
+  // Fade-swap visible content
+  const current = document.querySelector('.agenda-day-content:not(.hidden)');
+  const next = document.getElementById(targetDay);
+  if (!next || current === next) {
+    renderDayStats(computeDayStats(targetDay));
+    return;
+  }
+
+  const swap = () => {
+    dayContents.forEach(c => c.classList.add('hidden'));
+    next.classList.remove('hidden');
+    next.classList.add('is-fading');
+    renderDayStats(computeDayStats(targetDay));
+    // Force layout so the browser commits opacity:0 before transitioning back
+    void next.offsetWidth;
+    next.classList.remove('is-fading');
+  };
+
+  if (current && !prefersReducedMotion) {
+    current.classList.add('is-fading');
+    setTimeout(swap, 180);
+  } else {
+    swap();
+  }
+}
+
+dayButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.agenda-day-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.agenda-day-content').forEach(c => c.classList.add('hidden'));
-    btn.classList.add('active');
-    document.getElementById(btn.dataset.day).classList.remove('hidden');
-    const titleEl = document.getElementById('agenda-day-title');
-    if (titleEl) titleEl.innerHTML = btn.dataset.label + ' – Agenda<br>Coming Soon';
+    switchDay(btn.dataset.day, btn.dataset.label);
   });
 });
+
+// Initialize stats on load
+renderDayStats(computeDayStats('day1'));
+
+/* ── Scroll-reveal observer ── */
+const revealEls = document.querySelectorAll('.reveal');
+
+if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+  revealEls.forEach(el => el.classList.add('is-visible'));
+} else {
+  const io = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+  );
+  revealEls.forEach(el => io.observe(el));
+}
+
+/* ── Navbar scroll state + scroll-to-top visibility ── */
+const navbar = document.querySelector('.navbar');
+const scrollTopBtn = document.querySelector('.scroll-top');
+
+let scrollTicking = false;
+function onScroll() {
+  const y = window.scrollY;
+  if (navbar) navbar.classList.toggle('is-scrolled', y > 40);
+  if (scrollTopBtn) scrollTopBtn.classList.toggle('is-visible', y > 600);
+  scrollTicking = false;
+}
+
+window.addEventListener(
+  'scroll',
+  () => {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(onScroll);
+      scrollTicking = true;
+    }
+  },
+  { passive: true }
+);
+
+onScroll();
+
+if (scrollTopBtn) {
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+    });
+  });
+}
