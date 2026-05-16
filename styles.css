@@ -301,6 +301,12 @@ a {
   pointer-events: none;
 }
 
+@media (min-width: 768px) {
+  .hero-brain {
+    filter: blur(3px);
+  }
+}
+
 .hero-brain-video,
 .hero-brain-img {
   position: absolute;
