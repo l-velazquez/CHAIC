@@ -31,7 +31,7 @@
         <li><a href="#sponsors">Sponsors</a></li>
         <li><a href="#ticket">Ticket</a></li>
         <li class="nav-contact-item">
-          <a href="#contact" class="btn-contact">
+          <a href="#contact-form" class="btn-contact">
             Contact Us
             <span class="btn-circle-nav">&#8594;</span>
           </a>
@@ -658,6 +658,87 @@
           <a href="https://lu.ma/oollgim4" class="btn-ticket luma-checkout--button" data-luma-action="checkout" data-luma-event-id="evt-fLWU47cvAQBa6a1">Register Now</a>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form -->
+  <section class="contact-section section-dark" id="contact-form">
+    <div class="contact-inner">
+      <div class="contact-form-col reveal">
+        <span class="section-eyebrow">Get in Touch</span>
+        <h2 class="contact-title">Contact CHAIC</h2>
+        <p class="contact-subtitle">
+          Let's start with a free consultation. Share your goals with us, and
+          we'll design a tailored strategy to deliver results.
+        </p>
+        <form
+          id="contact-form-el"
+          action="https://formspree.io/f/xdajokyo"
+          method="POST"
+          novalidate
+        >
+          <div class="contact-form-row">
+            <div class="contact-field">
+              <label for="cf-name">Name *</label>
+              <input id="cf-name" type="text" name="name" placeholder="Jane Smith" required />
+            </div>
+            <div class="contact-field">
+              <label for="cf-company">Company</label>
+              <input id="cf-company" type="text" name="company" placeholder="Acme Corp" />
+            </div>
+          </div>
+          <div class="contact-form-row">
+            <div class="contact-field">
+              <label for="cf-email">Email *</label>
+              <input id="cf-email" type="email" name="email" placeholder="jane@example.com" required />
+            </div>
+            <div class="contact-field">
+              <label for="cf-phone">Phone Number</label>
+              <input id="cf-phone" type="tel" name="phone" placeholder="+1 (787) 000-0000" />
+            </div>
+          </div>
+          <div class="contact-field">
+            <label for="cf-inquiry">Inquiry Type</label>
+            <select id="cf-inquiry" name="inquiry_type">
+              <option value="" disabled selected>Select Inquiry Type</option>
+              <option value="sponsorship">Sponsorship</option>
+              <option value="speaking">Speaking Opportunity</option>
+              <option value="media">Media / Press</option>
+              <option value="general">General Inquiry</option>
+            </select>
+          </div>
+          <div class="contact-field">
+            <label for="cf-message">Messages *</label>
+            <textarea
+              id="cf-message"
+              name="message"
+              placeholder="Tell us briefly about your goals"
+              rows="5"
+              required
+            ></textarea>
+          </div>
+          <p class="contact-form-status" id="contact-form-status" aria-live="polite"></p>
+          <button type="submit" class="btn-register contact-submit">
+            Book Free Consultation
+            <span class="btn-circle" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+          </button>
+        </form>
+      </div>
+      <div class="contact-image-col reveal" aria-hidden="true">
+        <picture>
+          <source srcset="images/assets/CHAIC-Form-image-opt.webp" type="image/webp">
+          <img
+            src="images/assets/CHAIC-Form-image.png"
+            alt=""
+            loading="lazy"
+            class="contact-bg-img"
+          >
+        </picture>
       </div>
     </div>
   </section>
