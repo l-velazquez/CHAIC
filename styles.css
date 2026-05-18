@@ -2059,7 +2059,7 @@ a {
 .sponsors-track {
   display: flex;
   width: max-content;
-  animation: scroll-sponsors 28s linear infinite;
+  animation: scroll-sponsors 15s linear infinite;
   padding: 1.25rem 0;
 }
 
