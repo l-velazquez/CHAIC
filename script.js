@@ -133,23 +133,32 @@ function computeDayStats(dayId) {
   const day = document.getElementById(dayId);
   if (!day) return null;
 
-  const cards = day.querySelectorAll('.agenda-card');
-  if (cards.length === 0) {
+  const allCards = day.querySelectorAll('.agenda-card');
+  if (allCards.length === 0) {
     // Placeholder day (Day 2 currently)
     return null;
   }
 
+  // Exclude non-program items (lunch, breaks) from session count
+  const cards = day.querySelectorAll('.agenda-card:not([data-track="lunch"])');
+
   let totalMinutes = 0;
   const speakers = new Set();
 
-  cards.forEach(card => {
+  allCards.forEach(card => {
     const durEl = card.querySelector('.agenda-duration');
     if (durEl) {
       const match = durEl.textContent.match(/(\d+)/);
       if (match) totalMinutes += parseInt(match[1], 10);
     }
-    const speakerName = card.querySelector('.agenda-speaker-name');
-    if (speakerName) speakers.add(speakerName.textContent.trim());
+    // Only count human speakers: must have a role and not be "To Be Announced"
+    card.querySelectorAll('.agenda-card-speaker').forEach(speakerEl => {
+      const nameEl = speakerEl.querySelector('.agenda-speaker-name');
+      const roleEl = speakerEl.querySelector('.agenda-speaker-role');
+      if (nameEl && roleEl && nameEl.textContent.trim() !== 'To Be Announced') {
+        speakers.add(nameEl.textContent.trim());
+      }
+    });
   });
 
   const hours = Math.round(totalMinutes / 60);

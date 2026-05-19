@@ -1648,6 +1648,11 @@ a {
   background: rgba(255, 255, 255, 0.5);
   border-color: rgba(255, 255, 255, 0.7);
 }
+.agenda-card[data-track="lunch"]::before {
+  background: #10b981;
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.22);
+}
 .agenda-card:hover::before {
   transform: scale(1.25);
 }
@@ -1761,6 +1766,10 @@ a {
 .agenda-card[data-track="break"] .agenda-track-pill {
   background: rgba(255, 255, 255, 0.08);
   color: rgba(255, 255, 255, 0.6);
+}
+.agenda-card[data-track="lunch"] .agenda-track-pill {
+  background: rgba(16, 185, 129, 0.16);
+  color: #6ee7b7;
 }
 
 .agenda-card-location {
