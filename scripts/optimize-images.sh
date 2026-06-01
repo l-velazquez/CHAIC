@@ -32,7 +32,7 @@ images/people/DrOrvil-profile-small.webp|cover|68|68
 images/people/yasmin-pedrogo-profile.webp|cover|68|68
 images/people/arlen-meyers.webp|cover|440|550
 images/people/dr-abiel-roche-lima.webp|cover|440|550
-images/people/dr-ana-lucumi.webp|cover|440|550
+images/people/dra-ana-lucumi.webp|cover|440|550
 images/people/dr-anthony-chang.webp|cover|440|550
 images/people/dr-carlos-ortiz.webp|cover|440|550
 images/people/dr-cesar-de-la-fuente.webp|cover|440|550
