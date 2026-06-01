@@ -146,17 +146,15 @@ function computeDayStats(dayId) {
   const speakers = new Set();
 
   allCards.forEach(card => {
-    const durEl = card.querySelector('.agenda-duration');
-    if (durEl) {
-      const match = durEl.textContent.match(/(\d+)/);
-      if (match) totalMinutes += parseInt(match[1], 10);
-    }
-    // Only count human speakers: must have a role and not be "To Be Announced"
+    const dur = parseInt(card.dataset.duration, 10);
+    if (!Number.isNaN(dur)) totalMinutes += dur;
+    // Only count human speakers: must have a role and not be a placeholder (TBA/TBC)
     card.querySelectorAll('.agenda-card-speaker').forEach(speakerEl => {
       const nameEl = speakerEl.querySelector('.agenda-speaker-name');
       const roleEl = speakerEl.querySelector('.agenda-speaker-role');
-      if (nameEl && roleEl && nameEl.textContent.trim() !== 'To Be Announced') {
-        speakers.add(nameEl.textContent.trim());
+      const name = nameEl?.textContent.trim();
+      if (nameEl && roleEl && !/^to be (announced|confirmed)$/i.test(name)) {
+        speakers.add(name);
       }
     });
   });
@@ -190,7 +188,7 @@ function renderDayStats(stats) {
   `;
 }
 
-function switchDay(targetDay, label) {
+function switchDay(targetDay, label, accent) {
   dayButtons.forEach(b => {
     const active = b.dataset.day === targetDay;
     b.classList.toggle('active', active);
@@ -200,7 +198,7 @@ function switchDay(targetDay, label) {
   if (dayTabs) dayTabs.setAttribute('data-active', targetDay);
 
   if (agendaTitle) {
-    agendaTitle.innerHTML = `${label} <span class="agenda-title-accent">Agenda</span>`;
+    agendaTitle.innerHTML = `${label} <span class="agenda-title-accent">${accent || 'Agenda'}</span>`;
   }
 
   // Fade-swap visible content
@@ -214,6 +212,9 @@ function switchDay(targetDay, label) {
   const swap = () => {
     dayContents.forEach(c => c.classList.add('hidden'));
     next.classList.remove('hidden');
+    // Reveal cards that were hidden (display:none) when the scroll observer
+    // first ran — otherwise they'd stay at opacity:0 on a freshly shown day.
+    next.querySelectorAll('.reveal:not(.is-visible)').forEach(el => el.classList.add('is-visible'));
     next.classList.add('is-fading');
     renderDayStats(computeDayStats(targetDay));
     // Force layout so the browser commits opacity:0 before transitioning back
@@ -231,7 +232,7 @@ function switchDay(targetDay, label) {
 
 dayButtons.forEach(btn => {
   btn.addEventListener('click', () => {
-    switchDay(btn.dataset.day, btn.dataset.label);
+    switchDay(btn.dataset.day, btn.dataset.label, btn.dataset.accent);
   });
 });
 

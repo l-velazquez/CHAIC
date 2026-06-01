@@ -20,6 +20,7 @@ QUALITY="${QUALITY:-80}"
 TABLE=$(cat <<'EOF'
 images/logos/CHAIC-Logo.webp|cover|100|100
 images/logos/chaic-icon-3.webp|cover|88|88
+images/logos/chaic-agenda-profile-pic.webp|cover|88|88
 images/logos/AMRC.webp|cover|168|168
 images/logos/AI-med.webp|cover|168|168
 images/logos/pr-usa-chamber-of-commerce.webp|cover|156|156
@@ -31,10 +32,17 @@ images/people/DrOrvil-profile-small.webp|cover|68|68
 images/people/yasmin-pedrogo-profile.webp|cover|68|68
 images/people/arlen-meyers.webp|cover|440|550
 images/people/dr-abiel-roche-lima.webp|cover|440|550
-images/people/dr-ana-lucumi.webp|cover|440|550
+images/people/dra-ana-lucumi.webp|cover|440|550
 images/people/dr-anthony-chang.webp|cover|440|550
 images/people/dr-carlos-ortiz.webp|cover|440|550
 images/people/dr-cesar-de-la-fuente.webp|cover|440|550
+images/people/daniel-golden.webp|cover|440|550
+images/people/dr-rafael-grossmann.webp|cover|440|550
+images/people/dra-myrna-quinonez.webp|cover|440|550
+images/people/luis-belen.webp|cover|440|550
+images/people/dr-travis-zack.webp|cover|440|550
+images/people/dr-carlos-diaz.webp|cover|440|550
+images/people/enrique-ortiz-de-montellano.webp|cover|440|550
 images/people/dr-felix-rivera.webp|cover|440|550
 images/people/dr-herman-taylor.webp|cover|440|550
 images/people/dr-humberto-cruz-esparra.webp|cover|440|550
