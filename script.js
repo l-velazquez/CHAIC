@@ -148,12 +148,17 @@ function computeDayStats(dayId) {
   allCards.forEach(card => {
     const dur = parseInt(card.dataset.duration, 10);
     if (!Number.isNaN(dur)) totalMinutes += dur;
-    // Only count human speakers: must have a role and not be a placeholder (TBA/TBC)
+    // Only count confirmed human speakers with roles.
     card.querySelectorAll('.agenda-card-speaker').forEach(speakerEl => {
       const nameEl = speakerEl.querySelector('.agenda-speaker-name');
       const roleEl = speakerEl.querySelector('.agenda-speaker-role');
       const name = nameEl?.textContent.trim();
-      if (nameEl && roleEl && !/^to be (announced|confirmed)$/i.test(name)) {
+      if (
+        nameEl &&
+        roleEl &&
+        !speakerEl.classList.contains('agenda-card-speaker--pending') &&
+        !/^to be (announced|confirmed)$/i.test(name)
+      ) {
         speakers.add(name);
       }
     });
@@ -292,4 +297,3 @@ if (scrollTopBtn) {
     });
   });
 }
-

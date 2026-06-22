@@ -1871,10 +1871,19 @@ a {
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.agenda-card-speaker--pending {
+  align-items: flex-start;
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  border: 1px solid rgba(245, 184, 0, 0.34);
+  border-radius: 8px;
+  background: rgba(245, 184, 0, 0.08);
+}
+
 .agenda-speaker-avatar {
   width: 34px;
   height: 34px;
-  border-radius: 50%;
+  border-radius: 9px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -1921,6 +1930,22 @@ a {
 .agenda-speaker-role {
   font-size: 0.76rem;
   color: rgba(255, 255, 255, 0.5);
+}
+
+.agenda-speaker-status {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  min-height: 1.35rem;
+  padding: 0.18rem 0.42rem;
+  border-radius: 6px;
+  background: var(--gold);
+  color: var(--navy-btn);
+  font-size: 0.64rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-transform: uppercase;
 }
 
 /* Day 2 placeholder card */
@@ -3281,6 +3306,11 @@ a {
   border-color: rgba(26, 62, 122, 0.18);
 }
 
+.speaker-detail-card--pending {
+  border-color: rgba(245, 184, 0, 0.5);
+  box-shadow: 0 16px 34px rgba(13, 27, 46, 0.08);
+}
+
 .speaker-detail-photo {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -3293,6 +3323,27 @@ a {
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.speaker-detail-status {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  max-width: calc(100% - 1.5rem);
+  min-height: 1.75rem;
+  padding: 0.34rem 0.54rem;
+  border-radius: 6px;
+  background: var(--gold);
+  color: var(--navy-btn);
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  box-shadow: 0 10px 22px rgba(13, 27, 46, 0.22);
 }
 
 /* Initials placeholder for speakers without photos */
@@ -3359,6 +3410,17 @@ a {
   font-size: 0.9rem;
   line-height: 1.45;
   color: var(--ink-2);
+}
+
+.speaker-detail-status-inline {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.28rem 0.45rem;
+  border: 1px solid rgba(245, 184, 0, 0.48);
+  border-radius: 6px;
+  background: rgba(245, 184, 0, 0.14);
+  color: var(--navy-btn);
+  font-weight: 800;
 }
 
 @media (max-width: 1024px) {
