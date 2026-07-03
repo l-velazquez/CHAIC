@@ -41,7 +41,6 @@ images/people/dr-rafael-grossmann.webp|cover|440|550
 images/people/dra-myrna-quinonez.webp|cover|440|550
 images/people/luis-belen.webp|cover|440|550
 images/people/dr-travis-zack.webp|cover|440|550
-images/people/dr-carlos-diaz.webp|cover|440|550
 images/people/enrique-ortiz-de-montellano.webp|cover|440|550
 images/people/dr-felix-rivera.webp|cover|440|550
 images/people/dr-herman-taylor.webp|cover|440|550
