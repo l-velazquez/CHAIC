@@ -4,6 +4,52 @@ const prefersReducedMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
 ).matches;
 
+/* ── Safari-friendly autoplay video startup ── */
+function startAutoplayVideos() {
+  if (prefersReducedMotion) return;
+
+  document.querySelectorAll('video[autoplay]').forEach(video => {
+    video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('muted', '');
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.preload = 'auto';
+
+    if (video.readyState === 0) video.load();
+
+    try {
+      const playAttempt = video.play();
+      if (playAttempt && typeof playAttempt.catch === 'function') {
+        playAttempt.catch(() => {
+          // Safari can still block autoplay through user-level site settings.
+        });
+      }
+    } catch {
+      // Keep the poster/first frame visible when playback is blocked.
+    }
+  });
+}
+
+startAutoplayVideos();
+window.addEventListener('load', startAutoplayVideos, { once: true });
+document.addEventListener(
+  'visibilitychange',
+  () => {
+    if (!document.hidden) startAutoplayVideos();
+  }
+);
+document.addEventListener('pointerdown', startAutoplayVideos, {
+  once: true,
+  passive: true,
+});
+document.addEventListener('touchstart', startAutoplayVideos, {
+  once: true,
+  passive: true,
+});
+document.addEventListener('keydown', startAutoplayVideos, { once: true });
+
 /* ── Countdown to September 25, 2026 ── */
 const TARGET = new Date('2026-09-25T00:00:00');
 
@@ -292,4 +338,3 @@ if (scrollTopBtn) {
     });
   });
 }
-

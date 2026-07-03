@@ -224,7 +224,7 @@ The agenda right column is a vertical timeline:
 
 - **Brand column**: logo, tagline, social row.
 - **Explore column**: Home / About / Speakers / Agenda / Sponsors / Tickets.
-- **Contact column**: email, sponsor link (with external icon), press email.
+- **Contact column**: WhatsApp contact link, sponsor link (with external icon).
 - **Bottom row**: copyright + Code of Conduct / Privacy legal links.
 
 Social icons sit in 38px outline circles. Hover: teal fill + soft teal-tinted bg + lifts -2px. Background gets a soft teal radial gradient at the top.
