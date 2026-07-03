@@ -3431,7 +3431,8 @@ a {
   margin-top: 0.5rem;
 }
 
-.contact-email-link {
+.contact-email-link,
+.contact-phone-link {
   color: rgba(255, 255, 255, 0.7);
   font-size: 1rem;
   font-weight: 500;
@@ -3439,8 +3440,26 @@ a {
   transition: color 0.2s;
 }
 
-.contact-email-link:hover {
+.contact-email-link:hover,
+.contact-phone-link:hover {
   color: var(--accent);
+}
+
+/* WhatsApp primary CTA — reuses .btn-register layout with brand color */
+.btn-whatsapp {
+  background: #25d366;
+  color: #05331b;
+  animation: none;
+}
+.btn-whatsapp:hover {
+  background: #1ebe5a;
+  box-shadow:
+    0 0 40px rgba(37, 211, 102, 0.55),
+    0 10px 30px -6px rgba(0, 0, 0, 0.45);
+}
+.btn-whatsapp .btn-circle {
+  background: #05331b;
+  color: #25d366;
 }
 
 .contact-image-col {
