@@ -2420,6 +2420,21 @@ a {
   letter-spacing: -0.03em;
 }
 
+.ticket-price-tax {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.3em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--accent-deep);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.ticket-card--vip .ticket-price-tax {
+  color: #b7791f;
+}
+
 .ticket-features {
   list-style: none;
   display: flex;
@@ -3590,6 +3605,12 @@ a {
   flex-shrink: 0;
   color: var(--gold);
 }
+.tickets-price-note {
+  position: relative;
+  margin: 1rem auto 0;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.82rem;
+}
 
 /* Cards section overrides */
 .tickets-cards-section {
@@ -3759,6 +3780,13 @@ a {
   font-weight: 700;
   font-family: var(--font-heading);
   color: var(--accent-2);
+}
+.compare-pass-tax {
+  font-family: var(--font-body);
+  font-size: 0.65em;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 .compare-col-vip .compare-pass-price {
   color: var(--gold);
