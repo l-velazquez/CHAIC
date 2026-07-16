@@ -293,3 +293,107 @@ if (scrollTopBtn) {
   });
 }
 
+/* ── Sponsor contact popup ──
+   Plain mailto: links "do nothing" for visitors without a configured mail
+   client, so any [data-sponsor-contact] trigger opens a small dialog that
+   shows the email with a copy button plus a mailto fallback. The href stays
+   a real mailto so the link still works with JS disabled. */
+const SPONSOR_EMAIL = 'info@chaicpr.com';
+
+function initSponsorContact() {
+  const triggers = document.querySelectorAll('[data-sponsor-contact]');
+  if (triggers.length === 0) return;
+
+  let lastTrigger = null;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'sponsor-modal';
+  overlay.setAttribute('aria-hidden', 'true');
+  overlay.innerHTML = `
+    <div class="sponsor-modal-box" role="dialog" aria-modal="true"
+         aria-labelledby="sponsor-modal-title" tabindex="-1">
+      <button type="button" class="sponsor-modal-close" aria-label="Close">&times;</button>
+      <h3 class="sponsor-modal-title" id="sponsor-modal-title">Become a Sponsor</h3>
+      <p class="sponsor-modal-text">
+        For sponsorship inquiries and any questions, please contact us by
+        email. Copy the address below or open your email app.
+      </p>
+      <div class="sponsor-modal-email">
+        <span class="sponsor-modal-address">${SPONSOR_EMAIL}</span>
+        <button type="button" class="sponsor-modal-copy">Copy</button>
+      </div>
+      <a class="sponsor-modal-mailto" href="mailto:${SPONSOR_EMAIL}">Open email app</a>
+    </div>
+  `;
+  document.body.appendChild(overlay);
+
+  const box = overlay.querySelector('.sponsor-modal-box');
+  const closeBtn = overlay.querySelector('.sponsor-modal-close');
+  const copyBtn = overlay.querySelector('.sponsor-modal-copy');
+
+  function open(trigger) {
+    lastTrigger = trigger || null;
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('sponsor-modal-open');
+    box.focus();
+  }
+
+  function close() {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('sponsor-modal-open');
+    copyBtn.textContent = 'Copy';
+    copyBtn.classList.remove('is-copied');
+    if (lastTrigger) lastTrigger.focus();
+  }
+
+  function copyEmail() {
+    const done = () => {
+      copyBtn.textContent = 'Copied!';
+      copyBtn.classList.add('is-copied');
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(SPONSOR_EMAIL).then(done).catch(fallbackCopy);
+    } else {
+      fallbackCopy();
+    }
+  }
+
+  function fallbackCopy() {
+    const ta = document.createElement('textarea');
+    ta.value = SPONSOR_EMAIL;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'absolute';
+    ta.style.left = '-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    try {
+      document.execCommand('copy');
+      copyBtn.textContent = 'Copied!';
+      copyBtn.classList.add('is-copied');
+    } catch (e) {
+      copyBtn.textContent = 'Copy failed';
+    }
+    document.body.removeChild(ta);
+  }
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      open(trigger);
+    });
+  });
+
+  closeBtn.addEventListener('click', close);
+  copyBtn.addEventListener('click', copyEmail);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('is-open')) close();
+  });
+}
+
+initSponsorContact();
+

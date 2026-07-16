@@ -2111,7 +2111,7 @@ a {
 .sponsors-carousel-wrap {
   overflow: hidden;
   position: relative;
-  margin-bottom: 3rem;
+  margin-top: 3rem;
   -webkit-mask-image: linear-gradient(
     to right,
     transparent,
@@ -2322,6 +2322,125 @@ a {
   font-size: 1.02rem;
   line-height: 1.6;
   max-width: 480px;
+}
+
+/* ── SPONSOR CONTACT MODAL ── */
+.sponsor-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(5, 8, 16, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+.sponsor-modal.is-open {
+  display: flex;
+}
+body.sponsor-modal-open {
+  overflow: hidden;
+}
+
+.sponsor-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 420px;
+  background: #0d1220;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 2.25rem 2rem 2rem;
+  text-align: center;
+  box-shadow: 0 30px 70px -20px rgba(0, 0, 0, 0.7);
+}
+.sponsor-modal-box:focus {
+  outline: none;
+}
+
+.sponsor-modal-close {
+  position: absolute;
+  top: 0.85rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem;
+  transition: color 0.2s var(--ease);
+}
+.sponsor-modal-close:hover {
+  color: #fff;
+}
+
+.sponsor-modal-title {
+  font-family: var(--font-heading);
+  color: #fff;
+  font-size: 1.35rem;
+  margin-bottom: 0.6rem;
+}
+
+.sponsor-modal-text {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.sponsor-modal-email {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.4rem 0.4rem 0.4rem 0.9rem;
+  margin-bottom: 1rem;
+}
+.sponsor-modal-address {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-size: 0.98rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+.sponsor-modal-copy {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 9px;
+  padding: 0.5rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background 0.2s var(--ease),
+    transform 0.2s var(--ease);
+}
+.sponsor-modal-copy:hover {
+  background: var(--accent-deep);
+}
+.sponsor-modal-copy.is-copied {
+  background: #16a34a;
+}
+
+.sponsor-modal-mailto {
+  display: inline-block;
+  color: var(--accent-2);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.sponsor-modal-mailto:hover {
+  text-decoration: underline;
 }
 
 /* ── TICKETS ── */
