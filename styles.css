@@ -4071,6 +4071,21 @@ body.sponsor-modal-open {
   border-radius: 50%;
   background: var(--gold);
 }
+.workshops-banner-section {
+  padding-bottom: 4rem;
+}
+.workshops-banner {
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  line-height: 0;
+}
+.workshops-banner img {
+  width: 100%;
+  height: clamp(220px, 34vw, 460px);
+  object-fit: cover;
+  display: block;
+}
 .workshops-list {
   padding-bottom: 6rem;
 }
