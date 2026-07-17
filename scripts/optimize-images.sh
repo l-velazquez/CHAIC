@@ -28,6 +28,7 @@ images/logos/puerto-rico-ai-institute-and-consortium.webp|cover|120|120
 images/logos/RCM-UPR-Logo.webp|contain|420|156
 images/logos/SPE-White-Letters.webp|contain|420|156
 images/logos/ABAIM-logo-transparent.webp|contain|420|156
+images/logos/centro-unido.webp|contain|420|156
 images/people/DrOrvil-profile-small.webp|cover|68|68
 images/people/yasmin-pedrogo-profile.webp|cover|68|68
 images/people/arlen-meyers.webp|cover|440|550
