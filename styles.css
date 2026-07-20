@@ -4128,6 +4128,12 @@ body.sponsor-modal-open {
   font-weight: 700;
   color: var(--ink-1);
 }
+.workshop-card-facilitator {
+  margin-top: -0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-deep);
+}
 .workshop-card-desc {
   font-size: 0.95rem;
   line-height: 1.6;
