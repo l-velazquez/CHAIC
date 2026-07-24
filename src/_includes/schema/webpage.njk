@@ -1,0 +1,12 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": "{{ canonicalUrl or (page.url | absolute(site.origin)) }}#webpage",
+  "url": "{{ canonicalUrl or (page.url | absolute(site.origin)) }}",
+  "name": {{ title | json | safe }},
+  "description": {{ description | json | safe }},
+  "inLanguage": "{{ 'es-PR' if locale == 'es' else 'en' }}",
+  "isPartOf": { "@id": "{{ site.origin }}/#website" }
+}
+</script>

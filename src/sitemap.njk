@@ -1,0 +1,33 @@
+---
+permalink: /sitemap.xml
+eleventyExcludeFromCollections: true
+indexable: false
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{% for route in publicRoutes %}
+  <url>
+    <loc>{{ route | absolute(site.origin) }}</loc>
+  </url>
+{% endfor %}
+{% if site.legalApproved %}
+{% for route in ["/privacy.html", "/code-of-conduct.html", "/es/privacidad.html", "/es/codigo-de-conducta.html"] %}
+  <url>
+    <loc>{{ route | absolute(site.origin) }}</loc>
+  </url>
+{% endfor %}
+{% endif %}
+{% set articlePageCount = articles | pageCount(9) %}
+{% for pageNumber in articlePageCount | pageRange %}
+  {% if pageNumber > 1 %}
+  <url>
+    <loc>{{ ("/blog/page/" + pageNumber + "/") | absolute(site.origin) }}</loc>
+  </url>
+  {% endif %}
+{% endfor %}
+{% for article in articles %}
+  <url>
+    <loc>{{ ("/blog/" + article.slug + "/") | absolute(site.origin) }}</loc>
+  </url>
+{% endfor %}
+</urlset>

@@ -1,0 +1,38 @@
+{% set t = i18n[locale] %}
+<footer class="site-footer">
+  <div class="footer-shell">
+    <div class="footer-about">
+      <a class="brand brand-footer" href="{{ '/es/' if locale == 'es' else '/' }}">
+        <img src="/images/logos/chaic-icon-3.webp" width="88" height="88" alt="">
+        <span>CHAIC <b>2026</b></span>
+      </a>
+      <p>{{ t.event.date }} · {{ t.event.venue }} · {{ t.event.location }}</p>
+    </div>
+    <div>
+      <h2>{{ t.footer.explore }}</h2>
+      <ul>
+        <li><a href="{{ '/es/agenda.html' if locale == 'es' else '/agenda.html' }}">{{ t.nav.agenda }}</a></li>
+        <li><a href="{{ '/es/ponentes.html' if locale == 'es' else '/speakers.html' }}">{{ t.nav.speakers }}</a></li>
+        <li><a href="{{ '/es/entradas.html' if locale == 'es' else '/tickets.html' }}">{{ t.nav.tickets }}</a></li>
+        <li><a href="{{ '/es/viaje.html' if locale == 'es' else '/travel.html' }}">{{ t.nav.travel }}</a></li>
+      </ul>
+    </div>
+    <div>
+      <h2>{{ t.footer.contact }}</h2>
+      <ul>
+        <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+        <li><a href="mailto:{{ site.email }}?subject=CHAIC%202026%20Sponsorship" data-sponsor-contact>{{ t.actions.sponsor }}</a></li>
+        {% if site.legalApproved %}
+          <li><a href="{{ '/es/privacidad.html' if locale == 'es' else '/privacy.html' }}">{{ 'Privacidad' if locale == 'es' else 'Privacy' }}</a></li>
+          <li><a href="{{ '/es/codigo-de-conducta.html' if locale == 'es' else '/code-of-conduct.html' }}">{{ 'Código de conducta' if locale == 'es' else 'Code of Conduct' }}</a></li>
+        {% else %}
+          <li><span class="legal-pending" aria-disabled="true">{{ t.footer.legalPending }}</span></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 {{ t.footer.copyright }}</p>
+    <p>{{ 'Program and speakers are subject to change.' if locale == 'en' else 'El programa y los ponentes están sujetos a cambios.' }}</p>
+  </div>
+</footer>

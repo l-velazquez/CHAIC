@@ -1,0 +1,32 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: articles
+  size: 9
+  alias: pagedArticles
+permalink: "/blog/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}index.html"
+locale: en
+eleventyComputed:
+  title: "{% if pagination.pageNumber > 0 %}Health AI Insights — Page {{ pagination.pageNumber + 1 }}{% else %}Healthcare AI Insights and CHAIC 2026 Articles{% endif %}"
+  description: "Expert-focused articles on responsible healthcare AI, clinical implementation, research, governance, and the Caribbean Health AI Congress."
+  canonicalUrl: "{{ site.origin }}/blog/{% if pagination.pageNumber > 0 %}page/{{ pagination.pageNumber + 1 }}/{% endif %}"
+schemaType: webpage
+indexable: true
+breadcrumbs:
+  - name: Home
+    url: /
+  - name: Insights
+    url: /blog/
+---
+<section class="page-hero compact-hero"><div class="section-shell"><p class="eyebrow">CHAIC insights</p><h1>Healthcare AI insight for responsible action</h1><p>Practical analysis for clinicians, researchers, health leaders, entrepreneurs, and everyone preparing for CHAIC 2026.</p></div></section>
+<section class="section"><div class="article-grid section-shell">
+  {% for article in pagedArticles %}{% include "partials/article-card.njk" %}{% endfor %}
+</div>
+{% if pagination.pages.length > 1 %}
+  <nav class="pagination section-shell" aria-label="Article pages">
+    {% if pagination.href.previous %}<a href="{{ pagination.href.previous }}" rel="prev">← Previous</a>{% endif %}
+    <span>Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</span>
+    {% if pagination.href.next %}<a href="{{ pagination.href.next }}" rel="next">Next →</a>{% endif %}
+  </nav>
+{% endif %}
+</section>

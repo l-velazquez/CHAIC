@@ -1,0 +1,27 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": {{ title | json | safe }},
+  "itemListElement": [
+    {% for speaker in speakers | confirmed %}
+      {
+        "@type": "ListItem",
+        "position": {{ loop.index }},
+        "item": {
+          "@type": "Person",
+          "@id": "{{ site.origin }}/speakers.html#{{ speaker.id }}",
+          "name": {{ speaker.name | json | safe }},
+          "image": "{{ speaker.image | absolute(site.origin) }}",
+          "jobTitle": {{ speaker.role | json | safe }}{% if speaker.organization %},
+          "worksFor": {
+            "@type": "Organization",
+            "name": {{ speaker.organization | json | safe }}
+          }{% endif %},
+          "sameAs": [{{ speaker.linkedin | json | safe }}]
+        }
+      }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>

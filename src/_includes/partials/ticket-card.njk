@@ -1,0 +1,32 @@
+{% set language = i18n[locale] %}
+<article class="ticket-card{% if ticket.featured %} ticket-featured{% endif %}" id="pass-{{ ticket.id }}" data-ticket-card>
+  {% if ticket.featured %}<span class="ticket-ribbon">{{ 'Más popular' if locale == 'es' else 'Most popular' }}</span>{% endif %}
+  <p class="ticket-name">{{ ticket.nameEs if locale == 'es' else ticket.name }}</p>
+  <p class="ticket-price"><strong>{{ ticket.price | money }}</strong> <span>{{ ticket.taxLabel }}</span></p>
+  {% if ticket.regularPrice > ticket.price %}
+    <p class="ticket-saving">{{ language.labels.regular }} <s>{{ ticket.regularPrice | money }}</s> · {{ language.labels.save }} {{ (ticket.regularPrice - ticket.price) | money }}</p>
+  {% endif %}
+  <p class="ticket-audience"><b>{{ language.labels.bestFor }}:</b> {{ ticket.audienceEs if locale == 'es' else ticket.audience }}</p>
+  {% if (ticket.eligibilityEs if locale == 'es' else ticket.eligibility) %}
+    <p class="ticket-eligibility">{{ ticket.eligibilityEs if locale == 'es' else ticket.eligibility }}</p>
+  {% endif %}
+  <ul class="ticket-highlights">
+    {% for item in (ticket.includedEs if locale == 'es' else ticket.included) | limit(4) %}
+      <li>{{ item }}</li>
+    {% endfor %}
+  </ul>
+  {% if detailed %}
+    <details>
+      <summary>{{ language.actions.details }}</summary>
+      <h3>{{ language.labels.included }}</h3>
+      <ul>
+        {% for item in (ticket.includedEs if locale == 'es' else ticket.included) %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+      <h3>{{ language.labels.notIncluded }}</h3>
+      <ul class="not-included">
+        {% for item in (ticket.excludedEs if locale == 'es' else ticket.excluded) %}<li>{{ item }}</li>{% endfor %}
+      </ul>
+    </details>
+  {% endif %}
+  <a class="button button-primary ticket-cta" href="{{ event.lumaUrl }}?utm_source=chaicpr.com&amp;utm_medium=website&amp;utm_campaign=chaic_2026&amp;utm_content={{ ctaLocation or 'ticket_card' }}_{{ ticket.id }}_{{ locale }}" data-checkout data-pass-id="{{ ticket.id }}" data-cta-location="{{ ctaLocation or 'ticket_card' }}" data-label="{{ language.actions.register }}">{{ language.actions.register }}</a>
+</article>

@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+permalink: /sponsors.html
+locale: en
+title: "Sponsors and Partners | CHAIC 2026"
+description: "Meet the organizations supporting CHAIC 2026 and explore sponsorship opportunities to reach healthcare and AI leaders across the Caribbean."
+schemaType: webpage
+translationUrl: /es/patrocinadores.html
+enUrl: /sponsors.html
+esUrl: /es/patrocinadores.html
+xDefaultUrl: /sponsors.html
+indexable: true
+breadcrumbs:
+  - name: Home
+    url: /
+  - name: Sponsors
+    url: /sponsors.html
+---
+<section class="page-hero compact-hero"><div class="section-shell"><p class="eyebrow">Partners in progress</p><h1>Organizations supporting Caribbean health AI</h1><p>CHAIC connects healthcare decision-makers with the institutions and companies building the region’s next chapter.</p></div></section>
+<section class="section"><div class="sponsor-page-grid section-shell">
+  {% for sponsor in sponsors %}
+    <article><span>{{ sponsor.tier }}</span><a href="{{ sponsor.url }}" target="_blank" rel="noopener noreferrer"><img src="{{ sponsor.image }}" width="{{ sponsor.width }}" height="{{ sponsor.height }}" alt="{{ sponsor.name }}" loading="lazy" decoding="async"><h2>{{ sponsor.name }}</h2></a></article>
+  {% endfor %}
+</div></section>
+<section class="section section-teal"><div class="section-shell split-heading"><div><p class="eyebrow">Build meaningful visibility</p><h2>Partner with the people adopting healthcare AI</h2></div><div><p>Reach clinicians, researchers, health-system leaders, founders, investors, educators, and policymakers through programming and relationship-driven experiences.</p><ul class="check-list"><li>Brand and thought-leadership visibility</li><li>Direct connection with a cross-sector audience</li><li>Exhibit and activation opportunities</li><li>Regional and international partner network</li></ul><a class="button button-light" href="mailto:{{ site.email }}?subject=CHAIC%202026%20Sponsorship" data-sponsor-contact>Request sponsorship information</a></div></div></section>

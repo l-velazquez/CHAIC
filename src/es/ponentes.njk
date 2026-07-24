@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+permalink: /es/ponentes.html
+locale: es
+title: "Ponentes confirmados | CHAIC 2026"
+description: "Conoce a los clínicos, investigadores, educadores y líderes tecnológicos confirmados para el Caribbean Health AI Congress 2026."
+schemaType: speakers
+translationUrl: /speakers.html
+enUrl: /speakers.html
+esUrl: /es/ponentes.html
+xDefaultUrl: /speakers.html
+indexable: true
+showMobileCta: true
+breadcrumbs:
+  - name: Inicio
+    url: /es/
+  - name: Ponentes
+    url: /es/ponentes.html
+---
+<section class="page-hero compact-hero"><div class="section-shell"><p class="eyebrow">Facultad confirmada</p><h1>Líderes que impulsan una IA en salud responsable</h1><p>Conoce a los ponentes confirmados que aportan experiencia clínica, investigativa, educativa y tecnológica a CHAIC 2026.</p></div></section>
+<section class="section"><div class="speaker-grid section-shell">{% for speaker in speakers | confirmed %}<div id="{{ speaker.id }}">{% include "partials/speaker-card.njk" %}</div>{% endfor %}</div></section>
+<section class="inline-cta"><div class="section-shell"><h2>Escucha a estos líderes en San Juan</h2><a class="button button-primary" href="{{ event.lumaUrl }}?utm_source=chaicpr.com&amp;utm_medium=website&amp;utm_campaign=chaic_2026&amp;utm_content=speakers_es" data-checkout data-pass-id="general" data-cta-location="speakers_page" data-label="Inscríbete ahora">Inscríbete ahora</a></div></section>

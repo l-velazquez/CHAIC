@@ -1,0 +1,13 @@
+<nav class="breadcrumbs" aria-label="{{ 'Migas de pan' if locale == 'es' else 'Breadcrumb' }}">
+  <ol>
+    {% for crumb in breadcrumbs %}
+      <li>
+        {% if crumb.url and not loop.last %}
+          <a href="{{ crumb.url }}">{{ crumb.name }}</a>
+        {% else %}
+          <span aria-current="page">{{ crumb.name }}</span>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ol>
+</nav>

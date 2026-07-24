@@ -1,0 +1,21 @@
+---
+layout: layouts/base.njk
+permalink: /es/patrocinadores.html
+locale: es
+title: "Patrocinadores y socios | CHAIC 2026"
+description: "Conoce las organizaciones que apoyan CHAIC 2026 y explora oportunidades de patrocinio para conectar con líderes de salud e IA del Caribe."
+schemaType: webpage
+translationUrl: /sponsors.html
+enUrl: /sponsors.html
+esUrl: /es/patrocinadores.html
+xDefaultUrl: /sponsors.html
+indexable: true
+breadcrumbs:
+  - name: Inicio
+    url: /es/
+  - name: Patrocinadores
+    url: /es/patrocinadores.html
+---
+<section class="page-hero compact-hero"><div class="section-shell"><p class="eyebrow">Socios del progreso</p><h1>Organizaciones que apoyan la IA en salud del Caribe</h1><p>CHAIC conecta a quienes toman decisiones en salud con instituciones y compañías que construyen el próximo capítulo de la región.</p></div></section>
+<section class="section"><div class="sponsor-page-grid section-shell">{% for sponsor in sponsors %}<article><span>{{ "Patrocinador oro" if sponsor.tier == "Gold sponsor" else "Socio" }}</span><a href="{{ sponsor.url }}" target="_blank" rel="noopener noreferrer"><img src="{{ sponsor.image }}" width="{{ sponsor.width }}" height="{{ sponsor.height }}" alt="{{ sponsor.name }}" loading="lazy" decoding="async"><h2>{{ sponsor.name }}</h2></a></article>{% endfor %}</div></section>
+<section class="section section-teal"><div class="section-shell split-heading"><div><p class="eyebrow">Visibilidad con propósito</p><h2>Conecta con quienes adoptan IA en salud</h2></div><div><p>Alcanza a clínicos, investigadores, líderes de sistemas de salud, fundadores, inversionistas, educadores y responsables de política pública.</p><ul class="check-list"><li>Visibilidad de marca y liderazgo de pensamiento</li><li>Conexión directa con una audiencia multisectorial</li><li>Oportunidades de exhibición y activación</li><li>Red de socios regionales e internacionales</li></ul><a class="button button-light" href="mailto:{{ site.email }}?subject=Patrocinio%20CHAIC%202026" data-sponsor-contact>Solicitar información de patrocinio</a></div></div></section>

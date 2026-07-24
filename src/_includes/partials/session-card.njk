@@ -1,0 +1,21 @@
+<article class="session-card session-{{ session.type }}" id="{{ session.id }}">
+  <div class="session-time">
+    <time datetime="{{ session.startDate }}">{{ session.startDate | timeDisplay(locale) }}</time>
+    <span>{{ session | duration(locale) }}</span>
+  </div>
+  <div>
+    <p class="session-type">{{ session.type | replace("-", " ") }}</p>
+    <h3>{{ session.titleEs if locale == 'es' else session.title }}</h3>
+    <p>{{ session.descriptionEs if locale == 'es' else session.description }}</p>
+    {% if session.speakerIds.length %}
+      <p class="session-speakers">
+        {% for speakerId in session.speakerIds %}
+          {% set sessionSpeaker = speakers | lookup(speakerId) %}
+          <a href="{{ '/es/ponentes.html' if locale == 'es' else '/speakers.html' }}#{{ sessionSpeaker.id }}">{{ sessionSpeaker.name }}</a>{% if not loop.last %}, {% endif %}
+        {% endfor %}
+      </p>
+    {% elseif session.status == "speaker-pending" %}
+      <p class="speaker-pending">{{ i18n[locale].labels.speakerPending }}</p>
+    {% endif %}
+  </div>
+</article>

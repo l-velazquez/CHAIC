@@ -1,0 +1,25 @@
+---
+layout: layouts/base.njk
+permalink: /es/agenda.html
+locale: es
+title: "Agenda de CHAIC 2026 | 25–26 de septiembre en San Juan"
+description: "Explora la agenda completa de dos días de CHAIC 2026: conferencias, sesiones clínicas de IA, paneles, networking y competencia de startups."
+schemaType: webpage
+translationUrl: /agenda.html
+enUrl: /agenda.html
+esUrl: /es/agenda.html
+xDefaultUrl: /agenda.html
+indexable: true
+showMobileCta: true
+breadcrumbs:
+  - name: Inicio
+    url: /es/
+  - name: Agenda
+    url: /es/agenda.html
+---
+<section class="page-hero compact-hero"><div class="section-shell"><p class="eyebrow">25–26 de septiembre de 2026</p><h1>La agenda completa de CHAIC 2026</h1><p>{{ sessions.length }} bloques de programa en dos días. Los horarios usan la hora estándar del Atlántico en Puerto Rico (UTC−4).</p></div></section>
+<section class="section agenda-section" data-agenda><div class="section-shell">
+  <div class="agenda-tabs" role="tablist" aria-label="Días de la agenda"><button type="button" role="tab" id="tab-dia-1" aria-selected="true" aria-controls="dia-1" tabindex="0" data-agenda-tab="1">Día uno <span>25 de septiembre</span></button><button type="button" role="tab" id="tab-dia-2" aria-selected="false" aria-controls="dia-2" tabindex="-1" data-agenda-tab="2">Día dos <span>26 de septiembre</span></button></div>
+  {% for day in [1, 2] %}<section class="agenda-day" id="dia-{{ day }}" role="tabpanel" aria-labelledby="tab-dia-{{ day }}" data-agenda-panel="{{ day }}"><div class="agenda-day-heading"><p class="day-label">Día {{ day }}</p><h2>{{ "Viernes, 25 de septiembre" if day == 1 else "Sábado, 26 de septiembre" }}</h2></div>{% for session in sessions | where("day", day) %}{% include "partials/session-card.njk" %}{% endfor %}</section>{% endfor %}
+  <noscript><style>.agenda-tabs{display:none}</style></noscript>
+</div></section>

@@ -7,7 +7,8 @@
       "Bash(cwebp -q 82 /tmp/img_opt/dr-abiel-roche-lima.jpg -o /Users/luis/Documents/GitHub/Orvil-Website/images/people/dr-abiel-roche-lima.webp)",
       "Bash(cwebp -q 82 /tmp/img_opt/dr-anthony-chang.jpg -o /Users/luis/Documents/GitHub/Orvil-Website/images/people/dr-anthony-chang.webp)",
       "WebSearch",
-      "Bash(sips *)"
+      "Bash(sips *)",
+      "Bash(grep *)"
     ]
   }
 }

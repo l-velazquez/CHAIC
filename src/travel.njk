@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+permalink: /travel.html
+locale: en
+title: "Travel to CHAIC 2026 in San Juan, Puerto Rico"
+description: "Plan your trip to CHAIC 2026 with official venue details, airport guidance, transportation, and accessibility information."
+schemaType: webpage
+translationUrl: /es/viaje.html
+enUrl: /travel.html
+esUrl: /es/viaje.html
+xDefaultUrl: /travel.html
+indexable: true
+showMobileCta: true
+breadcrumbs:
+  - name: Home
+    url: /
+  - name: Travel
+    url: /travel.html
+---
+<section class="page-hero compact-hero"><div class="section-shell"><p class="eyebrow">Plan your visit</p><h1>Travel to CHAIC 2026 in San Juan</h1><p>Official venue details and practical guidance for a smooth arrival.</p></div></section>
+<section class="section"><div class="travel-grid section-shell">
+  <article class="travel-feature"><p class="eyebrow">Official venue</p><h2>{{ event.venue.name }}</h2><address>{{ event.venue.street }}<br>{{ event.venue.locality }}, {{ event.venue.region }} {{ event.venue.postalCode }}</address><p>The Convention Center sits in San Juan’s Convention District, near Distrito T-Mobile and a short drive from Condado and Old San Juan.</p><a class="button button-dark" href="{{ event.venue.mapUrl }}" target="_blank" rel="noopener noreferrer">Open in Google Maps <span aria-hidden="true">↗</span></a></article>
+  <article><h2>Airport</h2><p>Luis Muñoz Marín International Airport (SJU) is San Juan’s primary airport. Travel time varies with traffic; allow extra time during peak arrival periods.</p></article>
+  <article><h2>Getting around</h2><p>Taxis, rideshare services, rental cars, and public transportation serve the metro area. Confirm rates and pickup locations with your provider.</p></article>
+  <article><h2>Accessibility</h2><p>The Puerto Rico Convention Center provides accessible routes and facilities. Contact <a href="mailto:{{ site.email }}">CHAIC</a> in advance for event-specific accommodations, and the venue for facility questions.</p></article>
+  <article><h2>Accommodations</h2><p>An official CHAIC hotel block has not yet been published. We will add approved accommodation information here when available; CHAIC does not currently endorse third-party room offers.</p></article>
+</div></section>

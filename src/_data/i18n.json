@@ -1,0 +1,116 @@
+{
+  "en": {
+    "skip": "Skip to main content",
+    "nav": {
+      "home": "Home",
+      "speakers": "Speakers",
+      "agenda": "Agenda",
+      "workshops": "Workshops",
+      "tickets": "Tickets",
+      "travel": "Travel",
+      "sponsors": "Sponsors",
+      "blog": "Insights",
+      "register": "Register now",
+      "menu": "Open menu",
+      "language": "Español"
+    },
+    "event": {
+      "date": "September 25–26, 2026",
+      "venue": "Puerto Rico Convention Center",
+      "location": "San Juan, Puerto Rico",
+      "cme": "12.5 CME credits",
+      "earlyBird": "Early-bird pricing ends July 31",
+      "countdown": "Time left for early-bird pricing",
+      "days": "days",
+      "hours": "hours",
+      "minutes": "minutes"
+    },
+    "actions": {
+      "register": "Register now",
+      "agenda": "View agenda",
+      "speakers": "Meet the speakers",
+      "tickets": "Compare passes",
+      "details": "See full details",
+      "learnMore": "Learn more",
+      "contact": "Contact CHAIC",
+      "sponsor": "Ask about sponsorship"
+    },
+    "footer": {
+      "explore": "Explore",
+      "contact": "Contact",
+      "legalPending": "Legal pages pending review",
+      "copyright": "Caribbean Health AI Congress. All rights reserved."
+    },
+    "labels": {
+      "confirmed": "Confirmed",
+      "speakerPending": "Speaker to be confirmed",
+      "included": "Included",
+      "notIncluded": "Not included",
+      "bestFor": "Best for",
+      "regular": "Regular",
+      "save": "Save",
+      "published": "Published",
+      "modified": "Updated",
+      "author": "By",
+      "sources": "Sources",
+      "disclosure": "Production disclosure"
+    }
+  },
+  "es": {
+    "skip": "Saltar al contenido principal",
+    "nav": {
+      "home": "Inicio",
+      "speakers": "Ponentes",
+      "agenda": "Agenda",
+      "workshops": "Talleres",
+      "tickets": "Entradas",
+      "travel": "Viaje",
+      "sponsors": "Patrocinadores",
+      "blog": "Artículos",
+      "register": "Inscríbete ahora",
+      "menu": "Abrir menú",
+      "language": "English"
+    },
+    "event": {
+      "date": "25–26 de septiembre de 2026",
+      "venue": "Centro de Convenciones de Puerto Rico",
+      "location": "San Juan, Puerto Rico",
+      "cme": "12.5 créditos CME",
+      "earlyBird": "El precio de inscripción temprana termina el 31 de julio",
+      "countdown": "Tiempo restante para el precio de inscripción temprana",
+      "days": "días",
+      "hours": "horas",
+      "minutes": "minutos"
+    },
+    "actions": {
+      "register": "Inscríbete ahora",
+      "agenda": "Ver agenda",
+      "speakers": "Conoce a los ponentes",
+      "tickets": "Comparar entradas",
+      "details": "Ver todos los detalles",
+      "learnMore": "Conoce más",
+      "contact": "Contacta a CHAIC",
+      "sponsor": "Pregunta por patrocinios"
+    },
+    "footer": {
+      "explore": "Explora",
+      "contact": "Contacto",
+      "legalPending": "Páginas legales pendientes de revisión",
+      "copyright": "Caribbean Health AI Congress. Todos los derechos reservados."
+    },
+    "labels": {
+      "confirmed": "Confirmado",
+      "speakerPending": "Ponente por confirmar",
+      "included": "Incluye",
+      "notIncluded": "No incluye",
+      "bestFor": "Ideal para",
+      "regular": "Regular",
+      "save": "Ahorra",
+      "published": "Publicado",
+      "modified": "Actualizado",
+      "author": "Por",
+      "sources": "Fuentes",
+      "disclosure": "Divulgación de producción"
+    }
+  }
+}

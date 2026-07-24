@@ -1,0 +1,167 @@
+---
+layout: layouts/base.njk
+permalink: /
+locale: en
+title: "CHAIC 2026 | Caribbean Health AI Congress in San Juan"
+description: "Join clinicians, researchers, entrepreneurs, and AI leaders at CHAIC 2026, September 25–26 at the Puerto Rico Convention Center in San Juan."
+schemaType: event
+translationUrl: /es/
+enUrl: /
+esUrl: /es/
+xDefaultUrl: /
+indexable: true
+bodyClass: home-page
+---
+{% set t = i18n.en %}
+<section class="hero">
+  {% include "partials/hero-media.njk" %}
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Caribbean Health AI Congress</p>
+    <h1>Where healthcare leaders turn AI into better care</h1>
+    <p class="hero-lede">Two focused days of clinical insight, practical implementation, research, and connection across the Caribbean and the Americas.</p>
+    <ul class="hero-facts" aria-label="Event details">
+      <li><strong>{{ t.event.date }}</strong></li>
+      <li>{{ t.event.venue }}, {{ t.event.location }}</li>
+      <li>{{ t.event.cme }}</li>
+    </ul>
+    <div class="button-row">
+      <a class="button button-primary" href="{{ event.lumaUrl }}?utm_source=chaicpr.com&amp;utm_medium=website&amp;utm_campaign=chaic_2026&amp;utm_content=hero_en" data-checkout data-pass-id="general" data-cta-location="hero" data-label="{{ t.actions.register }}">{{ t.actions.register }}</a>
+      <a class="button button-secondary" href="/agenda.html" data-cta-event data-cta-location="hero" data-label="{{ t.actions.agenda }}">{{ t.actions.agenda }}</a>
+    </div>
+  </div>
+</section>
+
+<section class="deadline-strip" data-countdown data-deadline="{{ event.earlyBirdEnd }}">
+  <div>
+    <p><strong>{{ t.event.earlyBird }}.</strong> Current passes start at $99 + IVU.</p>
+    <div class="countdown" aria-label="{{ t.event.countdown }}">
+      <span><b data-days>—</b> {{ t.event.days }}</span>
+      <span><b data-hours>—</b> {{ t.event.hours }}</span>
+      <span><b data-minutes>—</b> {{ t.event.minutes }}</span>
+    </div>
+  </div>
+</section>
+
+<section class="partner-strip" aria-labelledby="partner-heading">
+  <div class="section-shell">
+    <p class="eyebrow" id="partner-heading">In partnership with trusted health, education, and innovation organizations</p>
+    <div class="partner-grid">
+      {% for sponsor in sponsors | limit(6) %}
+        <a href="{{ sponsor.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ sponsor.name }}">
+          <img src="{{ sponsor.image }}" width="{{ sponsor.width }}" height="{{ sponsor.height }}" alt="{{ sponsor.name }}" loading="lazy" decoding="async">
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section value-section">
+  <div class="section-shell split-heading">
+    <div>
+      <p class="eyebrow">Built for people making real decisions</p>
+      <h2>Move from AI interest to responsible action</h2>
+    </div>
+    <p>CHAIC brings evidence, implementation experience, and regional context into one room—so your next AI decision is better informed.</p>
+  </div>
+  <div class="benefit-grid section-shell">
+    <article><span>01</span><h3>Clinical clarity</h3><p>Understand where AI is useful today, where it is not, and how to evaluate tools safely.</p></article>
+    <article><span>02</span><h3>Practical skills</h3><p>Learn governance, workflow, and implementation approaches you can take back to your organization.</p></article>
+    <article><span>03</span><h3>Caribbean perspective</h3><p>Explore solutions shaped by the realities and opportunities of Puerto Rico, the Caribbean, and Latin America.</p></article>
+    <article><span>04</span><h3>High-value connection</h3><p>Meet clinicians, researchers, founders, investors, educators, and health-system leaders.</p></article>
+  </div>
+</section>
+
+<section class="section section-teal">
+  <div class="section-shell section-heading">
+    <div><p class="eyebrow">Confirmed faculty</p><h2>Featured speakers</h2></div>
+    <a class="text-link light-link" href="/speakers.html">{{ t.actions.speakers }} <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="speaker-feature-grid section-shell">
+    {% for speaker in speakers | confirmed | featured | limit(6) %}
+      <article>
+        <a href="/speakers.html#{{ speaker.id }}">
+          <img src="{{ speaker.image }}" width="{{ speaker.imageWidth }}" height="{{ speaker.imageHeight }}" alt="{{ speaker.name }}" loading="lazy" decoding="async">
+          <h3>{{ speaker.name }}</h3>
+          <p>{{ speaker.organization or speaker.role }}</p>
+        </a>
+      </article>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-shell section-heading">
+    <div><p class="eyebrow">Two focused days</p><h2>Agenda highlights</h2></div>
+    <a class="text-link" href="/agenda.html">{{ t.actions.agenda }} <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="agenda-preview section-shell">
+    <article>
+      <p class="day-label">Day one · September 25</p>
+      {% for sessionId in ["d1-beyond-hype", "d1-antibiotics", "d1-abaim-primer"] %}
+        {% set session = sessions | lookup(sessionId) %}
+        <div><time datetime="{{ session.startDate }}">{{ session.startDate | timeDisplay("en") }}</time><h3>{{ session.title }}</h3></div>
+      {% endfor %}
+    </article>
+    <article>
+      <p class="day-label">Day two · September 26</p>
+      {% for sessionId in ["d2-surgery", "d2-medgemma", "d2-open-evidence", "d2-research"] %}
+        {% set session = sessions | lookup(sessionId) %}
+        <div><time datetime="{{ session.startDate }}">{{ session.startDate | timeDisplay("en") }}</time><h3>{{ session.title }}</h3></div>
+      {% endfor %}
+    </article>
+  </div>
+</section>
+
+<section class="section section-warm" id="tickets">
+  <div class="section-shell section-heading">
+    <div><p class="eyebrow">Choose your experience</p><h2>Four ways to join CHAIC</h2><p>Early-bird pricing is shown before IVU. Checkout and availability are managed by Luma.</p></div>
+    <a class="text-link" href="/tickets.html">{{ t.actions.tickets }} <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="ticket-grid section-shell">
+    {% for ticket in tickets %}
+      {% set detailed = false %}
+      {% set ctaLocation = "home_pass_preview" %}
+      {% include "partials/ticket-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="section workshop-teaser">
+  <div class="section-shell workshop-teaser-grid">
+    {% set workshopAlt = "CHAIC hands-on healthcare AI workshops" %}
+    {% set workshopSizes = "(max-width: 768px) calc(100vw - 24px), 55vw" %}
+    {% set workshopLazy = true %}
+    {% include "partials/workshop-picture.njk" %}
+    <div>
+      <p class="eyebrow">Learn by doing</p>
+      <h2>Hands-on workshops for practical AI skills</h2>
+      <p>Go beyond the main stage with guided sessions on AI tools, agents, and healthcare entrepreneurship. Workshop access depends on your pass.</p>
+      <a class="button button-dark" href="/workshops.html">Explore workshops</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-shell section-heading">
+    <div><p class="eyebrow">CHAIC insights</p><h2>Latest articles</h2></div>
+    <a class="text-link" href="/blog/">View all insights <span aria-hidden="true">→</span></a>
+  </div>
+  <div class="article-grid section-shell">
+    {% for article in articles | limit(3) %}
+      {% include "partials/article-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
+
+<section class="final-cta">
+  <div class="section-shell">
+    <p class="eyebrow">September 25–26 · San Juan</p>
+    <h2>Be in the room where Caribbean health AI moves forward</h2>
+    <p>Reserve your pass through the official CHAIC registration page on Luma.</p>
+    <div class="button-row centered">
+      <a class="button button-primary" href="{{ event.lumaUrl }}?utm_source=chaicpr.com&amp;utm_medium=website&amp;utm_campaign=chaic_2026&amp;utm_content=final_cta_en" data-checkout data-pass-id="general" data-cta-location="final_cta" data-label="{{ t.actions.register }}">{{ t.actions.register }}</a>
+      <a class="button button-secondary" href="mailto:{{ site.email }}">{{ t.actions.contact }}</a>
+    </div>
+  </div>
+</section>

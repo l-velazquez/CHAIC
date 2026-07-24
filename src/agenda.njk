@@ -1,0 +1,46 @@
+---
+layout: layouts/base.njk
+permalink: /agenda.html
+locale: en
+title: "CHAIC 2026 Agenda | September 25–26 in San Juan"
+description: "Explore the complete two-day CHAIC 2026 agenda, including keynotes, clinical AI sessions, panels, workshops, networking, and the startup pitch competition."
+schemaType: webpage
+translationUrl: /es/agenda.html
+enUrl: /agenda.html
+esUrl: /es/agenda.html
+xDefaultUrl: /agenda.html
+indexable: true
+showMobileCta: true
+breadcrumbs:
+  - name: Home
+    url: /
+  - name: Agenda
+    url: /agenda.html
+---
+<section class="page-hero compact-hero">
+  <div class="section-shell">
+    <p class="eyebrow">September 25–26, 2026</p>
+    <h1>The complete CHAIC 2026 agenda</h1>
+    <p>{{ sessions.length }} scheduled program blocks across two days. Times use Atlantic Standard Time in Puerto Rico (UTC−4).</p>
+  </div>
+</section>
+<section class="section agenda-section" data-agenda>
+  <div class="section-shell">
+    <div class="agenda-tabs" role="tablist" aria-label="Agenda days">
+      <button type="button" role="tab" id="tab-day-1" aria-selected="true" aria-controls="day-1" tabindex="0" data-agenda-tab="1">Day one <span>September 25</span></button>
+      <button type="button" role="tab" id="tab-day-2" aria-selected="false" aria-controls="day-2" tabindex="-1" data-agenda-tab="2">Day two <span>September 26</span></button>
+    </div>
+    {% for day in [1, 2] %}
+      <section class="agenda-day" id="day-{{ day }}" role="tabpanel" aria-labelledby="tab-day-{{ day }}" data-agenda-panel="{{ day }}">
+        <div class="agenda-day-heading">
+          <p class="day-label">Day {{ day }}</p>
+          <h2>{{ "Friday, September 25" if day == 1 else "Saturday, September 26" }}</h2>
+        </div>
+        {% for session in sessions | where("day", day) %}
+          {% include "partials/session-card.njk" %}
+        {% endfor %}
+      </section>
+    {% endfor %}
+    <noscript><style>.agenda-tabs{display:none}</style></noscript>
+  </div>
+</section>

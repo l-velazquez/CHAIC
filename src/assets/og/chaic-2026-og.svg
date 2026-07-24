@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">CHAIC 2026</title>
+  <desc id="description">Caribbean Health AI Congress, September 25 to 26, 2026, San Juan, Puerto Rico</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#032e31"/>
+      <stop offset="0.58" stop-color="#075459"/>
+      <stop offset="1" stop-color="#087b7b"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#35c6bd" stop-opacity=".58"/>
+      <stop offset="1" stop-color="#35c6bd" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="52" height="52" patternUnits="userSpaceOnUse">
+      <path d="M52 0H0v52" fill="none" stroke="#b6e6e2" stroke-opacity=".07"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <circle cx="1000" cy="145" r="360" fill="url(#glow)"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M881 112c74-43 176-4 196 74 12 45-5 85-32 112 38 28 56 77 41 120-23 67-107 91-166 53-46 29-113 18-145-27-28-40-25-91 4-126-27-40-20-96 14-131 24-25 57-36 88-31z" stroke="#f2b84b" stroke-width="8"/>
+    <path d="M879 160v311M820 200c43 7 59 38 59 76M812 342c44-2 67 23 67 66M936 183c-37 15-55 48-55 84M948 335c-44-1-67 27-67 70" stroke="#bfece8" stroke-width="6"/>
+    <g stroke="#f2b84b" stroke-width="5">
+      <path d="M801 241h-66l-30-31h-55"/>
+      <path d="M964 250h64l34-36h62"/>
+      <path d="M789 385h-62l-35 37h-73"/>
+      <path d="M966 396h62l35 39h65"/>
+    </g>
+    <g fill="#f2b84b" stroke="none">
+      <circle cx="650" cy="210" r="8"/><circle cx="619" cy="422" r="8"/>
+      <circle cx="1124" cy="214" r="8"/><circle cx="1128" cy="435" r="8"/>
+    </g>
+  </g>
+  <rect x="78" y="74" width="178" height="46" rx="23" fill="#f2b84b"/>
+  <text x="167" y="105" fill="#062e31" font-family="Arial, sans-serif" font-size="22" font-weight="700" text-anchor="middle" letter-spacing="2">SAN JUAN · PR</text>
+  <text x="78" y="218" fill="#ffffff" font-family="Arial, sans-serif" font-size="92" font-weight="800" letter-spacing="-4">CHAIC <tspan fill="#f2b84b">2026</tspan></text>
+  <text x="82" y="278" fill="#cce8e5" font-family="Arial, sans-serif" font-size="30" font-weight="600">CARIBBEAN HEALTH AI CONGRESS</text>
+  <line x1="80" y1="328" x2="680" y2="328" stroke="#75bdb8" stroke-width="2"/>
+  <text x="80" y="392" fill="#ffffff" font-family="Arial, sans-serif" font-size="38" font-weight="700">SEPTEMBER 25–26, 2026</text>
+  <text x="80" y="442" fill="#cce8e5" font-family="Arial, sans-serif" font-size="27">Puerto Rico Convention Center</text>
+  <text x="80" y="524" fill="#f2b84b" font-family="Arial, sans-serif" font-size="25" font-weight="700">WHERE HEALTHCARE LEADERS TURN AI INTO BETTER CARE</text>
+</svg>

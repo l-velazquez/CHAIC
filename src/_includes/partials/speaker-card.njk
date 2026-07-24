@@ -1,0 +1,23 @@
+<article class="speaker-card">
+  <img src="{{ speaker.image }}" width="{{ speaker.imageWidth }}" height="{{ speaker.imageHeight }}" alt="{{ speaker.name }}" loading="lazy" decoding="async">
+  <div class="speaker-card-body">
+    <span class="status-pill">{{ i18n[locale].labels.confirmed }}</span>
+    <h2>{{ speaker.name }}{% if speaker.credentials %}, <span>{{ speaker.credentials }}</span>{% endif %}</h2>
+    <p class="speaker-role">{{ speaker.role }}{% if speaker.organization %} · {{ speaker.organization }}{% endif %}</p>
+    <p>{{ speaker.bioEs if locale == 'es' else speaker.bio }}</p>
+    <p class="topic-list">{{ (speaker.topicsEs if locale == 'es' else speaker.topics) | join(" · ") }}</p>
+    {% if speaker.sessionIds.length %}
+      <p class="session-links">
+        {% for sessionId in speaker.sessionIds %}
+          {% set linkedSession = sessions | lookup(sessionId) %}
+          {% if linkedSession %}
+            <a href="{{ '/es/agenda.html' if locale == 'es' else '/agenda.html' }}#{{ linkedSession.id }}">{{ linkedSession.titleEs if locale == 'es' else linkedSession.title }}</a>{% if not loop.last %} · {% endif %}
+          {% endif %}
+        {% endfor %}
+      </p>
+    {% endif %}
+    {% if speaker.linkedin %}
+      <a class="text-link" href="{{ speaker.linkedin }}" target="_blank" rel="noopener noreferrer">{{ speaker.name }} {{ 'en LinkedIn' if locale == 'es' else 'on LinkedIn' }} <span aria-hidden="true">↗</span></a>
+    {% endif %}
+  </div>
+</article>

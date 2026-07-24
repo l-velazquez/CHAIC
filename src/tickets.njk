@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+permalink: /tickets.html
+locale: en
+title: "CHAIC 2026 Tickets and Passes | Official Registration"
+description: "Compare CHAIC 2026 student, congress, mastery, and Founders Circle passes. Official checkout is securely managed through Luma."
+schemaType: event
+translationUrl: /es/entradas.html
+enUrl: /tickets.html
+esUrl: /es/entradas.html
+xDefaultUrl: /tickets.html
+indexable: true
+breadcrumbs:
+  - name: Home
+    url: /
+  - name: Tickets
+    url: /tickets.html
+---
+<section class="page-hero ticket-hero">
+  <div class="section-shell">
+    <p class="eyebrow">Official CHAIC registration</p>
+    <h1>Choose the pass that fits your goals</h1>
+    <p>Early-bird pricing ends July 31, 2026. Prices shown are before IVU, which is added at checkout. Luma is CHAIC’s only official checkout.</p>
+  </div>
+</section>
+<section class="ticket-trust">
+  <div class="section-shell">
+    <p><strong>Every pass:</strong> September 25–26 at the Puerto Rico Convention Center · 12.5 CME credits · Official Luma checkout</p>
+    <p class="fact-stamp">Ticket facts last reconciled in site data: {{ event.ticketFactsLastVerified | readableDate("en") }}.</p>
+  </div>
+</section>
+<section class="section ticket-detail-section" data-ticket-section>
+  <div class="ticket-grid ticket-grid-detail section-shell">
+    {% for ticket in tickets %}
+      {% set detailed = true %}
+      {% set ctaLocation = "tickets_page" %}
+      {% include "partials/ticket-card.njk" %}
+    {% endfor %}
+  </div>
+</section>
+<section class="section section-teal ticket-help">
+  <div class="section-shell split-heading">
+    <div><p class="eyebrow">Need help deciding?</p><h2>Start with what you want to take home</h2></div>
+    <div>
+      <p><strong>Congress</strong> covers the full two-day program. <strong>Mastery</strong> adds the ABAIM primer and a workshop. <strong>Founders Circle</strong> adds every workshop and the private leadership experience.</p>
+      <a class="button button-light" href="mailto:{{ site.email }}?subject=CHAIC%20pass%20question">Ask us a question</a>
+    </div>
+  </div>
+</section>

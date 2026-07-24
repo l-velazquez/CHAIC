@@ -1,0 +1,78 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Event",
+      "@id": "{{ site.origin }}/#event",
+      "name": {{ event.name | json | safe }},
+      "description": {{ event.description | json | safe }},
+      "startDate": "{{ event.startDate }}",
+      "endDate": "{{ event.endDate }}",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "inLanguage": ["en", "es-PR"],
+      "image": ["{{ site.defaultOgImage | absolute(site.origin) }}"],
+      "url": "{{ site.origin }}/",
+      "location": {
+        "@id": "{{ site.origin }}/#place"
+      },
+      "organizer": {
+        "@id": "{{ site.origin }}/#organization"
+      },
+      "performer": [
+        {% for speaker in speakers | confirmed %}
+          {
+            "@type": "Person",
+            "name": {{ speaker.name | json | safe }},
+            "url": "{{ site.origin }}/speakers.html#{{ speaker.id }}"
+          }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ],
+      "offers": [
+        {% for ticket in tickets %}
+          {
+            "@type": "Offer",
+            "name": {{ ticket.name | json | safe }},
+            "url": "{{ event.lumaUrl }}",
+            "price": "{{ ticket.price }}",
+            "priceCurrency": "{{ event.currency }}",
+            "validFrom": "{{ event.ticketFactsLastVerified }}T00:00:00-04:00",
+            "validThrough": "{{ event.earlyBirdEnd }}",
+            "availability": "https://schema.org/{{ ticket.availability }}"
+          }{% if not loop.last %},{% endif %}
+        {% endfor %}
+      ]
+    },
+    {
+      "@type": "Place",
+      "@id": "{{ site.origin }}/#place",
+      "name": {{ event.venue.name | json | safe }},
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": {{ event.venue.street | json | safe }},
+        "addressLocality": {{ event.venue.locality | json | safe }},
+        "addressRegion": "{{ event.venue.region }}",
+        "postalCode": "{{ event.venue.postalCode }}",
+        "addressCountry": "{{ event.venue.country }}"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "{{ site.origin }}/#organization",
+      "name": {{ site.fullName | json | safe }},
+      "url": "{{ site.origin }}/",
+      "logo": "{{ '/images/logos/CHAIC-Logo.png' | absolute(site.origin) }}",
+      "email": "{{ site.email }}"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.origin }}/#website",
+      "name": {{ site.fullName | json | safe }},
+      "url": "{{ site.origin }}/",
+      "publisher": { "@id": "{{ site.origin }}/#organization" },
+      "inLanguage": ["en", "es-PR"]
+    }
+  ]
+}
+</script>

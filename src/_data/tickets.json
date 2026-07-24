@@ -1,0 +1,168 @@
+[
+  {
+    "id": "student",
+    "name": "Students Pass",
+    "nameEs": "Entrada para estudiantes",
+    "audience": "Medical students and residents",
+    "audienceEs": "Estudiantes de medicina y residentes",
+    "price": 99,
+    "regularPrice": 119,
+    "taxLabel": "+ 11% IVU",
+    "eligibility": "Valid student ID and approval required.",
+    "eligibilityEs": "Se requiere identificación estudiantil válida y aprobación.",
+    "included": [
+      "12.5 CME credits",
+      "Two-day main-stage access",
+      "ABAIM AI Primer",
+      "Exhibit hall",
+      "Startup pitch competition"
+    ],
+    "includedEs": [
+      "12.5 créditos CME",
+      "Acceso al escenario principal por dos días",
+      "Curso introductorio de IA de ABAIM",
+      "Sala de exhibición",
+      "Competencia de propuestas de startups"
+    ],
+    "excluded": [
+      "Workshops",
+      "ABAIM certification",
+      "VIP lounge and cocktail reception",
+      "Lunch both days"
+    ],
+    "excludedEs": [
+      "Talleres",
+      "Certificación ABAIM",
+      "Sala VIP y cóctel",
+      "Almuerzo ambos días"
+    ],
+    "featured": false,
+    "availability": "InStock"
+  },
+  {
+    "id": "congress",
+    "name": "Congress Pass",
+    "nameEs": "Entrada al congreso",
+    "audience": "Clinicians, nurses, faculty, and healthcare professionals",
+    "audienceEs": "Clínicos, personal de enfermería, facultad y profesionales de la salud",
+    "price": 249,
+    "regularPrice": 499,
+    "taxLabel": "+ 11% IVU",
+    "eligibility": "",
+    "eligibilityEs": "",
+    "included": [
+      "12.5 CME credits",
+      "Two-day access to keynotes, panels, and case studies",
+      "Exhibit hall",
+      "Startup pitch competition",
+      "Day-one cocktail reception",
+      "Lunch both days",
+      "Congress program and digital materials"
+    ],
+    "includedEs": [
+      "12.5 créditos CME",
+      "Dos días de conferencias, paneles y casos de estudio",
+      "Sala de exhibición",
+      "Competencia de propuestas de startups",
+      "Cóctel del primer día",
+      "Almuerzo ambos días",
+      "Programa del congreso y materiales digitales"
+    ],
+    "excluded": [
+      "ABAIM certification course",
+      "Workshops (available separately at $149 per session)",
+      "Priority seating, VIP lounge, and VIP reception"
+    ],
+    "excludedEs": [
+      "Curso de certificación ABAIM",
+      "Talleres (disponibles por separado a $149 por sesión)",
+      "Asientos prioritarios, sala VIP y recepción VIP"
+    ],
+    "featured": false,
+    "availability": "InStock"
+  },
+  {
+    "id": "mastery",
+    "name": "Mastery Pass",
+    "nameEs": "Entrada Mastery",
+    "audience": "Clinicians seeking practical implementation skills",
+    "audienceEs": "Clínicos que buscan destrezas prácticas de implementación",
+    "price": 499,
+    "regularPrice": 799,
+    "taxLabel": "+ 11% IVU",
+    "eligibility": "",
+    "eligibilityEs": "",
+    "included": [
+      "Everything in the Congress Pass",
+      "12.5 CME credits",
+      "ABAIM AI Primer with credit toward certification",
+      "One workshop of your choice",
+      "Digital speaker slide decks after the event"
+    ],
+    "includedEs": [
+      "Todo lo incluido en la entrada al congreso",
+      "12.5 créditos CME",
+      "Curso introductorio de ABAIM con crédito hacia certificación",
+      "Un taller a escoger",
+      "Presentaciones digitales después del evento"
+    ],
+    "excluded": [
+      "VIP lounge and dinner",
+      "Speaker meet-and-greet",
+      "ABAIM certification"
+    ],
+    "excludedEs": [
+      "Sala VIP y cena",
+      "Encuentro con conferenciantes",
+      "Certificación ABAIM"
+    ],
+    "featured": true,
+    "availability": "InStock"
+  },
+  {
+    "id": "founders",
+    "name": "Founders Circle",
+    "nameEs": "Círculo de fundadores",
+    "audience": "Hospital executives, investors, physician leaders, and entrepreneurs",
+    "audienceEs": "Ejecutivos hospitalarios, inversionistas, médicos líderes y emprendedores",
+    "price": 1499,
+    "regularPrice": 1499,
+    "taxLabel": "+ 11% IVU",
+    "eligibility": "",
+    "eligibilityEs": "",
+    "included": [
+      "Everything in the Congress Pass",
+      "All workshops and sessions",
+      "12.5 CME credits",
+      "VIP lounge both days",
+      "Keynote meet-and-greets",
+      "September 24 welcome dinner",
+      "Front-row keynote seating",
+      "Option to serve as a startup competition judge",
+      "Program recognition and welcome kit",
+      "September 26 closing reception",
+      "Founders community and early 2027 access"
+    ],
+    "includedEs": [
+      "Todo lo incluido en la entrada al congreso",
+      "Todos los talleres y sesiones",
+      "12.5 créditos CME",
+      "Sala VIP ambos días",
+      "Encuentros con conferenciantes principales",
+      "Cena de bienvenida el 24 de septiembre",
+      "Asientos de primera fila",
+      "Opción de servir como jurado en la competencia de startups",
+      "Reconocimiento en el programa y obsequio de bienvenida",
+      "Recepción de cierre el 26 de septiembre",
+      "Comunidad de fundadores y acceso anticipado a 2027"
+    ],
+    "excluded": [
+      "ABAIM certification"
+    ],
+    "excludedEs": [
+      "Certificación ABAIM"
+    ],
+    "featured": false,
+    "availability": "InStock"
+  }
+]

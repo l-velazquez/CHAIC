@@ -1,0 +1,26 @@
+{
+  "name": "chaic-2026",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Static bilingual website for the Caribbean Health AI Congress 2026",
+  "scripts": {
+    "build": "eleventy && node scripts/minify.mjs",
+    "clean": "node scripts/clean.mjs",
+    "serve": "eleventy --serve",
+    "validate:data": "node scripts/validate-data.mjs",
+    "validate:site": "node scripts/validate-site.mjs",
+    "test:browser": "node scripts/browser-check.mjs",
+    "test": "npm run validate:data && npm run build && npm run validate:site"
+  },
+  "dependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "sanitize-html": "^2.17.0"
+  },
+  "devDependencies": {
+    "lightningcss": "^1.33.0",
+    "playwright": "^1.61.1",
+    "terser": "^5.49.0"
+  }
+}

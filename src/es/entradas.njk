@@ -1,0 +1,22 @@
+---
+layout: layouts/base.njk
+permalink: /es/entradas.html
+locale: es
+title: "Entradas de CHAIC 2026 | Inscripción oficial"
+description: "Compara las entradas de estudiantes, congreso, Mastery y Círculo de fundadores para CHAIC 2026. El pago oficial se gestiona mediante Luma."
+schemaType: event
+translationUrl: /tickets.html
+enUrl: /tickets.html
+esUrl: /es/entradas.html
+xDefaultUrl: /tickets.html
+indexable: true
+breadcrumbs:
+  - name: Inicio
+    url: /es/
+  - name: Entradas
+    url: /es/entradas.html
+---
+<section class="page-hero ticket-hero"><div class="section-shell"><p class="eyebrow">Inscripción oficial de CHAIC</p><h1>Escoge la entrada que mejor responde a tus metas</h1><p>El precio de inscripción temprana termina el 31 de julio de 2026. Los precios no incluyen IVU, que se añade al pagar. Luma es el único pago oficial de CHAIC.</p></div></section>
+<section class="ticket-trust"><div class="section-shell"><p><strong>Todas las entradas:</strong> 25–26 de septiembre en el Centro de Convenciones · 12.5 créditos CME · Pago oficial en Luma</p><p class="fact-stamp">Datos de entradas reconciliados por última vez en el sitio: {{ event.ticketFactsLastVerified | readableDate("es") }}.</p></div></section>
+<section class="section ticket-detail-section" data-ticket-section><div class="ticket-grid ticket-grid-detail section-shell">{% for ticket in tickets %}{% set detailed = true %}{% set ctaLocation = "tickets_page" %}{% include "partials/ticket-card.njk" %}{% endfor %}</div></section>
+<section class="section section-teal ticket-help"><div class="section-shell split-heading"><div><p class="eyebrow">¿Necesitas ayuda?</p><h2>Comienza por lo que deseas llevarte</h2></div><div><p><strong>Congreso</strong> cubre el programa de dos días. <strong>Mastery</strong> añade el curso de ABAIM y un taller. <strong>Círculo de fundadores</strong> añade todos los talleres y la experiencia privada de liderazgo.</p><a class="button button-light" href="mailto:{{ site.email }}?subject=Pregunta%20sobre%20entradas%20de%20CHAIC">Envíanos tu pregunta</a></div></div></section>

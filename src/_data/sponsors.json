@@ -1,0 +1,66 @@
+[
+  {
+    "name": "Society of Physician Entrepreneurs",
+    "url": "https://sopenet.org/",
+    "image": "/images/logos/SPE-White-Letters.webp",
+    "width": 367,
+    "height": 156,
+    "tier": "Partner"
+  },
+  {
+    "name": "American Board of Artificial Intelligence in Medicine",
+    "url": "https://abaim.org/",
+    "image": "/images/logos/ABAIM-logo-transparent.webp",
+    "width": 420,
+    "height": 82,
+    "tier": "Partner"
+  },
+  {
+    "name": "Advance Medical Research Center",
+    "url": "https://www.advanceresearchpr.com/",
+    "image": "/images/logos/AMRC.webp",
+    "width": 168,
+    "height": 168,
+    "tier": "Gold sponsor"
+  },
+  {
+    "name": "AIMed",
+    "url": "https://www.ai-med.io/",
+    "image": "/images/logos/AI-med.webp",
+    "width": 168,
+    "height": 168,
+    "tier": "Partner"
+  },
+  {
+    "name": "University of Puerto Rico Medical Sciences Campus",
+    "url": "https://rcm2.rcm.upr.edu/",
+    "image": "/images/logos/RCM-UPR-Logo.webp",
+    "width": 167,
+    "height": 156,
+    "tier": "Partner"
+  },
+  {
+    "name": "PR-USA Chamber of Commerce",
+    "url": "https://prusachamberofcommerce.com/",
+    "image": "/images/logos/pr-usa-chamber-of-commerce.webp",
+    "width": 157,
+    "height": 156,
+    "tier": "Partner"
+  },
+  {
+    "name": "Puerto Rico AI Institute and Consortium",
+    "url": "https://praiic.com/",
+    "image": "/images/logos/puerto-rico-ai-institute-and-consortium.webp",
+    "width": 120,
+    "height": 120,
+    "tier": "Partner"
+  },
+  {
+    "name": "Centro Unido de Detallistas",
+    "url": "https://centrounido.com/",
+    "image": "/images/logos/centro-unido.webp",
+    "width": 131,
+    "height": 156,
+    "tier": "Partner"
+  }
+]

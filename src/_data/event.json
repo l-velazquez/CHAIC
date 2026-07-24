@@ -1,0 +1,34 @@
+{
+  "id": "chaic-2026",
+  "name": "Caribbean Health AI Congress 2026",
+  "alternateName": "CHAIC 2026",
+  "description": "A two-day congress where clinicians, researchers, entrepreneurs, investors, and technology leaders explore practical and responsible artificial intelligence in healthcare.",
+  "startDate": "2026-09-25T08:00:00-04:00",
+  "endDate": "2026-09-26T18:00:00-04:00",
+  "timezone": "America/Puerto_Rico",
+  "earlyBirdEnd": "2026-07-31T23:59:59-04:00",
+  "currency": "USD",
+  "tax": {
+    "name": "IVU Tax",
+    "percent": 11
+  },
+  "cme": "12.5 CME credits",
+  "lumaUrl": "https://lu.ma/oollgim4",
+  "lumaEventId": "evt-fLWU47cvAQBa6a1",
+  "ticketFactsLastVerified": "2026-07-24",
+  "organizer": {
+    "name": "Caribbean Health AI Congress",
+    "url": "https://www.chaicpr.com/"
+  },
+  "contact": "info@chaicpr.com",
+  "venue": {
+    "name": "Puerto Rico Convention Center",
+    "nameEs": "Centro de Convenciones de Puerto Rico",
+    "street": "100 Convention Boulevard",
+    "locality": "San Juan",
+    "region": "PR",
+    "postalCode": "00907",
+    "country": "PR",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Puerto+Rico+Convention+Center%2C+100+Convention+Boulevard%2C+San+Juan%2C+PR+00907"
+  }
+}

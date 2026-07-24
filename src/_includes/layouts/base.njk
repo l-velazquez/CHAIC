@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="{{ 'es-PR' if locale == 'es' else 'en' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}">
+    {% set preventIndex = indexable == false or (legalDraft and not site.legalApproved) %}
+    {% if preventIndex %}
+      <meta name="robots" content="noindex, nofollow">
+    {% else %}
+      <meta name="robots" content="index, follow, max-image-preview:large">
+    {% endif %}
+    <link rel="canonical" href="{{ canonicalUrl or (page.url | absolute(site.origin)) }}">
+    {% if translationUrl %}
+      <link rel="alternate" hreflang="en" href="{{ enUrl | absolute(site.origin) }}">
+      <link rel="alternate" hreflang="es-PR" href="{{ esUrl | absolute(site.origin) }}">
+      <link rel="alternate" hreflang="x-default" href="{{ xDefaultUrl | absolute(site.origin) }}">
+    {% endif %}
+    <meta property="og:type" content="{{ ogType or 'website' }}">
+    <meta property="og:site_name" content="{{ site.fullName }}">
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:url" content="{{ canonicalUrl or (page.url | absolute(site.origin)) }}">
+    <meta property="og:image" content="{{ (image or site.defaultOgImage) | absolute(site.origin) }}">
+    <meta property="og:image:width" content="{{ imageWidth or 1200 }}">
+    <meta property="og:image:height" content="{{ imageHeight or 630 }}">
+    <meta property="og:image:alt" content="{{ imageAlt or 'CHAIC 2026 — Caribbean Health AI Congress' }}">
+    <meta property="og:locale" content="{{ 'es_PR' if locale == 'es' else 'en_US' }}">
+    {% if translationUrl %}
+      <meta property="og:locale:alternate" content="{{ 'en_US' if locale == 'es' else 'es_PR' }}">
+    {% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description }}">
+    <meta name="twitter:image" content="{{ (image or site.defaultOgImage) | absolute(site.origin) }}">
+    <link rel="icon" href="/images/favicon-96x96.png" sizes="96x96">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="preload" href="/assets/fonts/inter-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/space-grotesk-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/site.css">
+    <noscript>
+      <style>
+        @media (max-width: 68rem) {
+          .menu-toggle { display: none; }
+          .primary-nav {
+            position: static;
+            display: grid;
+            max-height: none;
+            padding: 0.75rem 0 1rem;
+            background: transparent;
+            border: 0;
+          }
+        }
+      </style>
+    </noscript>
+    {% if schemaType == "event" %}
+      {% include "schema/event.njk" %}
+    {% elseif schemaType == "speakers" %}
+      {% include "schema/speakers.njk" %}
+    {% elseif schemaType == "webpage" %}
+      {% include "schema/webpage.njk" %}
+    {% endif %}
+    {% if breadcrumbs %}
+      {% include "schema/breadcrumbs.njk" %}
+    {% endif %}
+    {% if site.gtmId %}
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ "site_language": "{{ locale or 'en' }}" });
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{ site.gtmId }}');
+      </script>
+    {% endif %}
+  </head>
+  <body class="{{ bodyClass or '' }}" data-locale="{{ locale or 'en' }}">
+    {% if site.gtmId %}
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ site.gtmId }}" height="0" width="0" class="gtm-frame" title="Google Tag Manager"></iframe></noscript>
+    {% endif %}
+    <a class="skip-link" href="#main">{{ i18n[locale].skip }}</a>
+    {% include "partials/header.njk" %}
+    <main id="main" tabindex="-1">
+      {% if breadcrumbs %}
+        {% include "partials/breadcrumbs.njk" %}
+      {% endif %}
+      {{ content | safe }}
+    </main>
+    {% include "partials/footer.njk" %}
+    {% if showMobileCta %}
+      <a class="mobile-register" href="{{ event.lumaUrl }}?utm_source=chaicpr.com&amp;utm_medium=website&amp;utm_campaign=chaic_2026&amp;utm_content=mobile_bar_{{ locale }}" data-checkout data-pass-id="general" data-cta-location="mobile_bar" data-label="{{ i18n[locale].actions.register }}">{{ i18n[locale].actions.register }}</a>
+    {% endif %}
+    <script src="/assets/js/site.js" defer></script>
+  </body>
+</html>

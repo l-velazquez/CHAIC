@@ -1,0 +1,26 @@
+{% set t = i18n[locale] %}
+<header class="site-header" data-header>
+  <div class="nav-shell">
+    <a class="brand" href="{{ '/es/' if locale == 'es' else '/' }}" aria-label="{{ site.fullName }}">
+      <img src="/images/logos/chaic-icon-3.webp" width="88" height="88" alt="" fetchpriority="high">
+      <span>CHAIC <b>2026</b></span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation" data-menu-toggle>
+      <span class="sr-only">{{ t.nav.menu }}</span>
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+    </button>
+    <nav id="primary-navigation" class="primary-nav" aria-label="{{ 'Navegación principal' if locale == 'es' else 'Primary navigation' }}" data-menu>
+      <a href="{{ '/es/ponentes.html' if locale == 'es' else '/speakers.html' }}">{{ t.nav.speakers }}</a>
+      <a href="{{ '/es/agenda.html' if locale == 'es' else '/agenda.html' }}">{{ t.nav.agenda }}</a>
+      <a href="{{ '/es/talleres.html' if locale == 'es' else '/workshops.html' }}">{{ t.nav.workshops }}</a>
+      <a href="{{ '/es/entradas.html' if locale == 'es' else '/tickets.html' }}">{{ t.nav.tickets }}</a>
+      <a href="{{ '/es/viaje.html' if locale == 'es' else '/travel.html' }}">{{ t.nav.travel }}</a>
+      <a href="{{ '/es/patrocinadores.html' if locale == 'es' else '/sponsors.html' }}">{{ t.nav.sponsors }}</a>
+      {% if locale == 'en' %}<a href="/blog/">{{ t.nav.blog }}</a>{% endif %}
+      {% if translationUrl %}
+        <a class="language-link" href="{{ translationUrl }}" lang="{{ 'en' if locale == 'es' else 'es-PR' }}" hreflang="{{ 'en' if locale == 'es' else 'es-PR' }}" data-language-switch data-source-language="{{ locale }}" data-destination-language="{{ 'en' if locale == 'es' else 'es' }}">{{ t.nav.language }}</a>
+      {% endif %}
+      <a class="nav-register" href="{{ event.lumaUrl }}?utm_source=chaicpr.com&amp;utm_medium=website&amp;utm_campaign=chaic_2026&amp;utm_content=nav_{{ locale }}" data-checkout data-pass-id="general" data-cta-location="navigation" data-label="{{ t.nav.register }}">{{ t.nav.register }}</a>
+    </nav>
+  </div>
+</header>

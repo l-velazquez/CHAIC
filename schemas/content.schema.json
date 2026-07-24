@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://www.chaicpr.com/schemas/content.schema.json",
+  "$defs": {
+    "nonEmpty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "description",
+        "startDate",
+        "endDate",
+        "timezone",
+        "venue",
+        "lumaUrl",
+        "earlyBirdEnd",
+        "currency",
+        "organizer",
+        "contact"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmpty" },
+        "name": { "$ref": "#/$defs/nonEmpty" },
+        "description": { "$ref": "#/$defs/nonEmpty" },
+        "startDate": { "type": "string", "format": "date-time" },
+        "endDate": { "type": "string", "format": "date-time" },
+        "earlyBirdEnd": { "type": "string", "format": "date-time" },
+        "timezone": { "const": "America/Puerto_Rico" },
+        "currency": { "const": "USD" },
+        "lumaUrl": { "type": "string", "format": "uri" },
+        "contact": { "type": "string", "format": "email" },
+        "venue": {
+          "type": "object",
+          "required": [
+            "name",
+            "street",
+            "locality",
+            "region",
+            "postalCode",
+            "country"
+          ]
+        },
+        "organizer": {
+          "type": "object",
+          "required": ["name", "url"]
+        }
+      }
+    },
+    "ticket": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "audience",
+        "price",
+        "regularPrice",
+        "taxLabel",
+        "included",
+        "excluded",
+        "featured",
+        "availability"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmpty" },
+        "name": { "$ref": "#/$defs/nonEmpty" },
+        "audience": { "$ref": "#/$defs/nonEmpty" },
+        "price": { "type": "number", "minimum": 0 },
+        "regularPrice": { "type": "number", "minimum": 0 },
+        "included": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/nonEmpty" }
+        },
+        "excluded": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/nonEmpty" }
+        },
+        "featured": { "type": "boolean" },
+        "availability": {
+          "enum": ["InStock", "SoldOut", "PreOrder", "LimitedAvailability"]
+        }
+      }
+    },
+    "speaker": {
+      "type": "object",
+      "required": [
+        "id",
+        "status",
+        "name",
+        "credentials",
+        "organization",
+        "role",
+        "topics",
+        "bio",
+        "image",
+        "linkedin",
+        "featured",
+        "sessionIds"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmpty" },
+        "status": { "enum": ["confirmed", "invited"] },
+        "name": { "$ref": "#/$defs/nonEmpty" },
+        "topics": { "type": "array" },
+        "featured": { "type": "boolean" },
+        "sessionIds": { "type": "array" }
+      }
+    },
+    "session": {
+      "type": "object",
+      "required": [
+        "id",
+        "day",
+        "startDate",
+        "endDate",
+        "title",
+        "description",
+        "type",
+        "status",
+        "speakerIds",
+        "location"
+      ],
+      "properties": {
+        "id": { "$ref": "#/$defs/nonEmpty" },
+        "day": { "enum": [1, 2] },
+        "startDate": { "type": "string", "format": "date-time" },
+        "endDate": { "type": "string", "format": "date-time" },
+        "status": { "enum": ["confirmed", "speaker-pending"] },
+        "speakerIds": { "type": "array" }
+      }
+    },
+    "articleApproval": {
+      "type": "object",
+      "required": [
+        "slug",
+        "approved",
+        "authorId",
+        "reviewerIds",
+        "dateModified",
+        "disclosure",
+        "sources"
+      ],
+      "properties": {
+        "slug": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "approved": { "type": "boolean" },
+        "authorId": { "$ref": "#/$defs/nonEmpty" },
+        "reviewerIds": { "type": "array" },
+        "dateModified": { "type": "string", "format": "date" },
+        "disclosure": { "$ref": "#/$defs/nonEmpty" },
+        "sources": { "type": "array" }
+      }
+    }
+  }
+}
