@@ -14,8 +14,8 @@
   /* Primary palette */
   --dark: #050d1e;
   --dark-2: #0a1628;
-  --gold: #f5b800;
-  --gold-2: #ffd24d;
+  --gold: #f59b00;
+  --gold-2: #ff8b4d;
   --gold-hover: #e0a800;
   --silver: #c7ccd4;
   --silver-2: #e6ebf2;
@@ -56,7 +56,7 @@
   --grad-headline: linear-gradient(
     135deg,
     #f5b800 0%,
-    #ffd24d 45%,
+    #ffac4d 45%,
     #22d3ee 100%
   );
   --grad-accent: linear-gradient(135deg, #06b6d4 0%, #0e7490 100%);
@@ -2554,6 +2554,20 @@ body.sponsor-modal-open {
   color: #b7791f;
 }
 
+.ticket-cme-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #b7791f;
+  background: rgba(245, 184, 0, 0.12);
+  padding: 0.25rem 0.6rem;
+  border-radius: 50px;
+}
+
 .ticket-features {
   list-style: none;
   display: flex;
@@ -3081,6 +3095,11 @@ body.sponsor-modal-open {
     gap: 1.5rem;
     align-items: start;
   }
+  /* Reorder hero on mobile so the Register CTA sits above the fold */
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+  }
   .hero-glow {
     width: 320px;
     height: 320px;
@@ -3118,7 +3137,9 @@ body.sponsor-modal-open {
     font-size: 2rem;
   }
   .countdown {
+    order: 3;
     gap: 0.55rem;
+    margin-top: 1.25rem;
   }
   .cd-label {
     font-size: 0.55rem;
@@ -3128,9 +3149,11 @@ body.sponsor-modal-open {
     font-size: clamp(2rem, 8.5vw, 3rem);
   }
   .hero-bottom-left {
-    margin-top: clamp(1.5rem, 5vh, 3rem);
+    order: 2;
+    margin-top: 0;
   }
   .hero-eyebrow {
+    order: 1;
     font-size: 0.66rem;
     padding: 0.4rem 0.85rem 0.4rem 0.7rem;
   }
