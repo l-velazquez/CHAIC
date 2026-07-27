@@ -139,15 +139,18 @@ function computeDayStats(dayId) {
     return null;
   }
 
-  // Exclude non-program items (lunch, breaks) from session count
-  const cards = day.querySelectorAll('.agenda-card:not([data-track="lunch"])');
+  // Exclude non-program items (lunch, registration, open slots) from session count
+  const cards = day.querySelectorAll(
+    '.agenda-card:not([data-track="lunch"]):not([data-track="break"])'
+  );
 
   let totalMinutes = 0;
   const speakers = new Set();
 
   allCards.forEach(card => {
     const dur = parseInt(card.dataset.duration, 10);
-    if (!Number.isNaN(dur)) totalMinutes += dur;
+    // Salón B runs alongside Salón A — counting both would double the day length
+    if (!Number.isNaN(dur) && !card.hasAttribute('data-parallel')) totalMinutes += dur;
     // Only count human speakers: must have a role and not be a placeholder (TBA/TBC)
     card.querySelectorAll('.agenda-card-speaker').forEach(speakerEl => {
       const nameEl = speakerEl.querySelector('.agenda-speaker-name');
