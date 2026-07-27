@@ -1709,6 +1709,11 @@ a {
   border-color: #f97362;
   box-shadow: 0 0 0 4px rgba(249, 115, 98, 0.2);
 }
+.agenda-card[data-track="ceremony"]::before {
+  background: #c084fc;
+  border-color: #c084fc;
+  box-shadow: 0 0 0 4px rgba(192, 132, 252, 0.2);
+}
 .agenda-card[data-track="break"]::before {
   background: rgba(255, 255, 255, 0.5);
   border-color: rgba(255, 255, 255, 0.7);
@@ -1827,6 +1832,10 @@ a {
 .agenda-card[data-track="networking"] .agenda-track-pill {
   background: rgba(249, 115, 98, 0.16);
   color: #fca5a5;
+}
+.agenda-card[data-track="ceremony"] .agenda-track-pill {
+  background: rgba(192, 132, 252, 0.16);
+  color: #d8b4fe;
 }
 .agenda-card[data-track="break"] .agenda-track-pill {
   background: rgba(255, 255, 255, 0.08);
@@ -4158,6 +4167,12 @@ body.sponsor-modal-open {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--accent-deep);
+}
+.workshop-card-schedule {
+  margin-top: -0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--ink-2);
 }
 .workshop-card-desc {
   font-size: 0.95rem;
