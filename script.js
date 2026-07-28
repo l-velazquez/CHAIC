@@ -82,7 +82,7 @@ function renderInitials() {
 
 renderInitials();
 
-/* ── Sponsor carousel: duplicate the base 4 cards 3 more times ──
+/* ── Sponsor carousel: duplicate the base cards 3 more times ──
    so the marquee loops seamlessly (track moves -25% per cycle). */
 function duplicateSponsorTrack() {
   const track = document.getElementById('sponsors-track');
