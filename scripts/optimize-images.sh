@@ -11,8 +11,13 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
-CWEBP="${CWEBP:-/usr/local/bin/cwebp}"
+CWEBP="${CWEBP:-$(command -v cwebp || echo /usr/local/bin/cwebp)}"
 QUALITY="${QUALITY:-80}"
+
+if [[ ! -x "$CWEBP" ]]; then
+  echo "error: cwebp not found (set CWEBP=/path/to/cwebp, or: brew install webp)" >&2
+  exit 1
+fi
 
 # file|mode|W|H
 #   cover   -> image must fully cover WxH after object-fit:cover
@@ -22,13 +27,14 @@ images/logos/CHAIC-Logo.webp|cover|100|100
 images/logos/chaic-icon-3.webp|cover|88|88
 images/logos/chaic-agenda-profile-pic.webp|cover|88|88
 images/logos/AMRC.webp|cover|168|168
-images/logos/AI-med.webp|cover|168|168
 images/logos/pr-usa-chamber-of-commerce.webp|cover|156|156
 images/logos/puerto-rico-ai-institute-and-consortium.webp|cover|120|120
 images/logos/RCM-UPR-Logo.webp|contain|420|156
 images/logos/SPE-White-Letters.webp|contain|420|156
 images/logos/ABAIM-logo-transparent.webp|contain|420|156
 images/logos/centro-unido.webp|contain|420|156
+images/logos/AI-med.webp|contain|420|156
+images/logos/pmtl-institute.webp|contain|420|156
 images/people/DrOrvil-profile-small.webp|cover|68|68
 images/people/yasmin-pedrogo-profile.webp|cover|68|68
 images/people/arlen-meyers.webp|cover|440|550

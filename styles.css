@@ -793,13 +793,21 @@ a {
   opacity: 1;
   transform: translateY(-2px);
 }
+/* Per-logo optical corrections. Each logo is wrapped in its own <a>, so
+   the img is always child 1 of that anchor — the height override has to
+   target the anchor's position, not the img's. The two `img:nth-child()`
+   rules below therefore match nothing and have never applied; they are
+   left inert so the current uniform sizing is preserved. Use the
+   `> a:nth-child(n) img` form (see PMTL) for corrections that should
+   actually take effect, and keep n in sync with index.html's order.
+   2 = SPE, 3 = ABAIM, 9 = PMTL (two-line lockup, needs extra height). */
 .sponsors-logos img:nth-child(2) {
   height: 46px;
 }
 .sponsors-logos img:nth-child(3) {
   height: 84px;
 }
-.sponsors-logos img:nth-child(4) {
+.sponsors-logos > a:nth-child(9) img {
   height: 76px;
 }
 
@@ -3076,8 +3084,8 @@ body.sponsor-modal-open {
   .sponsors-logos img:nth-child(3) {
     height: 72px;
   }
-  .sponsors-logos img:nth-child(4) {
-    height: 64px;
+  .sponsors-logos > a:nth-child(9) img {
+    height: 66px;
   }
 
   .footer-grid {
@@ -3183,8 +3191,8 @@ body.sponsor-modal-open {
   .sponsors-logos img:nth-child(3) {
     height: 58px;
   }
-  .sponsors-logos img:nth-child(4) {
-    height: 52px;
+  .sponsors-logos > a:nth-child(9) img {
+    height: 56px;
   }
 
   /* About */
