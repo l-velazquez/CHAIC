@@ -16,6 +16,78 @@ function pad(n, len) {
   return String(n).padStart(len, '0');
 }
 
+/* ── Early-bird promotion (ends August 1 at 12:00 a.m. AST) ── */
+const promotion = window.CHAICPromotion;
+const promotionCountdown = document.querySelector('[data-early-bird-countdown]');
+let promotionTimerId = null;
+
+function renderPromotionCountdown(nowMs) {
+  if (!promotion || !promotionCountdown) return;
+
+  const diff = Math.max(0, promotion.endAtMs - nowMs);
+  const days = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const minutes = Math.floor((diff % 3600000) / 60000);
+  const seconds = Math.floor((diff % 60000) / 1000);
+
+  const values = {
+    '[data-promo-days]': pad(days, 2),
+    '[data-promo-hours]': pad(hours, 2),
+    '[data-promo-minutes]': pad(minutes, 2),
+    '[data-promo-seconds]': pad(seconds, 2),
+  };
+
+  Object.entries(values).forEach(([selector, value]) => {
+    const el = promotionCountdown.querySelector(selector);
+    if (el) el.textContent = value;
+  });
+}
+
+function syncPromotionState(nowMs = Date.now()) {
+  const active = Boolean(promotion && promotion.isActive(nowMs));
+  document.documentElement.classList.toggle('early-bird-active', active);
+
+  document.querySelectorAll('[data-early-price][data-regular-price]').forEach(el => {
+    el.textContent = active ? el.dataset.earlyPrice : el.dataset.regularPrice;
+  });
+
+  document.querySelectorAll('[data-promo-text][data-regular-text]').forEach(el => {
+    el.textContent = active ? el.dataset.promoText : el.dataset.regularText;
+  });
+
+  renderPromotionCountdown(nowMs);
+
+  if (!active && promotionTimerId !== null) {
+    window.clearInterval(promotionTimerId);
+    promotionTimerId = null;
+  }
+
+  return active;
+}
+
+if (syncPromotionState() && promotionCountdown) {
+  promotionTimerId = window.setInterval(() => syncPromotionState(), 1000);
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState !== 'visible') return;
+
+  const active = syncPromotionState();
+  if (active && promotionCountdown && promotionTimerId === null) {
+    promotionTimerId = window.setInterval(() => syncPromotionState(), 1000);
+  }
+});
+
+document.querySelectorAll('[data-early-bird-cta]').forEach(cta => {
+  cta.addEventListener('click', () => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'early_bird_banner_click',
+      page_path: window.location.pathname,
+    });
+  });
+});
+
 function tick() {
   const diff = TARGET - Date.now();
 
@@ -399,4 +471,3 @@ function initSponsorContact() {
 }
 
 initSponsorContact();
-

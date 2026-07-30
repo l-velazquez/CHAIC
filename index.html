@@ -42,6 +42,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="promotion.js"></script>
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="icon"
@@ -68,6 +69,26 @@
       ></iframe
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <aside class="early-bird-banner promotion-only" aria-label="Early-bird ticket offer">
+      <div class="early-bird-banner-inner">
+        <div class="early-bird-banner-message">
+          <span class="early-bird-banner-kicker">Early-bird pricing ends July 31</span>
+          <span class="early-bird-banner-detail">Save up to $300—secure your pass before prices increase.</span>
+        </div>
+        <div class="early-bird-countdown" data-early-bird-countdown aria-hidden="true">
+          <span class="early-bird-countdown-unit"><strong data-promo-days>00</strong><small>Days</small></span>
+          <span class="early-bird-countdown-separator">:</span>
+          <span class="early-bird-countdown-unit"><strong data-promo-hours>00</strong><small>Hrs</small></span>
+          <span class="early-bird-countdown-separator">:</span>
+          <span class="early-bird-countdown-unit"><strong data-promo-minutes>00</strong><small>Min</small></span>
+          <span class="early-bird-countdown-separator">:</span>
+          <span class="early-bird-countdown-unit"><strong data-promo-seconds>00</strong><small>Sec</small></span>
+        </div>
+        <a href="tickets.html#passes" class="early-bird-banner-cta" data-early-bird-cta>
+          Get Early-Bird Price <span aria-hidden="true">&#8594;</span>
+        </a>
+      </div>
+    </aside>
     <!-- Navbar -->
     <nav class="navbar">
       <div class="nav-inner">
@@ -744,7 +765,11 @@
               </svg>
             </div>
             <p>
-              Secure your seat before early-bird pricing ends July 31, 2026.
+              <span
+                data-promo-text="Secure your seat before early-bird pricing ends July 31, 2026."
+                data-regular-text="Secure your seat for CHAIC 2026."
+                >Secure your seat for CHAIC 2026.</span
+              >
             </p>
             <a href="#ticket" class="btn-get-tickets">
               Get Tickets
@@ -2715,9 +2740,12 @@
         <div class="section-header">
           <span class="section-eyebrow">Passes</span>
           <h2 class="section-title">Get Your Ticket</h2>
-          <p class="section-desc">
-            Early-bird pricing ends July 31, 2026. Choose the pass that fits
-            your role and your goals.
+          <p
+            class="section-desc"
+            data-promo-text="Early-bird pricing ends July 31, 2026. Choose the pass that fits your role and your goals."
+            data-regular-text="Choose the pass that fits your role and your goals."
+          >
+            Choose the pass that fits your role and your goals.
           </p>
           <a
             href="tickets.html"
@@ -2735,14 +2763,15 @@
             </div>
             <div class="ticket-type">Students Pass</div>
             <div class="ticket-price">
-              $99 <span class="ticket-price-tax">+ IVU</span>
+              <span data-early-price="$99" data-regular-price="$119">$119</span>
+              <span class="ticket-price-tax">+ IVU</span>
             </div>
             <span class="ticket-cme-badge">&#10003; 12.5 CME Credits</span>
             <p class="ticket-desc">
               For medical students and residents ready to lead the next
               generation of healthcare AI.
             </p>
-            <div class="ticket-pricing-note">
+            <div class="ticket-pricing-note promotion-only">
               Early bird &middot; Regular <s>$119</s> &middot; Ends July 31,
               2026
             </div>
@@ -2772,14 +2801,15 @@
           <div class="ticket-card reveal">
             <div class="ticket-type">Congress Pass</div>
             <div class="ticket-price">
-              $249 <span class="ticket-price-tax">+ IVU</span>
+              <span data-early-price="$249" data-regular-price="$499">$499</span>
+              <span class="ticket-price-tax">+ IVU</span>
             </div>
             <span class="ticket-cme-badge">&#10003; 12.5 CME Credits</span>
             <p class="ticket-desc">
               The complete congress experience — everything you need to learn,
               connect, and earn your CME credits.
             </p>
-            <div class="ticket-pricing-note">
+            <div class="ticket-pricing-note promotion-only">
               Early bird &middot; Regular <s>$499</s> &middot; Ends July 31,
               2026
             </div>
@@ -2812,7 +2842,8 @@
             <div class="ticket-badge">Most Popular</div>
             <div class="ticket-type">Mastery Pass</div>
             <div class="ticket-price">
-              $499 <span class="ticket-price-tax">+ IVU</span>
+              <span data-early-price="$499" data-regular-price="$799">$799</span>
+              <span class="ticket-price-tax">+ IVU</span>
             </div>
             <span class="ticket-cme-badge">&#10003; 12.5 CME Credits</span>
             <p class="ticket-desc">
@@ -2820,9 +2851,9 @@
               certification credit, and the tools to implement AI on Monday
               morning.
             </p>
-            <div class="ticket-pricing-note">
+            <div class="ticket-pricing-note promotion-only">
               Early bird &middot; Regular <s>$799</s> &middot; Ends July 31,
-              2026 &middot; Save $200
+              2026 &middot; <strong>Save $300</strong>
             </div>
             <ul class="ticket-features">
               <li>12.5 CME credits included</li>
@@ -2861,6 +2892,10 @@
             <ul class="ticket-features">
               <li>12.5 CME credits included</li>
               <li>Everything in Congress Pass + all workshops included</li>
+              <li>
+                ABAIM AI Primer — 3.5-hr course, earns credit toward ABAIM
+                certification
+              </li>
               <li>
                 VIP lounge &middot; Speaker meet-and-greets &middot; Front-row
                 reserved seating

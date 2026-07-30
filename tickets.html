@@ -26,6 +26,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="promotion.js"></script>
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
   <link rel="shortcut icon" href="images/favicon.ico">
@@ -37,6 +38,27 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TDJXRP72"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+
+  <aside class="early-bird-banner promotion-only" aria-label="Early-bird ticket offer">
+    <div class="early-bird-banner-inner">
+      <div class="early-bird-banner-message">
+        <span class="early-bird-banner-kicker">Early-bird pricing ends July 31</span>
+        <span class="early-bird-banner-detail">Save up to $300—secure your pass before prices increase.</span>
+      </div>
+      <div class="early-bird-countdown" data-early-bird-countdown aria-hidden="true">
+        <span class="early-bird-countdown-unit"><strong data-promo-days>00</strong><small>Days</small></span>
+        <span class="early-bird-countdown-separator">:</span>
+        <span class="early-bird-countdown-unit"><strong data-promo-hours>00</strong><small>Hrs</small></span>
+        <span class="early-bird-countdown-separator">:</span>
+        <span class="early-bird-countdown-unit"><strong data-promo-minutes>00</strong><small>Min</small></span>
+        <span class="early-bird-countdown-separator">:</span>
+        <span class="early-bird-countdown-unit"><strong data-promo-seconds>00</strong><small>Sec</small></span>
+      </div>
+      <a href="tickets.html#passes" class="early-bird-banner-cta" data-early-bird-cta>
+        Get Early-Bird Price <span aria-hidden="true">&#8594;</span>
+      </a>
+    </div>
+  </aside>
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -75,7 +97,7 @@
       <span class="tickets-page-eyebrow">Passes &middot; CHAIC 2026</span>
       <h1 class="tickets-page-title">Choose Your <span class="tickets-title-accent">Pass</span></h1>
       <p class="tickets-page-subtitle">Join us September 25–26, 2026 at the <strong>Centro de Convenciones de Puerto Rico</strong>, San Juan. Select the pass that fits your role and goals.</p>
-      <div class="tickets-early-bird-note">
+      <div class="tickets-early-bird-note promotion-only">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
         Early-bird pricing ends <strong>July 31, 2026</strong> — save up to $300
       </div>
@@ -84,7 +106,7 @@
   </section>
 
   <!-- Pass Cards -->
-  <section class="section section-light tickets-cards-section">
+  <section id="passes" class="section section-light tickets-cards-section">
     <div class="container">
       <div class="section-header">
         <span class="section-eyebrow">Pass Options</span>
@@ -98,14 +120,14 @@
         <div class="ticket-card reveal">
           <div class="ticket-badge ticket-badge--approval">Requires Approval</div>
           <div class="ticket-type">Students Pass</div>
-          <div class="ticket-price">$99 <span class="ticket-price-tax">+ IVU</span></div>
+          <div class="ticket-price"><span data-early-price="$99" data-regular-price="$119">$119</span> <span class="ticket-price-tax">+ IVU</span></div>
           <span class="ticket-cme-badge">&#10003; 12.5 CME Credits</span>
           <p class="ticket-desc">For medical students and residents ready to lead the next generation of healthcare AI.</p>
           <div class="ticket-bestfor">
             <span class="ticket-bestfor-label">Best for</span>
             Medical students &amp; residents
           </div>
-          <div class="ticket-pricing-note">Early bird &middot; Regular <s>$119</s> &middot; Ends July 31, 2026</div>
+          <div class="ticket-pricing-note promotion-only">Early bird &middot; Regular <s>$119</s> &middot; Ends July 31, 2026</div>
           <div class="ticket-features-divider">
             <span>What's included</span>
           </div>
@@ -132,14 +154,14 @@
         <!-- Congress Pass -->
         <div class="ticket-card reveal">
           <div class="ticket-type">Congress Pass</div>
-          <div class="ticket-price">$249 <span class="ticket-price-tax">+ IVU</span></div>
+          <div class="ticket-price"><span data-early-price="$249" data-regular-price="$499">$499</span> <span class="ticket-price-tax">+ IVU</span></div>
           <span class="ticket-cme-badge">&#10003; 12.5 CME Credits</span>
           <p class="ticket-desc">The complete congress experience — everything you need to learn, connect, and earn your CME credits.</p>
           <div class="ticket-bestfor">
             <span class="ticket-bestfor-label">Best for</span>
             Clinicians &middot; Nurses &middot; Healthcare professionals &middot; Academic faculty &middot; Hospital staff
           </div>
-          <div class="ticket-pricing-note">Early bird &middot; Regular <s>$499</s> &middot; Ends July 31, 2026</div>
+          <div class="ticket-pricing-note promotion-only">Early bird &middot; Regular <s>$499</s> &middot; Ends July 31, 2026</div>
           <div class="ticket-features-divider">
             <span>What's included</span>
           </div>
@@ -166,14 +188,14 @@
         <div class="ticket-card featured reveal">
           <div class="ticket-badge">Most Popular</div>
           <div class="ticket-type">Mastery Pass</div>
-          <div class="ticket-price">$499 <span class="ticket-price-tax">+ IVU</span></div>
+          <div class="ticket-price"><span data-early-price="$499" data-regular-price="$799">$799</span> <span class="ticket-price-tax">+ IVU</span></div>
           <span class="ticket-cme-badge">&#10003; 12.5 CME Credits</span>
           <p class="ticket-desc">For the clinician who wants to leave CHAIC with new skills, certification credit, and the tools to implement AI on Monday morning.</p>
           <div class="ticket-bestfor">
             <span class="ticket-bestfor-label">Best for</span>
             Clinicians &middot; Physicians &middot; Healthcare professionals seeking ABAIM certification
           </div>
-          <div class="ticket-pricing-note">Early bird &middot; Regular <s>$799</s> &middot; Ends July 31, 2026 &middot; <strong>Save $300</strong></div>
+          <div class="ticket-pricing-note promotion-only">Early bird &middot; Regular <s>$799</s> &middot; Ends July 31, 2026 &middot; <strong>Save $300</strong></div>
           <div class="ticket-features-divider">
             <span>What's included</span>
           </div>
@@ -213,6 +235,7 @@
           <ul class="ticket-features">
             <li>12.5 CME credits included</li>
             <li>Everything in Congress Pass, plus</li>
+            <li>ABAIM AI Primer — Dr. Anthony Chang's 3.5-hr course, earning credit toward ABAIM certification</li>
             <li>All sessions included — no choosing, every session is yours</li>
             <li>VIP lounge access all day, both days — private space with dedicated staff</li>
             <li>Premier meet-and-greet after each keynote session</li>
@@ -252,16 +275,16 @@
               <th class="compare-feature-col">Feature</th>
               <th>
                 <div class="compare-pass-name">Students</div>
-                <div class="compare-pass-price">$99 <span class="compare-pass-tax">+ IVU</span></div>
+                <div class="compare-pass-price"><span data-early-price="$99" data-regular-price="$119">$119</span> <span class="compare-pass-tax">+ IVU</span></div>
               </th>
               <th>
                 <div class="compare-pass-name">Congress</div>
-                <div class="compare-pass-price">$249 <span class="compare-pass-tax">+ IVU</span></div>
+                <div class="compare-pass-price"><span data-early-price="$249" data-regular-price="$499">$499</span> <span class="compare-pass-tax">+ IVU</span></div>
               </th>
               <th class="compare-col-featured">
                 <div class="compare-pass-badge">Most Popular</div>
                 <div class="compare-pass-name">Mastery</div>
-                <div class="compare-pass-price">$499 <span class="compare-pass-tax">+ IVU</span></div>
+                <div class="compare-pass-price"><span data-early-price="$499" data-regular-price="$799">$799</span> <span class="compare-pass-tax">+ IVU</span></div>
               </th>
               <th class="compare-col-vip">
                 <div class="compare-pass-badge compare-pass-badge--vip">VIP</div>
@@ -332,7 +355,7 @@
               <td><span class="compare-check" aria-label="Included">✓</span></td>
               <td><span class="compare-dash" aria-label="Not included">–</span></td>
               <td class="compare-col-featured"><span class="compare-check" aria-label="Included">✓</span></td>
-              <td class="compare-col-vip"><span class="compare-dash" aria-label="Not included">–</span></td>
+              <td class="compare-col-vip"><span class="compare-check" aria-label="Included">✓</span></td>
             </tr>
             <tr>
               <td class="compare-feature-col">Workshop</td>
