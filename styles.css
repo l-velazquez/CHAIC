@@ -133,6 +133,216 @@ a {
   }
 }
 
+/* ── EARLY-BIRD PROMOTION ── */
+.promotion-only {
+  display: none !important;
+}
+
+html.early-bird-active .promotion-only {
+  display: block !important;
+}
+
+.early-bird-banner {
+  position: relative;
+  z-index: 210;
+  color: #fff;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(34, 211, 238, 0.18), transparent 34%),
+    linear-gradient(110deg, #07152b 0%, #0b2940 55%, #10233c 100%);
+  border-bottom: 1px solid rgba(34, 211, 238, 0.22);
+  box-shadow: 0 10px 28px -18px rgba(5, 13, 30, 0.8);
+}
+
+.early-bird-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(245, 155, 0, 0.08) 48%,
+    transparent
+  );
+}
+
+.early-bird-banner-inner {
+  position: relative;
+  width: min(1280px, 100%);
+  min-height: 70px;
+  margin: 0 auto;
+  padding: 0.7rem 2rem;
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) auto auto;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2.5rem);
+}
+
+.early-bird-banner-message {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.early-bird-banner-kicker {
+  color: #ffd24d;
+  font-family: var(--font-heading);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.early-bird-banner-detail {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.early-bird-countdown {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.early-bird-countdown-unit {
+  min-width: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.early-bird-countdown-unit strong {
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 1.12rem;
+  font-weight: 700;
+}
+
+.early-bird-countdown-unit small {
+  margin-top: 0.22rem;
+  color: rgba(255, 255, 255, 0.52);
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.early-bird-countdown-separator {
+  align-self: flex-start;
+  margin-top: 0.05rem;
+  color: var(--gold);
+  font-weight: 700;
+}
+
+.early-bird-banner-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 40px;
+  padding: 0.65rem 1rem;
+  border-radius: 50px;
+  background: linear-gradient(135deg, var(--gold), #ffb02e);
+  color: var(--dark);
+  box-shadow: 0 12px 28px -14px rgba(245, 155, 0, 0.85);
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    transform 0.2s var(--ease),
+    box-shadow 0.2s var(--ease),
+    background 0.2s var(--ease);
+}
+
+.early-bird-banner-cta:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ffad1f, #ffc35c);
+  box-shadow: 0 16px 32px -14px rgba(245, 155, 0, 0.95);
+}
+
+.early-bird-banner-cta span {
+  transition: transform 0.2s var(--ease);
+}
+
+.early-bird-banner-cta:hover span {
+  transform: translateX(3px);
+}
+
+html.early-bird-active .tickets-early-bird-note {
+  display: inline-flex !important;
+}
+
+@media (max-width: 768px) {
+  .early-bird-banner-inner {
+    min-height: 84px;
+    padding: 0.65rem 1rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.45rem 0.9rem;
+  }
+
+  .early-bird-banner-message {
+    grid-column: 1;
+  }
+
+  .early-bird-banner-detail {
+    display: none;
+  }
+
+  .early-bird-countdown {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .early-bird-banner-cta {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    padding-inline: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .early-bird-banner-inner {
+    min-height: 78px;
+  }
+
+  .early-bird-banner-kicker {
+    font-size: 0.72rem;
+  }
+
+  .early-bird-countdown {
+    gap: 0.2rem;
+  }
+
+  .early-bird-countdown-unit {
+    min-width: 27px;
+  }
+
+  .early-bird-countdown-unit strong {
+    font-size: 0.94rem;
+  }
+
+  .early-bird-countdown-unit small {
+    font-size: 0.48rem;
+  }
+
+  .early-bird-banner-cta {
+    min-height: 36px;
+    padding: 0.55rem 0.72rem;
+    font-size: 0.68rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .early-bird-banner-cta,
+  .early-bird-banner-cta span {
+    transition: none;
+  }
+}
+
 /* ── NAVBAR ── */
 .navbar {
   position: sticky;

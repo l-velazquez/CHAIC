@@ -172,6 +172,14 @@ Initials are rendered as text via JS (`script.js → renderInitials()`) unless a
 - Links have an animated teal underline that wipes in from left on hover.
 - Mobile menu (`.nav-menu.open`): full-width dark dropdown, staggered link fade-in via `transition-delay` per `:nth-child`.
 
+### Early-bird promotion
+
+- `.early-bird-banner` — sitewide navy/teal announcement strip above the navbar with gold urgency accents, a compact countdown, and a gold ticket CTA.
+- `.promotion-only` — hidden by default and displayed only while `html.early-bird-active` is present.
+- The shared deadline is defined in `promotion.js` as August 1, 2026 at midnight AST. Regular pricing is the static HTML fallback; `script.js` activates promotional prices and copy before the deadline.
+- Desktop uses a message/countdown/CTA row. At `768px` the message and countdown stack beside the CTA; supporting detail is removed to keep the strip compact.
+- Countdown digits are `aria-hidden` to avoid continuous screen-reader announcements; the banner label and deadline copy remain accessible.
+
 ### Hero
 
 - Full-viewport minus navbar.
