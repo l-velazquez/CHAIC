@@ -253,21 +253,41 @@ Sizes: `12–28px` depending on context (timeline location pins are 12px, agenda
 
 ## Motion
 
+Motion is intentionally polished and calm. New effects should use `opacity` and
+`transform` so they remain compositor-friendly, and they must include a
+`prefers-reduced-motion` path.
+
+| Token | Value | Usage |
+|---|---:|---|
+| `--motion-fast` | `180ms` | Fallback exits and small state changes |
+| `--motion-base` | `320ms` | Cross-document page transitions |
+| `--motion-slow` | `520ms` | Hero entrances and scroll reveals |
+| `--motion-stagger` | `70ms` | Short sequencing within small groups |
+| `--motion-distance-sm` | `10px` | Page and hero movement |
+| `--motion-distance-md` | `20px` | Reserved for larger reveal movement |
+
 | Effect | Implementation |
 |---|---|
+| Page navigation | CSS `@view-transition` crossfade/lift between same-origin HTML pages; navbar and promotion banner use stable transition names |
+| Navigation fallback | `script.js` adds `html.is-page-leaving` for 180ms before eligible internal page loads |
+| Hero entrance | `.page-enter` with `--enter-order` controls the short destination-page stagger |
 | Register button glow | `@keyframes btn-pulse` — 2.8s ease-in-out infinite |
 | Hero glow drift | `@keyframes glow-drift` — 18s drift+scale cycle |
 | Hero eyebrow dot pulse | `@keyframes pulse-dot` — 2s scale cycle |
 | Sponsor carousel | `@keyframes scroll-sponsors` — 28s linear (was 22s), seamless via JS-duplicated track |
 | Day toggle pill | `transform: translateX(100%)` on `.agenda-day-tabs::before`, 0.4s `--ease` |
 | Day content swap | Fade out 180ms → swap → fade in (JS-driven) |
-| Scroll reveal | IntersectionObserver toggles `.reveal.is-visible` (opacity + translateY 24px → 0) |
+| Scroll reveal | IntersectionObserver toggles `.is-visible` on `.reveal` and `.reveal-grid > *`; modifiers are `.reveal--fade` and `.reveal--scale`, with optional `--reveal-delay` |
 | Nav hamburger → X | Span transforms, 0.25s `--ease` |
 | Mobile menu open | Staggered link fade-in (60–300ms delays per child) |
 | Day 2 gradient border | `@keyframes gradient-shift` — 6s background-position cycle |
-| Reduced motion | `@media (prefers-reduced-motion: reduce)` disables hero glow, btn-pulse, gradient-shift, sponsor scroll, scroll-reveal transitions, and smooth-scroll behavior |
+| Reduced motion | Disables page transitions, hero entrances, fallback delays, glow, pulse, marquees, scroll reveals, and smooth scrolling |
 
 Global easing: `--ease: cubic-bezier(0.22, 1, 0.36, 1)`.
+
+Fallback interception applies only to unmodified primary clicks between different
+same-origin documents. Same-page anchors, external protocols, checkout links,
+downloads, new-tab links, and modifier-assisted clicks retain native behavior.
 
 ---
 
