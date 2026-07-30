@@ -4,6 +4,62 @@ const prefersReducedMotion = window.matchMedia(
   '(prefers-reduced-motion: reduce)'
 ).matches;
 
+/* ── Multi-page navigation fallback ──
+   Modern Chromium/WebKit browsers use the shared CSS @view-transition rules.
+   Other browsers get a short content exit before a normal static-page load. */
+const supportsCrossDocumentTransitions =
+  'CSSViewTransitionRule' in window && 'onpagereveal' in window;
+const PAGE_EXIT_MS = 180;
+
+function isEligiblePageNavigation(event, link) {
+  if (
+    prefersReducedMotion ||
+    supportsCrossDocumentTransitions ||
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey ||
+    link.target ||
+    link.hasAttribute('download')
+  ) {
+    return false;
+  }
+
+  let destination;
+  try {
+    destination = new URL(link.href, window.location.href);
+  } catch (error) {
+    return false;
+  }
+
+  const current = new URL(window.location.href);
+  const isHttp = destination.protocol === 'http:' || destination.protocol === 'https:';
+  const isSameOrigin = destination.origin === current.origin;
+  const isSameDocument = destination.pathname === current.pathname
+    && destination.search === current.search;
+
+  return isHttp && isSameOrigin && !isSameDocument;
+}
+
+document.addEventListener('click', (event) => {
+  const link = event.target.closest('a[href]');
+  if (!link || !isEligiblePageNavigation(event, link)) return;
+
+  event.preventDefault();
+  if (document.documentElement.classList.contains('is-page-leaving')) return;
+
+  document.documentElement.classList.add('is-page-leaving');
+  window.setTimeout(() => {
+    window.location.href = link.href;
+  }, PAGE_EXIT_MS);
+});
+
+window.addEventListener('pageshow', () => {
+  document.documentElement.classList.remove('is-page-leaving');
+});
+
 /* ── Countdown to September 25, 2026 ── */
 const TARGET = new Date('2026-09-25T00:00:00');
 
@@ -315,7 +371,7 @@ dayButtons.forEach(btn => {
 renderDayStats(computeDayStats('day1'));
 
 /* ── Scroll-reveal observer ── */
-const revealEls = document.querySelectorAll('.reveal');
+const revealEls = document.querySelectorAll('.reveal, .reveal-grid > *');
 
 if (prefersReducedMotion || !('IntersectionObserver' in window)) {
   revealEls.forEach(el => el.classList.add('is-visible'));
@@ -329,7 +385,7 @@ if (prefersReducedMotion || !('IntersectionObserver' in window)) {
         }
       });
     },
-    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.12, rootMargin: '0px 0px -48px 0px' }
   );
   revealEls.forEach(el => io.observe(el));
 }

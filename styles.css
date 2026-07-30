@@ -76,6 +76,12 @@
   --radius-md: 16px;
   --radius-lg: 22px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-fast: 180ms;
+  --motion-base: 320ms;
+  --motion-slow: 520ms;
+  --motion-stagger: 70ms;
+  --motion-distance-sm: 10px;
+  --motion-distance-md: 20px;
 }
 
 html {
@@ -105,6 +111,102 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Cross-document navigation — progressive enhancement for this static MPA. */
+@view-transition {
+  navigation: auto;
+}
+
+.navbar {
+  view-transition-name: site-navigation;
+}
+
+.early-bird-banner {
+  view-transition-name: promotion-banner;
+}
+
+::view-transition-old(root) {
+  animation: page-transition-out var(--motion-base) var(--ease) both;
+}
+
+::view-transition-new(root) {
+  animation: page-transition-in var(--motion-base) var(--ease) both;
+}
+
+::view-transition-group(site-navigation),
+::view-transition-group(promotion-banner) {
+  animation-duration: var(--motion-base);
+  animation-timing-function: var(--ease);
+}
+
+::view-transition-old(site-navigation),
+::view-transition-old(promotion-banner) {
+  animation-name: page-transition-shared-out;
+  animation-duration: var(--motion-fast);
+  animation-timing-function: ease-out;
+}
+
+::view-transition-new(site-navigation),
+::view-transition-new(promotion-banner) {
+  animation-name: page-transition-shared-in;
+  animation-duration: var(--motion-fast);
+  animation-timing-function: ease-out;
+}
+
+@keyframes page-transition-out {
+  to {
+    opacity: 0;
+    transform: translateY(calc(var(--motion-distance-sm) * -0.8));
+  }
+}
+
+@keyframes page-transition-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--motion-distance-sm) * 1.2));
+  }
+}
+
+@keyframes page-transition-shared-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes page-transition-shared-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Destination-page hero choreography. */
+.page-enter {
+  animation: page-enter var(--motion-slow) var(--ease) both;
+  animation-delay: calc(var(--enter-order, 0) * var(--motion-stagger));
+}
+
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--motion-distance-sm) * 1.4));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Fallback exit for browsers without cross-document View Transitions. */
+html.is-page-leaving body > section,
+html.is-page-leaving body > footer,
+html.is-page-leaving .scroll-top {
+  opacity: 0;
+  transform: translateY(calc(var(--motion-distance-sm) * -0.8));
+  transition:
+    opacity var(--motion-fast) ease-out,
+    transform var(--motion-fast) var(--ease);
+  pointer-events: none;
+}
+
 /* Global focus ring */
 :focus-visible {
   outline: 2px solid var(--accent);
@@ -113,23 +215,97 @@ a {
 }
 
 /* Scroll-reveal utility */
-.reveal {
+.reveal,
+.reveal-grid > * {
   opacity: 0;
   transform: translateY(24px);
   transition:
-    opacity 0.7s var(--ease),
-    transform 0.7s var(--ease);
+    opacity var(--motion-slow) var(--ease),
+    transform var(--motion-slow) var(--ease);
+  transition-delay: var(--reveal-delay, 0ms);
   will-change: opacity, transform;
 }
-.reveal.is-visible {
-  opacity: 1;
+.reveal--fade {
   transform: none;
 }
+.reveal--scale {
+  transform: scale(0.985);
+}
+.reveal.is-visible,
+.reveal-grid > *.is-visible {
+  opacity: 1;
+  transform: none;
+  will-change: auto;
+  animation: reveal-up var(--motion-slow) var(--ease) backwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal--fade.is-visible {
+  animation-name: reveal-fade;
+}
+
+.reveal--scale.is-visible {
+  animation-name: reveal-scale;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes reveal-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes reveal-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.985);
+  }
+}
+
+.reveal-grid > :nth-child(3n + 2) {
+  --reveal-delay: var(--motion-stagger);
+}
+
+.reveal-grid > :nth-child(3n + 3) {
+  --reveal-delay: calc(var(--motion-stagger) * 2);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  html {
+    scroll-behavior: auto;
+  }
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+  }
+  .page-enter {
+    animation: none;
+  }
+  html.is-page-leaving body > section,
+  html.is-page-leaving body > footer,
+  html.is-page-leaving .scroll-top {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+  .reveal,
+  .reveal-grid > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+  .reveal.is-visible,
+  .reveal-grid > *.is-visible {
+    animation: none;
   }
 }
 
