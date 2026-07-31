@@ -2,7 +2,7 @@
 
 Official website for the **Caribbean Health AI Congress 2026** — September 25–26, 2026, at the Centro de Convenciones de Puerto Rico in San Juan, where clinicians, researchers, and AI leaders shape the future of healthcare.
 
-**Live site:** https://l-velazquez.com/CHAIC/
+**Live site:** https://chaicpr.com
 
 ## About this project
 
