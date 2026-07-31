@@ -180,6 +180,26 @@ Initials are rendered as text via JS (`script.js → renderInitials()`) unless a
 - Desktop uses a message/countdown/CTA row. At `768px` the message and countdown stack beside the CTA; supporting detail is removed to keep the strip compact.
 - Countdown digits are `aria-hidden` to avoid continuous screen-reader announcements; the banner label and deadline copy remain accessible.
 
+### Consent banner
+
+- `.consent-banner` — floating dark card pinned to the bottom of the viewport, injected by `consent.js` only when a decision is still needed. Teal hairline border, `--shadow-lg`, `backdrop-filter` blur.
+- Layout is a two-column grid (copy | actions) that collapses to stacked full-width buttons at `860px`, then becomes a flush bottom sheet at `480px` with `env(safe-area-inset-bottom)` padding.
+- `.consent-options` — the granular Analytics / Marketing panel. Hidden via the `hidden` attribute; `.consent-options[hidden]` outranks the `display: grid` base rule on specificity.
+- Buttons: `.consent-btn--primary` (gold, Accept all), `.consent-btn--ghost` (outline, Customize / Reject), `.consent-btn--save` (teal outline, inside the panel).
+- Entrance is `@keyframes consent-enter` at `--motion-slow`, redefined inside the `480px` query to drop the centering `translateX`. Disabled under `prefers-reduced-motion`.
+- See `docs/privacy-and-consent.md` for the consent logic this UI drives.
+
+### Privacy notice page
+
+- Reuses `.speakers-page-body` / `-container` / `-hero` / `-eyebrow` / `-title`, then adds a `.legal-*` layer.
+- `.legal-layout` — `232px` sticky table of contents + prose column, collapsing to a single column with a 2-up boxed TOC at `1024px` and 1-up at `640px`.
+- `.legal-toc` — CSS-counter numbered links, sticky at `--nav-h + 2rem`.
+- `.legal-callout` — white card holding the "Review cookie choices" button (`[data-open-consent]`, handled by `consent.js`).
+- `.legal-prose` capped at `74ch`. `.legal-block + .legal-block` draws the hairline section rule. `em` inside prose is restyled as a muted block for legal-basis annotations.
+- `.legal-table` — cookie inventory, min-width `660px` inside a `.legal-table-wrap` scroll container. Category pills are `.legal-pill--essential` (navy), `--analytics` (teal), `--marketing` (gold).
+- `.legal-note` — gold left-rule aside for caveats.
+- The page carries a `<noscript>` override that un-hides `.reveal` elements, since a legal notice has to render without JavaScript.
+
 ### Hero
 
 - Full-viewport minus navbar.

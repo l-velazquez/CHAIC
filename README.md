@@ -17,6 +17,7 @@ Some of what I designed and shipped here:
 - **Motion system** — cross-document View Transitions for page navigation and scroll-triggered reveals, both fully gated behind `prefers-reduced-motion`.
 - **Responsive & mobile-first** — mobile nav, sticky CTAs, and marquee rails for sponsors and speakers.
 - **Performance & SEO** — WebP images through an optimization script ([`scripts/optimize-images.sh`](scripts/optimize-images.sh)), favicon/PWA manifest set, and GTM + GA4 analytics.
+- **Privacy & consent** — a written privacy notice plus geo-gated Google Consent Mode v2, so analytics and advertising tags stay blocked for EEA/UK/Swiss visitors until they opt in. The reasoning and the required Tag Manager setup are recorded in [`docs/privacy-and-consent.md`](docs/privacy-and-consent.md).
 
 ## Stack
 
@@ -38,10 +39,12 @@ index.html        Landing page (hero, about, agenda, speakers, sponsors, tickets
 speakers.html     Full speaker roster
 tickets.html      Pricing and registration
 workshops.html    Pre-congress workshops
+privacy.html      Privacy notice and cookie inventory
 styles.css        All styles, driven by design tokens
 script.js         Countdown, agenda tabs, nav, reveals, page transitions
 promotion.js      Early-bird promotion state (loads in <head>)
-docs/             Design system documentation
+consent.js        Consent Mode v2 defaults + consent banner (loads in <head>)
+docs/             Design system and privacy/consent documentation
 images/           Logos, speaker photos, videos, icons
 scripts/          Image optimization tooling
 ```
