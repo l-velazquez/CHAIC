@@ -2969,20 +2969,6 @@ body.sponsor-modal-open {
   color: #b7791f;
 }
 
-.ticket-cme-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin-top: 0.55rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #b7791f;
-  background: rgba(245, 184, 0, 0.12);
-  padding: 0.25rem 0.6rem;
-  border-radius: 50px;
-}
-
 .ticket-features {
   list-style: none;
   display: flex;
