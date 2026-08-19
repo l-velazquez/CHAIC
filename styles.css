@@ -4596,14 +4596,6 @@ body.sponsor-modal-open {
   line-height: 1.6;
   color: var(--ink-2);
 }
-.workshop-card-price {
-  margin-top: auto;
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--navy-btn);
-}
 .workshops-access {
   margin-top: 3rem;
   background: #fff;
