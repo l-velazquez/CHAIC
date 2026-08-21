@@ -5257,3 +5257,394 @@ body.sponsor-modal-open {
     transform: none;
   }
 }
+
+/* ──────────────────────────────────────────────────────────
+   SPONSORS PAGE (sponsors.html)
+   Dark canvas so the white-lettered sponsor logos stay legible,
+   reusing the .sponsor-card / .sponsors-cta system from the
+   sponsors section on the home page.
+   ────────────────────────────────────────────────────────── */
+.sponsors-page-body {
+  background: var(--dark);
+  color: #fff;
+  min-height: 100vh;
+}
+
+/* Hero */
+.sponsors-page-hero {
+  position: relative;
+  padding-top: calc(var(--nav-h) + 5rem);
+  padding-bottom: 4rem;
+  background: var(--dark);
+  overflow: hidden;
+  text-align: center;
+}
+.sponsors-page-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 60% 50% at 20% 50%,
+      rgba(6, 182, 212, 0.12) 0%,
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 50% 60% at 80% 30%,
+      rgba(245, 184, 0, 0.08) 0%,
+      transparent 70%
+    );
+  pointer-events: none;
+}
+.sponsors-page-hero-glow {
+  position: absolute;
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(
+    circle,
+    rgba(6, 182, 212, 0.07) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+.sponsors-page-hero-inner {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+.sponsors-page-eyebrow {
+  display: inline-block;
+  color: var(--accent-2);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin-bottom: 1.25rem;
+}
+.sponsors-page-title {
+  font-family: var(--font-heading);
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #fff;
+  margin: 0 0 1.25rem;
+}
+.sponsors-title-accent {
+  background: var(--grad-headline);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.sponsors-page-subtitle {
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  color: rgba(255, 255, 255, 0.65);
+  line-height: 1.65;
+  max-width: 54ch;
+  margin: 0 auto;
+}
+
+/* Tier jump links */
+.sponsors-tier-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+.sponsors-tier-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.15rem;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.8);
+  font-family: var(--font);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    background 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+.sponsors-tier-nav-link::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+}
+.sponsors-tier-nav-link[data-tier="gold"]::before {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+}
+.sponsors-tier-nav-link[data-tier="silver"]::before {
+  background: linear-gradient(135deg, var(--silver) 0%, var(--silver-2) 100%);
+}
+.sponsors-tier-nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(34, 211, 238, 0.4);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* Tier stack */
+.sponsors-tiers {
+  position: relative;
+  padding: 1rem 0 6rem;
+}
+.sponsors-page-container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.sponsor-tier {
+  scroll-margin-top: calc(var(--nav-h) + 2rem);
+}
+.sponsor-tier + .sponsor-tier {
+  margin-top: 4.5rem;
+}
+
+.sponsor-tier-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.sponsor-tier-label {
+  display: inline-block;
+  font-family: var(--font);
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.32rem 0.95rem;
+  border-radius: 50px;
+  margin-bottom: 0.9rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.82);
+}
+.sponsor-tier-label[data-tier="gold"] {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);
+  border-color: transparent;
+  color: #1a1a1a;
+  box-shadow: 0 6px 14px -4px rgba(245, 184, 0, 0.55);
+}
+.sponsor-tier-label[data-tier="silver"] {
+  background: linear-gradient(135deg, var(--silver) 0%, var(--silver-2) 100%);
+  border-color: transparent;
+  color: #1a1a1a;
+  box-shadow: 0 6px 14px -4px rgba(199, 204, 212, 0.5);
+}
+.sponsor-tier-title {
+  font-family: var(--font-heading);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: #fff;
+  margin-bottom: 0.65rem;
+}
+.sponsor-tier-desc {
+  max-width: 56ch;
+  margin: 0 auto;
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* Tier grid — flex wrap so a short tier stays centered */
+.sponsors-tier-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+/* Static tile variant of the carousel card */
+.sponsor-card--tile {
+  flex: 0 1 var(--sponsor-tile, 250px);
+  width: auto;
+  height: auto;
+  min-height: var(--sponsor-tile-h, 180px);
+  max-width: 100%;
+  margin-right: 0;
+  padding: 0;
+  transition:
+    background 0.3s,
+    border-color 0.3s,
+    transform 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+.sponsor-card--tile:hover {
+  transform: translateY(-4px);
+}
+
+.sponsor-card-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.75rem 1.5rem;
+  text-decoration: none;
+  text-align: center;
+}
+.sponsor-card-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--sponsor-logo-h, 78px);
+  width: 100%;
+}
+.sponsor-card--tile img {
+  max-height: var(--sponsor-logo-h, 78px);
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(1.05) contrast(1.05);
+}
+.sponsor-card-name {
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.72);
+  transition: color 0.25s var(--ease);
+}
+.sponsor-card--tile:hover .sponsor-card-name {
+  color: #fff;
+}
+
+/* Tier scale: gold reads largest, then silver, then partners */
+.sponsor-tier[data-tier="gold"] .sponsors-tier-grid {
+  --sponsor-tile: 420px;
+  --sponsor-tile-h: 260px;
+  --sponsor-logo-h: 120px;
+}
+.sponsor-tier[data-tier="gold"] .sponsor-card-name {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+.sponsor-tier[data-tier="silver"] .sponsors-tier-grid {
+  --sponsor-tile: 360px;
+  --sponsor-tile-h: 230px;
+  --sponsor-logo-h: 96px;
+}
+.sponsor-tier[data-tier="silver"] .sponsor-card-name {
+  font-size: 0.98rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* Become-a-sponsor panel closing the page */
+.sponsors-tiers .sponsors-cta {
+  margin-top: 5rem;
+}
+
+@media (max-width: 1024px) {
+  .sponsor-tier[data-tier="gold"] .sponsors-tier-grid,
+  .sponsor-tier[data-tier="silver"] .sponsors-tier-grid {
+    --sponsor-tile: 340px;
+  }
+}
+
+@media (max-width: 640px) {
+  .sponsors-page-hero {
+    padding-top: calc(var(--nav-h) + 2.5rem);
+    padding-bottom: 2.5rem;
+  }
+  .sponsors-page-hero-inner,
+  .sponsors-page-container {
+    padding: 0 1.25rem;
+  }
+  .sponsors-tiers {
+    padding-bottom: 4rem;
+  }
+  .sponsor-tier + .sponsor-tier {
+    margin-top: 3.25rem;
+  }
+  .sponsor-tier-header {
+    margin-bottom: 1.75rem;
+  }
+  .sponsors-tier-grid {
+    --sponsor-tile: 100%;
+    gap: 1.25rem;
+  }
+  .sponsor-tier[data-tier="gold"] .sponsors-tier-grid {
+    --sponsor-tile: 100%;
+    --sponsor-tile-h: 210px;
+    --sponsor-logo-h: 100px;
+  }
+  .sponsor-tier[data-tier="silver"] .sponsors-tier-grid {
+    --sponsor-tile: 100%;
+    --sponsor-tile-h: 195px;
+    --sponsor-logo-h: 88px;
+  }
+  .sponsors-tiers .sponsors-cta {
+    margin-top: 3.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sponsor-card--tile:hover,
+  .sponsors-tier-nav-link:hover {
+    transform: none;
+  }
+}
+
+/* "View All Sponsors" link under the home-page sponsors carousel */
+.sponsors-viewall {
+  display: flex;
+  justify-content: center;
+  margin-top: 2.5rem;
+}
+.sponsors-viewall-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(34, 211, 238, 0.5);
+  text-decoration: none;
+  padding: 0.75rem 1.75rem;
+  border-radius: 50px;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 0.92rem;
+  transition:
+    background 0.25s,
+    border-color 0.25s,
+    transform 0.25s var(--ease),
+    box-shadow 0.25s;
+}
+.sponsors-viewall-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px -10px rgba(6, 182, 212, 0.5);
+}
+.sponsors-viewall-btn svg {
+  width: 15px;
+  height: 15px;
+  transition: transform 0.25s var(--ease);
+}
+.sponsors-viewall-btn:hover svg {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sponsors-viewall-btn:hover {
+    transform: none;
+  }
+}
