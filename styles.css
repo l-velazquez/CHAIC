@@ -1183,7 +1183,7 @@ html.early-bird-active .tickets-early-bird-note {
    the img is always child 1 of that anchor — overrides must target the
    anchor's position, not the img's. Always use `> a:nth-child(n) img`,
    and keep n in sync with index.html's order.
-   2 = SPE, 3 = ABAIM, 9 = PMTL.
+   2 = SPE, 3 = ABAIM, 10 = PMTL.
 
    The square/round marks sit at the 60px base. Wide marks are trimmed
    below it so their rendered box carries comparable weight. */
@@ -1203,7 +1203,7 @@ html.early-bird-active .tickets-early-bird-note {
   height: auto;
 }
 /* PMTL — wide two-line lockup, scaled down so it matches SPE's box. */
-.sponsors-logos > a:nth-child(9) img {
+.sponsors-logos > a:nth-child(10) img {
   height: 56px;
 }
 
@@ -3470,7 +3470,7 @@ body.sponsor-modal-open {
     width: 180px;
     height: auto;
   }
-  .sponsors-logos > a:nth-child(9) img {
+  .sponsors-logos > a:nth-child(10) img {
     height: 48px;
   }
 
@@ -3578,7 +3578,7 @@ body.sponsor-modal-open {
     width: 150px;
     height: auto;
   }
-  .sponsors-logos > a:nth-child(9) img {
+  .sponsors-logos > a:nth-child(10) img {
     height: 42px;
   }
 
