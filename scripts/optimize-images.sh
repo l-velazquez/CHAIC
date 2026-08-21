@@ -35,6 +35,7 @@ images/logos/ABAIM-logo-transparent.webp|contain|420|156
 images/logos/centro-unido.webp|contain|420|156
 images/logos/AI-med.webp|contain|420|156
 images/logos/pmtl-institute.webp|contain|420|156
+images/logos/triple-s.webp|contain|420|156
 images/people/DrOrvil-profile-small.webp|cover|68|68
 images/people/yasmin-pedrogo-profile.webp|cover|68|68
 images/people/arlen-meyers.webp|cover|440|550
