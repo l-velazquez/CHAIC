@@ -209,7 +209,7 @@ Initials are rendered as text via JS (`script.js → renderInitials()`) unless a
   3. Bottom linear fade anchors the sponsors bar.
 - `.hero-glow` — animated 520px teal radial blob, 18s drift cycle (disabled under `prefers-reduced-motion`).
 - `.hero-eyebrow` — pill chip with pulsing teal dot above the title.
-- `.hero-sponsors` — compact shared glass lockup for AMRC and Triple-S on desktop; becomes a full-width row within the hero flow on mobile.
+- `.hero-sponsors` — transparent AMRC and Triple-S lockup on desktop; becomes a shared full-width glass panel within the hero flow on mobile.
 - Countdown units are glass cards with a gold-to-teal underline accent.
 - `.hero-accent` uses `--grad-headline` via `background-clip: text`.
 

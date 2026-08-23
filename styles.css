@@ -1172,6 +1172,39 @@ html.early-bird-active .tickets-early-bird-note {
   transform: translateY(-2px);
 }
 
+@media (min-width: 769px) {
+  .hero-sponsors {
+    width: min(390px, calc(50% - 4rem));
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+  .hero-sponsors-label {
+    color: rgba(255, 255, 255, 0.72);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
+  }
+  .hero-sponsors-logos {
+    margin-top: 0.75rem;
+  }
+  .hero-sponsor {
+    height: 108px;
+    padding: 0.25rem 1rem;
+  }
+  .hero-sponsor + .hero-sponsor {
+    border-left-color: rgba(255, 255, 255, 0.25);
+  }
+  .hero-sponsor--amrc img {
+    height: 118px;
+  }
+  .hero-sponsor--triple-s img {
+    max-height: 62px;
+  }
+}
+
 /* Rounded corners for non-transparent square logos */
 .logo-rounded {
   border-radius: 12px;
@@ -3525,7 +3558,7 @@ body.sponsor-modal-open {
   }
   .hero-sponsors {
     right: 2.5rem;
-    width: min(310px, calc(50% - 3rem));
+    width: min(350px, calc(50% - 3rem));
   }
   .cd-num {
     font-size: 3rem;
