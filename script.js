@@ -222,6 +222,9 @@ function duplicateSponsorTrack() {
     originals.forEach(card => {
       const clone = card.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
+      clone
+        .querySelectorAll('a')
+        .forEach(link => link.setAttribute('tabindex', '-1'));
       const img = clone.querySelector('img');
       if (img) img.removeAttribute('loading');
       track.appendChild(clone);

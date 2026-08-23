@@ -124,19 +124,37 @@
       <div class="hero-glow" aria-hidden="true"></div>
 
       <div class="hero-body">
-        <a
-          class="hero-amrc"
-          href="https://www.advanceresearchpr.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Advance Medical Research Center"
-        >
-          <img
-            src="images/logos/AMRC-hero.webp"
-            alt="Advance Medical Research Center"
-            decoding="async"
-          />
-        </a>
+        <aside class="hero-sponsors" aria-label="Event sponsors">
+          <span class="hero-sponsors-label">Event Sponsors</span>
+          <div class="hero-sponsors-logos">
+            <a
+              class="hero-sponsor hero-sponsor--amrc"
+              href="https://www.advanceresearchpr.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Advance Medical Research Center"
+            >
+              <img
+                src="images/logos/AMRC.webp"
+                alt="Advance Medical Research Center"
+                decoding="async"
+              />
+            </a>
+            <a
+              class="hero-sponsor hero-sponsor--triple-s"
+              href="https://salud.grupotriples.com/en/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Triple-S Salud"
+            >
+              <img
+                src="images/logos/triple-s.webp"
+                alt="Triple-S Salud"
+                decoding="async"
+              />
+            </a>
+          </div>
+        </aside>
         <!-- Left column -->
         <div class="hero-left">
           <span class="hero-eyebrow page-enter" style="--enter-order: 0"
@@ -220,7 +238,7 @@
       <div class="sponsors-bar page-enter" style="--enter-order: 5">
         <div class="sponsors-label">
           <div class="sponsors-line"></div>
-          <span>In Partnership With</span>
+          <span>Community Partners</span>
           <div class="sponsors-line"></div>
         </div>
         <div class="sponsors-logos">
@@ -246,17 +264,6 @@
             ><img
               src="images/logos/ABAIM-logo-transparent.webp"
               alt="American Board of Artificial Intelligence in Medicine"
-              loading="lazy"
-              decoding="async"
-          /></a>
-          <a
-            href="https://salud.grupotriples.com/en/"
-            target="_blank"
-            rel="noopener noreferrer"
-            ><img
-              class="logo-rounded"
-              src="images/logos/triple-s.webp"
-              alt="Triple-S Salud"
               loading="lazy"
               decoding="async"
           /></a>
@@ -2750,50 +2757,57 @@
     <section id="sponsors" class="section section-dark">
       <div class="container">
         <div class="section-header reveal">
-          <span class="section-eyebrow">Partners</span>
-          <h2 class="section-title">Our Sponsors</h2>
+          <span class="section-eyebrow">Sponsors &amp; Partners</span>
+          <h2 class="section-title">Organizations Behind the Event</h2>
           <p class="section-desc">
-            We are proud to collaborate with leading organizations supporting
-            innovation in healthcare and artificial intelligence.
+            Our event sponsors lead the way, supported by a network of partners
+            advancing healthcare and artificial intelligence across the region.
           </p>
         </div>
       </div>
 
       <div class="container">
-        <div class="sponsors-cta reveal reveal--scale">
-          <span class="sponsors-cta-icon">
-            <svg
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-              <circle cx="9" cy="7" r="4" />
-              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-            </svg>
-          </span>
-          <p>
-            Questions about becoming a sponsor? All sponsorship inquiries are
-            handled by email. Join us in shaping the next chapter of healthcare
-            AI.
-          </p>
-          <a
-            href="mailto:info@chaicpr.com"
-            class="btn-become-sponsor"
-            data-sponsor-contact
-          >
-            Become a Sponsor
-            <svg
-              viewBox="0 0 24 24"
-              stroke-width="2.5"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
+        <div class="event-sponsors reveal">
+          <div class="sponsor-group-heading">
+            <span class="sponsor-group-kicker">Featured</span>
+            <h3>Event Sponsors</h3>
+          </div>
+          <div class="event-sponsors-grid">
+            <div class="sponsor-card" data-tier="gold">
+              <span class="sponsor-tier-badge">Gold Sponsor</span>
+              <a
+                href="https://www.advanceresearchpr.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><img
+                  src="images/logos/AMRC.webp"
+                  alt="Advance Medical Research Center"
+                  loading="lazy"
+                  decoding="async"
+              /></a>
+            </div>
+            <div class="sponsor-card" data-tier="silver">
+              <span class="sponsor-tier-badge">Silver Sponsor</span>
+              <a
+                href="https://salud.grupotriples.com/en/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><img
+                  class="logo-rounded"
+                  src="images/logos/triple-s.webp"
+                  alt="Triple-S Salud"
+                  loading="lazy"
+                  decoding="async"
+              /></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container partner-heading reveal">
+        <div class="sponsor-group-heading">
+          <span class="sponsor-group-kicker">In Collaboration With</span>
+          <h3>Community Partners</h3>
         </div>
       </div>
 
@@ -2819,33 +2833,6 @@
               ><img
                 src="images/logos/ABAIM-logo-transparent.webp"
                 alt="ABAIM"
-                loading="lazy"
-                decoding="async"
-            /></a>
-          </div>
-          <div class="sponsor-card" data-tier="gold">
-            <span class="sponsor-tier-badge">Gold Sponsor</span
-            ><a
-              href="https://www.advanceresearchpr.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              ><img
-                src="images/logos/AMRC.webp"
-                alt="Advance Medical Research Center"
-                loading="lazy"
-                decoding="async"
-            /></a>
-          </div>
-          <div class="sponsor-card" data-tier="silver">
-            <span class="sponsor-tier-badge">Silver Sponsor</span
-            ><a
-              href="https://salud.grupotriples.com/en/"
-              target="_blank"
-              rel="noopener noreferrer"
-              ><img
-                class="logo-rounded"
-                src="images/logos/triple-s.webp"
-                alt="Triple-S Salud"
                 loading="lazy"
                 decoding="async"
             /></a>
@@ -2923,6 +2910,44 @@
                 decoding="async"
             /></a>
           </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="sponsors-cta reveal reveal--scale">
+          <span class="sponsors-cta-icon">
+            <svg
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+              <circle cx="9" cy="7" r="4" />
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+              <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+            </svg>
+          </span>
+          <p>
+            Questions about becoming a sponsor? All sponsorship inquiries are
+            handled by email. Join us in shaping the next chapter of healthcare
+            AI.
+          </p>
+          <a
+            href="mailto:info@chaicpr.com"
+            class="btn-become-sponsor"
+            data-sponsor-contact
+          >
+            Become a Sponsor
+            <svg
+              viewBox="0 0 24 24"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>
