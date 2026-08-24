@@ -145,7 +145,7 @@ All headings have `letter-spacing: -0.015em` global; larger displays tighten fur
 | `.agenda-card` | Timeline row: 104px rail + 28px gap + card body. Pseudo-elements draw spine node (`::before`) and connector (`::after`) |
 | `.agenda-card-body` | Subtle gradient bg, 1px border. Hover: shifts +2px, teal border, teal glow shadow |
 | `.experience-card` | White flat card, teal/gold icon circle, hover lifts -3px |
-| `.sponsor-card` | 280×130 glass card, blur 14px. Logos `filter: brightness(1.05) contrast(1.05)` |
+| `.sponsor-card` | 280×130 glass card, blur 14px. Featured sponsor cards expand to 340×155 in a static two-column grid; partner cards remain in the marquee. Logos use `filter: brightness(1.05) contrast(1.05)` |
 | `.ticket-card` | Pristine white, soft shadow. Hover lifts -5px, shadow deepens, teal border |
 | `.ticket-card.featured` | Gradient border (navy → teal → gold) via mask trick, slight cream gradient bg |
 | `.ticket-card--vip` | Gold-tinted bg, gold top accent line, gradient bronze→gold button |
@@ -209,6 +209,7 @@ Initials are rendered as text via JS (`script.js → renderInitials()`) unless a
   3. Bottom linear fade anchors the sponsors bar.
 - `.hero-glow` — animated 520px teal radial blob, 18s drift cycle (disabled under `prefers-reduced-motion`).
 - `.hero-eyebrow` — pill chip with pulsing teal dot above the title.
+- `.hero-sponsors` — transparent AMRC and Triple-S lockup on desktop; becomes a shared full-width glass panel within the hero flow on mobile.
 - Countdown units are glass cards with a gold-to-teal underline accent.
 - `.hero-accent` uses `--grad-headline` via `background-clip: text`.
 
@@ -294,7 +295,7 @@ Motion is intentionally polished and calm. New effects should use `opacity` and
 | Register button glow | `@keyframes btn-pulse` — 2.8s ease-in-out infinite |
 | Hero glow drift | `@keyframes glow-drift` — 18s drift+scale cycle |
 | Hero eyebrow dot pulse | `@keyframes pulse-dot` — 2s scale cycle |
-| Sponsor carousel | `@keyframes scroll-sponsors` — 28s linear (was 22s), seamless via JS-duplicated track |
+| Partner carousel | `@keyframes scroll-sponsors` — 15s linear, seamless via JS-duplicated track |
 | Day toggle pill | `transform: translateX(100%)` on `.agenda-day-tabs::before`, 0.4s `--ease` |
 | Day content swap | Fade out 180ms → swap → fade in (JS-driven) |
 | Scroll reveal | IntersectionObserver toggles `.is-visible` on `.reveal` and `.reveal-grid > *`; modifiers are `.reveal--fade` and `.reveal--scale`, with optional `--reveal-delay` |
@@ -321,7 +322,8 @@ All in `/images/`. Formats: **WebP** (logos, stills), **MP4** (videos), inline S
 | Footer icon | `images/logos/chaic-icon-3.webp` | Footer brand column |
 | Hero video | `images/videos/ai-brain-opt.mp4` | Poster: `ai-brain-opt.webp` |
 | About video | `images/videos/about-opt.mp4` | |
-| Sponsor logos | `images/logos/SPE-White-Letters.webp`, `ABAIM-logo-transparent.webp`, `AMRC.webp`, `RCM-UPR-Logo.webp` | 4 base cards — JS clones 3x for seamless marquee |
+| Sponsor logos | `images/logos/AMRC.webp`, `images/logos/triple-s.webp` | Featured event sponsors in a static two-card grid |
+| Partner logos | `images/logos/SPE-White-Letters.webp`, `ABAIM-logo-transparent.webp`, `AI-med.webp`, `RCM-UPR-Logo.webp`, `pr-usa-chamber-of-commerce.webp`, `puerto-rico-ai-institute-and-consortium.webp`, `centro-unido.webp`, `pmtl-institute.webp` | 8 base cards — JS clones 3x for a seamless marquee |
 | Speaker fallback | `images/people/DrOrvil.webp` | Only photo currently in the repo; other speakers use initials |
 
 ---
@@ -332,7 +334,7 @@ All in `/images/`. Formats: **WebP** (logos, stills), **MP4** (videos), inline S
 |---|---|
 | `tick()` | Updates the countdown every second |
 | `renderInitials()` | Walks `.speaker-avatar[data-initials]` & `.agenda-speaker-avatar[data-initials]`, injects `<span class="avatar-initials">` when no `<img>` is present |
-| `duplicateSponsorTrack()` | Clones the 4 base sponsor cards 3 more times into `#sponsors-track` for seamless marquee. HTML stays a 1-place edit. |
+| `duplicateSponsorTrack()` | Clones the 8 base partner cards 3 more times into `#sponsors-track` for a seamless marquee and removes cloned links from keyboard navigation. HTML stays a 1-place edit. |
 | `computeDayStats(dayId)` | Counts `.agenda-card`s, sums `.agenda-duration` minutes, dedupes speakers — returns `{sessions, hours, speakers}` or `null` for placeholder days |
 | `renderDayStats(stats)` | Renders the 3-pill stats line, or a "Full program announcing · Aug 2026" line when `null` |
 | `switchDay(targetDay, label)` | Toggles active button, slides the segmented-control pill (`data-active`), fades content swap (180ms), updates title + stats |

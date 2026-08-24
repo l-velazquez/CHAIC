@@ -1098,23 +1098,111 @@ html.early-bird-active .tickets-early-bird-note {
   transform: translateX(3px);
 }
 
-/* Floating AMRC brand mark (top-right of hero) */
-.hero-amrc {
+/* Compact event-sponsor lockup (right side of hero) */
+.hero-sponsors {
   position: absolute;
   right: 4rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
+  width: min(340px, calc(50% - 5rem));
+  padding: 0.9rem 1rem 1rem;
+  background: rgba(5, 13, 30, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 18px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 18px 45px -24px rgba(0, 0, 0, 0.8),
+    inset 0 1px rgba(255, 255, 255, 0.05);
 }
-.hero-amrc img {
-  height: clamp(120px, 14vw, 200px);
-  width: auto;
+
+.hero-sponsors-label {
   display: block;
-  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.35));
-  transition: transform 0.25s var(--ease);
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-align: center;
+  text-transform: uppercase;
 }
-.hero-amrc:hover img {
-  transform: scale(1.04);
+
+.hero-sponsors-logos {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  align-items: center;
+  margin-top: 0.65rem;
+}
+
+.hero-sponsor {
+  min-width: 0;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.8rem;
+}
+
+.hero-sponsor + .hero-sponsor {
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.hero-sponsor img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.28));
+  transition:
+    opacity 0.25s,
+    transform 0.25s var(--ease);
+}
+
+.hero-sponsor--amrc img {
+  height: 84px;
+}
+
+.hero-sponsor--triple-s img {
+  max-height: 54px;
+  border-radius: 9px;
+}
+
+.hero-sponsor:hover img {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 769px) {
+  .hero-sponsors {
+    width: min(390px, calc(50% - 4rem));
+    padding: 0;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    box-shadow: none;
+  }
+  .hero-sponsors-label {
+    color: rgba(255, 255, 255, 0.72);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
+  }
+  .hero-sponsors-logos {
+    margin-top: 0.75rem;
+  }
+  .hero-sponsor {
+    height: 108px;
+    padding: 0.25rem 1rem;
+  }
+  .hero-sponsor + .hero-sponsor {
+    border-left-color: rgba(255, 255, 255, 0.25);
+  }
+  .hero-sponsor--amrc img {
+    height: 118px;
+  }
+  .hero-sponsor--triple-s img {
+    max-height: 62px;
+  }
 }
 
 /* Rounded corners for non-transparent square logos */
@@ -1183,7 +1271,7 @@ html.early-bird-active .tickets-early-bird-note {
    the img is always child 1 of that anchor — overrides must target the
    anchor's position, not the img's. Always use `> a:nth-child(n) img`,
    and keep n in sync with index.html's order.
-   2 = SPE, 3 = ABAIM, 10 = PMTL.
+   2 = SPE, 3 = ABAIM, 9 = PMTL.
 
    The square/round marks sit at the 60px base. Wide marks are trimmed
    below it so their rendered box carries comparable weight. */
@@ -1203,7 +1291,7 @@ html.early-bird-active .tickets-early-bird-note {
   height: auto;
 }
 /* PMTL — wide two-line lockup, scaled down so it matches SPE's box. */
-.sponsors-logos > a:nth-child(10) img {
+.sponsors-logos > a:nth-child(9) img {
   height: 56px;
 }
 
@@ -2523,6 +2611,68 @@ html.early-bird-active .tickets-early-bird-note {
   margin-right: auto;
 }
 
+.event-sponsors {
+  padding: 2.25rem;
+  border: 1px solid rgba(245, 184, 0, 0.18);
+  border-radius: var(--radius-lg);
+  background: linear-gradient(
+    145deg,
+    rgba(245, 184, 0, 0.055),
+    rgba(255, 255, 255, 0.025)
+  );
+  box-shadow: 0 24px 60px -40px rgba(245, 184, 0, 0.45);
+}
+
+.sponsor-group-heading {
+  text-align: center;
+}
+
+.sponsor-group-kicker {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--gold);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.sponsor-group-heading h3 {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.4vw, 1.8rem);
+  letter-spacing: -0.02em;
+}
+
+.event-sponsors-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 340px));
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.event-sponsors-grid .sponsor-card {
+  width: 100%;
+  height: 155px;
+  margin-right: 0;
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.event-sponsors-grid .sponsor-card img {
+  max-width: 240px;
+  max-height: 90px;
+}
+
+.partner-heading {
+  margin-top: 3.5rem;
+}
+
+.partner-heading .sponsor-group-kicker {
+  color: var(--accent);
+}
+
 .sponsors-carousel-wrap {
   overflow: hidden;
   position: relative;
@@ -2652,6 +2802,7 @@ html.early-bird-active .tickets-early-bird-note {
 
 .sponsors-cta {
   position: relative;
+  margin-top: 3rem;
   background: rgba(255, 255, 255, 0.03);
   border-radius: var(--radius-lg);
   padding: 3rem 2rem;
@@ -3405,8 +3556,9 @@ body.sponsor-modal-open {
   .hero-body {
     padding: 2rem 2.5rem;
   }
-  .hero-amrc {
+  .hero-sponsors {
     right: 2.5rem;
+    width: min(350px, calc(50% - 3rem));
   }
   .cd-num {
     font-size: 3rem;
@@ -3470,7 +3622,7 @@ body.sponsor-modal-open {
     width: 180px;
     height: auto;
   }
-  .sponsors-logos > a:nth-child(10) img {
+  .sponsors-logos > a:nth-child(9) img {
     height: 48px;
   }
 
@@ -3482,14 +3634,28 @@ body.sponsor-modal-open {
 
 /* ── MOBILE (≤768px) ── */
 @media (max-width: 768px) {
-  .hero-amrc {
+  .hero-sponsors {
+    position: relative;
     top: auto;
-    bottom: 1.25rem;
-    right: 1.5rem;
+    right: auto;
     transform: none;
+    order: 3;
+    width: 100%;
+    margin-top: 0.25rem;
+    padding: 0.75rem 0.9rem 0.85rem;
   }
-  .hero-amrc img {
-    height: 104px;
+  .hero-sponsors-logos {
+    max-width: 310px;
+    margin: 0.55rem auto 0;
+  }
+  .hero-sponsor {
+    height: 62px;
+  }
+  .hero-sponsor--amrc img {
+    height: 60px;
+  }
+  .hero-sponsor--triple-s img {
+    max-height: 44px;
   }
   /* Hero */
   .hero-body {
@@ -3528,7 +3694,7 @@ body.sponsor-modal-open {
   }
   .hero-sub {
     text-align: left;
-    max-width: calc(100% - 7.5rem);
+    max-width: 100%;
   }
 
   .cd-unit {
@@ -3578,7 +3744,7 @@ body.sponsor-modal-open {
     width: 150px;
     height: auto;
   }
-  .sponsors-logos > a:nth-child(10) img {
+  .sponsors-logos > a:nth-child(9) img {
     height: 42px;
   }
 
@@ -3720,6 +3886,27 @@ body.sponsor-modal-open {
   .agenda-day-btn {
     flex: 1;
     padding: 0.55rem 0.9rem;
+  }
+
+  /* Sponsors and partners */
+  .event-sponsors {
+    padding: 2rem 1rem 1.25rem;
+  }
+  .event-sponsors-grid {
+    grid-template-columns: minmax(0, 360px);
+    gap: 1.35rem;
+    margin-top: 1.75rem;
+  }
+  .event-sponsors-grid .sponsor-card {
+    height: 135px;
+    padding: 1.35rem 1.25rem;
+  }
+  .event-sponsors-grid .sponsor-card img {
+    max-width: min(220px, 100%);
+    max-height: 78px;
+  }
+  .partner-heading {
+    margin-top: 3rem;
   }
 
   /* Tickets */
