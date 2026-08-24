@@ -2693,36 +2693,64 @@ html.early-bird-active .tickets-early-bird-note {
   );
 }
 
+/* The track is N identical copies of the card set (see
+   duplicateSponsorTrack) and scrolls by exactly one copy per cycle, so the
+   seam lands pixel-perfect however the logos end up sizing themselves. */
 .sponsors-track {
   display: flex;
   width: max-content;
-  animation: scroll-sponsors 15s linear infinite;
-  padding: 1.25rem 0;
+  padding: 1.75rem 0;
+  animation: scroll-sponsors 40s linear infinite;
+  /* Own compositor layer: the marquee then scrolls without repainting the
+     cards, which is what kept the strip from stuttering on hover. */
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-.sponsors-track:hover {
+/* Pause from the wrapper, not the track. The track is the element that is
+   moving, so using :hover on it made the cursor fall in and out of its
+   hit-box and the animation flicker between paused and running. */
+.sponsors-carousel-wrap:hover .sponsors-track,
+.sponsors-carousel-wrap:focus-within .sponsors-track {
   animation-play-state: paused;
 }
 
+/* Shift by exactly one copy of the card set. --marquee-sets is set by
+   duplicateSponsorTrack(); the percentage is relative to the track's own
+   width, so the seam stays exact whatever the logos measure. */
 @keyframes scroll-sponsors {
-  0% {
-    transform: translateX(0);
+  from {
+    transform: translate3d(0, 0, 0);
   }
-  100% {
-    transform: translateX(-25%);
+  to {
+    transform: translate3d(calc(-100% / var(--marquee-sets, 2)), 0, 0);
   }
 }
 @media (prefers-reduced-motion: reduce) {
   .sponsors-track {
     animation: none;
+    will-change: auto;
+    padding-inline: 1.25rem;
+  }
+  /* No auto-scroll, so drop the duplicates and let the strip be swiped. */
+  .sponsors-track .sponsor-card.is-clone {
+    display: none;
+  }
+  .sponsors-carousel-wrap {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+    scroll-snap-type: x proximity;
+  }
+  .sponsors-track .sponsor-card {
+    scroll-snap-align: center;
   }
 }
 
 .sponsor-card {
   position: relative;
   background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 14px;
   width: 280px;
@@ -2741,6 +2769,55 @@ html.early-bird-active .tickets-early-bird-note {
 .sponsor-card:hover {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(34, 211, 238, 0.2);
+}
+
+/* The featured cards are static, so they can afford the frosted-glass pass.
+   The carousel cards deliberately do not: 16 backdrop-filtered layers being
+   re-sampled every frame inside a moving track is what made the strip tear
+   and drop frames the moment anything about a card changed on hover. */
+.event-sponsors-grid .sponsor-card {
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+/* ── Carousel card interaction ── */
+.sponsors-track .sponsor-card {
+  /* A transform is already in play at rest, so hovering does not have to
+     promote the card to a new layer mid-animation (that pop was the other
+     half of the glitch). */
+  transform: translateY(0);
+  /* The whole card lights up on hover, so the whole card should be the
+     link: the padding moves onto the anchor, inside the hit area. */
+  padding: 0;
+  transition:
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sponsors-track .sponsor-card > a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  padding: 1.5rem 2rem;
+  border-radius: inherit;
+}
+
+.sponsors-track .sponsor-card:hover {
+  background: rgba(255, 255, 255, 0.075);
+  border-color: rgba(34, 211, 238, 0.38);
+  box-shadow:
+    inset 0 0 30px rgba(34, 211, 238, 0.05),
+    0 16px 36px -20px rgba(34, 211, 238, 0.5);
+  transform: translateY(-4px);
+}
+
+.sponsors-track .sponsor-card > a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
 }
 
 .sponsor-card[data-tier="gold"] {
@@ -2798,6 +2875,28 @@ html.early-bird-active .tickets-early-bird-note {
   height: auto;
   object-fit: contain;
   filter: brightness(1.05) contrast(1.05);
+}
+
+/* Logos sit back a touch at rest and come forward on hover, so the pointer
+   reads as "this one" instead of the whole strip changing at once. */
+.sponsors-track .sponsor-card img {
+  opacity: 0.82;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.sponsors-track .sponsor-card:hover img {
+  opacity: 1;
+  transform: scale(1.045);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sponsors-track .sponsor-card img {
+    opacity: 1;
+    transition: none;
+  }
+  .sponsors-track .sponsor-card:hover img {
+    transform: none;
+  }
 }
 
 .sponsors-cta {

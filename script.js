@@ -210,18 +210,35 @@ function renderInitials() {
 
 renderInitials();
 
-/* ── Sponsor carousel: duplicate the base cards 3 more times ──
-   so the marquee loops seamlessly (track moves -25% per cycle). */
+/* ── Sponsor carousel: build the marquee out of identical copies ──
+   The track is N identical copies of the card set and the animation shifts
+   it by exactly one copy (-100% / N), so the loop seam is pixel-perfect no
+   matter what size the logos settle at once they load — that mismatch is
+   what used to make the strip jump.
+
+   N is only as large as the viewport needs: one copy has to be wide enough
+   to still cover the screen at the moment the track has travelled a full
+   copy, which needs (N - 1) copies' worth of width. Fewer cards on screen
+   means less work per frame, which is what keeps hovering smooth. */
 function duplicateSponsorTrack() {
   const track = document.getElementById('sponsors-track');
   if (!track) return;
   const originals = Array.from(track.children);
   if (originals.length === 0) return;
 
-  for (let i = 0; i < 3; i++) {
+  /* Cards are a fixed width in CSS, so this measurement does not depend on
+     the logos having loaded yet. */
+  const copyWidth = track.scrollWidth;
+
+  const sets = copyWidth
+    ? Math.max(2, Math.ceil(window.innerWidth / copyWidth) + 1)
+    : 3;
+
+  const appendSet = () => {
     originals.forEach(card => {
       const clone = card.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
+      clone.classList.add('is-clone');
       clone
         .querySelectorAll('a')
         .forEach(link => link.setAttribute('tabindex', '-1'));
@@ -229,7 +246,32 @@ function duplicateSponsorTrack() {
       if (img) img.removeAttribute('loading');
       track.appendChild(clone);
     });
-  }
+  };
+
+  let currentSets = 1;
+  const growTo = target => {
+    while (currentSets < target) {
+      appendSet();
+      currentSets++;
+    }
+    /* Drives the keyframe's translate distance. Adding copies leaves that
+       distance at exactly one copy, so a mid-flight change is continuous
+       and the marquee does not jump. */
+    track.style.setProperty('--marquee-sets', String(currentSets));
+  };
+
+  growTo(sets);
+
+  /* Widening the window past what the current copies cover would expose a
+     gap at the seam, so top up when that happens. */
+  if (!copyWidth) return;
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      growTo(Math.max(2, Math.ceil(window.innerWidth / copyWidth) + 1));
+    }, 200);
+  });
 }
 
 duplicateSponsorTrack();
