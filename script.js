@@ -234,6 +234,77 @@ function duplicateSponsorTrack() {
 
 duplicateSponsorTrack();
 
+/* Ease the sponsor marquee to a stop instead of hard-pausing mid-frame.
+   The CSS pause remains as a fallback when the Web Animations API is absent. */
+function initSponsorMarquee() {
+  const track = document.getElementById('sponsors-track');
+  const wrap = track?.closest('.sponsors-carousel-wrap');
+  if (!track || !wrap || prefersReducedMotion) return;
+
+  const marqueeAnimation = track
+    .getAnimations()
+    .find(animation => animation.animationName === 'scroll-sponsors');
+  if (!marqueeAnimation || typeof marqueeAnimation.updatePlaybackRate !== 'function') {
+    return;
+  }
+
+  track.classList.add('is-smooth-controlled');
+  let rateFrame = 0;
+  let pointerInside = false;
+  let focusInside = false;
+
+  function animatePlaybackRate(targetRate, duration) {
+    cancelAnimationFrame(rateFrame);
+
+    if (targetRate > 0 && marqueeAnimation.playState === 'paused') {
+      marqueeAnimation.updatePlaybackRate(0.001);
+      marqueeAnimation.play();
+    }
+
+    const startRate = marqueeAnimation.playbackRate;
+    const startTime = performance.now();
+
+    function step(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const nextRate = startRate + (targetRate - startRate) * eased;
+      marqueeAnimation.updatePlaybackRate(nextRate);
+
+      if (progress < 1) {
+        rateFrame = requestAnimationFrame(step);
+      } else if (targetRate === 0) {
+        marqueeAnimation.pause();
+      }
+    }
+
+    rateFrame = requestAnimationFrame(step);
+  }
+
+  function syncMarqueeMotion() {
+    const shouldPause = pointerInside || focusInside;
+    animatePlaybackRate(shouldPause ? 0 : 1, shouldPause ? 360 : 480);
+  }
+
+  wrap.addEventListener('pointerenter', () => {
+    pointerInside = true;
+    syncMarqueeMotion();
+  });
+  wrap.addEventListener('pointerleave', () => {
+    pointerInside = false;
+    syncMarqueeMotion();
+  });
+  wrap.addEventListener('focusin', () => {
+    focusInside = true;
+    syncMarqueeMotion();
+  });
+  wrap.addEventListener('focusout', event => {
+    focusInside = wrap.contains(event.relatedTarget);
+    syncMarqueeMotion();
+  });
+}
+
+initSponsorMarquee();
+
 /* ── Speakers marquee: duplicate cards in each track once so the
    vertical (or horizontal on mobile) scroll loops seamlessly.
    The visible roster is the originals; clones are aria-hidden. */

@@ -51,7 +51,6 @@ images/people/luis-belen.webp|cover|440|550
 images/people/dr-travis-zack.webp|cover|440|550
 images/people/enrique-ortiz-de-montellano.webp|cover|440|550
 images/people/dr-felix-rivera.webp|cover|440|550
-images/people/dr-herman-taylor.webp|cover|440|550
 images/people/dr-humberto-cruz-esparra.webp|cover|440|550
 images/people/dr-jamboor-vishwanatha.webp|cover|440|550
 images/people/DrOrvil-profile.webp|cover|440|550
