@@ -2696,7 +2696,7 @@ html.early-bird-active .tickets-early-bird-note {
 .sponsors-track {
   display: flex;
   width: max-content;
-  animation: scroll-sponsors 32s linear infinite;
+  animation: scroll-sponsors 60s linear infinite;
   padding: 1.25rem 0;
   will-change: transform;
   backface-visibility: hidden;
@@ -2851,6 +2851,18 @@ html.early-bird-active .tickets-early-bird-note {
   height: auto;
   object-fit: contain;
   filter: brightness(1.05) contrast(1.05);
+}
+
+.sponsor-card img.collaborator-logo--light {
+  box-sizing: border-box;
+  padding: 6px 8px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.sponsor-card img.collaborator-logo--square {
+  max-width: 88px;
+  max-height: 88px;
 }
 
 .sponsors-cta {

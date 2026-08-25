@@ -36,6 +36,13 @@ images/logos/centro-unido.webp|contain|420|156
 images/logos/AI-med.webp|contain|420|156
 images/logos/pmtl-institute.webp|contain|420|156
 images/logos/triple-s.webp|contain|420|156
+images/logos/open-evidence.webp|contain|420|156
+images/logos/medgemma.webp|contain|420|156
+images/logos/google.webp|contain|176|176
+images/logos/nabla.webp|contain|420|156
+images/logos/himss.webp|contain|176|176
+images/logos/parallel18.webp|contain|420|156
+images/logos/UPenn.webp|contain|176|176
 images/people/DrOrvil-profile-small.webp|cover|68|68
 images/people/yasmin-pedrogo-profile.webp|cover|68|68
 images/people/arlen-meyers.webp|cover|440|550
