@@ -1,2 +1,5 @@
 # Internal agenda reconciliation notes — kept local, not part of the site
 docs/agenda-diff-*
+
+# Local dev dependencies (live-server)
+node_modules/

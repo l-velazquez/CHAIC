@@ -1210,10 +1210,23 @@ html.early-bird-active .tickets-early-bird-note {
   border-radius: 12px;
 }
 
+/* White plate behind dark-on-light marks sitting on a dark surface. */
+.logo-plate {
+  box-sizing: border-box;
+  padding: 6px 8px;
+  background: #fff;
+  border-radius: 10px;
+}
+
 /* Sponsors bar (inside hero) */
 .sponsors-bar {
   position: relative;
   z-index: 3;
+  /* Same track as .hero-body, so the strip lines up with the headline above
+     it instead of running the full bleed of the viewport. */
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
   padding: 1.25rem 4rem 1.75rem;
   display: flex;
   flex-direction: column;
@@ -1245,17 +1258,31 @@ html.early-bird-active .tickets-early-bird-note {
 }
 
 .sponsors-logos {
+  /* Every mark is fitted to one shared box, so the row reads as a single set
+     no matter how the logos differ in aspect. Breakpoints retune the row by
+     overriding just these two values. */
+  --mark-h: 48px;
+  --mark-w: 176px;
+  /* Narrower than the 1272px the bar actually offers. The nine partner marks
+     measure ~1091px and the seven collaborator marks ~1097px, so capping here
+     is wide enough for either group but too narrow to pull a tenth mark up —
+     which pins the wrap to the 9/7 boundary instead of leaving it to whatever
+     the viewport happens to allow. */
+  max-width: 1160px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3rem;
+  gap: 1.75rem 2.75rem;
   flex-wrap: wrap;
 }
 
 .sponsors-logos img {
-  height: 60px;
+  /* Fit-inside sizing, not a fixed height: a wide mark is bound by --mark-w
+     and a tall one by --mark-h, so neither has to be hand-tuned per logo. */
   width: auto;
-  max-width: 220px;
+  height: auto;
+  max-height: var(--mark-h);
+  max-width: var(--mark-w);
   object-fit: contain;
   opacity: 0.88;
   filter: brightness(1.05);
@@ -1267,33 +1294,27 @@ html.early-bird-active .tickets-early-bird-note {
   opacity: 1;
   transform: translateY(-2px);
 }
-/* Per-logo optical corrections. Each logo is wrapped in its own <a>, so
-   the img is always child 1 of that anchor — overrides must target the
-   anchor's position, not the img's. Always use `> a:nth-child(n) img`,
-   and keep n in sync with index.html's order.
-   2 = SPE, 3 = ABAIM, 9 = PMTL.
 
-   The square/round marks sit at the 60px base. Wide marks are trimmed
-   below it so their rendered box carries comparable weight. */
+/* Wordmark-over-tagline lockups carry empty space inside their own box, so at
+   the shared height their letterforms out-weigh the icon marks beside them. */
+.sponsors-logos img.sponsor-mark--trim {
+  max-height: calc(var(--mark-h) * 0.88);
+}
 
-/* SPE — wordmark over a tagline; trimmed so the wordmark's cap-height
-   reads level with the icon marks rather than the lockup's full box. */
-.sponsors-logos > a:nth-child(2) img {
-  height: 54px;
+/* Squares read lighter than wide marks at equal height; a small bump evens
+   them out without letting them tower over the row. */
+.sponsors-logos img.collaborator-logo--square {
+  max-height: calc(var(--mark-h) * 1.08);
+  max-width: calc(var(--mark-h) * 1.08);
 }
-/* ABAIM — aspect 5.1, so WIDTH is the binding constraint, never height:
-   any height >= 43px just collides with max-width and clamps. Sized by
-   width so the rule states what it actually does, and so it still scales
-   at the breakpoints (max-width alone left it frozen at 220px on mobile).
-   210px renders ~41px tall; a true 60px would be 307px and blow out the row. */
-.sponsors-logos > a:nth-child(3) img {
-  width: 210px;
-  height: auto;
+
+/* Mark stacked over a wordmark — narrow and tall, so it needs the extra
+   height its second line eats up. */
+.sponsors-logos img.collaborator-logo--stacked {
+  max-height: calc(var(--mark-h) * 1.15);
+  max-width: calc(var(--mark-w) * 0.64);
 }
-/* PMTL — wide two-line lockup, scaled down so it matches SPE's box. */
-.sponsors-logos > a:nth-child(9) img {
-  height: 56px;
-}
+
 
 /* ── SECTIONS ── */
 .section {
@@ -2676,7 +2697,11 @@ html.early-bird-active .tickets-early-bird-note {
 .sponsors-carousel-wrap {
   overflow: hidden;
   position: relative;
-  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 2.25rem;
+  padding: 0.75rem 0;
   -webkit-mask-image: linear-gradient(
     to right,
     transparent,
@@ -2693,23 +2718,44 @@ html.early-bird-active .tickets-early-bird-note {
   );
 }
 
+/* Two rows travelling in opposite directions: twice the logos on screen at
+   once, so the full roster comes around in roughly half the time. Durations
+   are set per row from its card count to keep both rows at the same px/s. */
 .sponsors-track {
   display: flex;
   width: max-content;
-  animation: scroll-sponsors 15s linear infinite;
-  padding: 1.25rem 0;
+  animation: scroll-sponsors 29s linear infinite;
+  padding: 0.6rem 0;
+  will-change: transform;
+  backface-visibility: hidden;
 }
 
-.sponsors-track:hover {
+.sponsors-track--reverse {
+  animation-name: scroll-sponsors-reverse;
+  animation-duration: 25s;
+}
+
+.sponsors-carousel-wrap:hover
+  .sponsors-track:not(.is-smooth-controlled),
+.sponsors-carousel-wrap:focus-within
+  .sponsors-track:not(.is-smooth-controlled) {
   animation-play-state: paused;
 }
 
 @keyframes scroll-sponsors {
   0% {
-    transform: translateX(0);
+    transform: translate3d(0, 0, 0);
   }
   100% {
-    transform: translateX(-25%);
+    transform: translate3d(-25%, 0, 0);
+  }
+}
+@keyframes scroll-sponsors-reverse {
+  0% {
+    transform: translate3d(-25%, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -2741,6 +2787,58 @@ html.early-bird-active .tickets-early-bird-note {
 .sponsor-card:hover {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(34, 211, 238, 0.2);
+}
+
+/* Keep the moving cards on a stable compositing layer. Repainting a
+   backdrop-filter while the parent is translating causes visible flicker in
+   some Chromium/WebKit builds. */
+.sponsors-carousel-wrap .sponsor-card {
+  width: 264px;
+  height: 120px;
+  padding: 1rem 1.5rem;
+  margin-right: 1rem;
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.065),
+    rgba(255, 255, 255, 0.025)
+  );
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  transition:
+    transform 0.3s var(--ease),
+    background 0.3s var(--ease),
+    border-color 0.3s var(--ease),
+    box-shadow 0.3s var(--ease);
+}
+
+.sponsors-carousel-wrap .sponsor-card:hover,
+.sponsors-carousel-wrap .sponsor-card:focus-within {
+  transform: translate3d(0, -5px, 0);
+  background: linear-gradient(
+    145deg,
+    rgba(34, 211, 238, 0.11),
+    rgba(255, 255, 255, 0.045)
+  );
+  border-color: rgba(34, 211, 238, 0.38);
+  box-shadow:
+    inset 0 0 28px rgba(255, 255, 255, 0.025),
+    0 16px 34px -20px rgba(34, 211, 238, 0.55);
+}
+
+.sponsors-carousel-wrap .sponsor-card > a {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+}
+
+.sponsors-carousel-wrap .sponsor-card > a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 8px;
 }
 
 .sponsor-card[data-tier="gold"] {
@@ -2798,6 +2896,28 @@ html.early-bird-active .tickets-early-bird-note {
   height: auto;
   object-fit: contain;
   filter: brightness(1.05) contrast(1.05);
+}
+
+.sponsor-card img.collaborator-logo--square {
+  max-width: 88px;
+  max-height: 88px;
+}
+
+.sponsors-carousel-wrap .sponsor-card img {
+  max-height: 72px;
+  max-width: 196px;
+}
+
+.sponsors-carousel-wrap .sponsor-card img.collaborator-logo--square {
+  max-width: 76px;
+  max-height: 76px;
+}
+
+/* Logos that ship their own opaque plate (white pill or baked-in background)
+   share one corner radius so the marquee reads as a single set. */
+.sponsor-card img.logo-rounded,
+.sponsor-card img.logo-plate {
+  border-radius: 10px;
 }
 
 .sponsors-cta {
@@ -3454,6 +3574,21 @@ body.sponsor-modal-open {
   height: 18px;
 }
 
+/* ── NARROW DESKTOP (1025–1287px) ── */
+/* Between the tablet breakpoint and the width where .sponsors-logos' own
+   1160px cap starts binding, the bar is wide enough to pull a tenth mark onto
+   the first line but not wide enough to keep the rest on the second — which
+   sheds a one- or two-logo orphan. Stepping the mark box down early keeps the
+   strip to two lines across the whole band. Range-bounded rather than
+   max-width so it can't leak into the tablet rules below. */
+@media (min-width: 1025px) and (max-width: 1287px) {
+  .sponsors-logos {
+    --mark-h: 42px;
+    --mark-w: 150px;
+    gap: 1.5rem;
+  }
+}
+
 /* ── TABLET (≤1024px) ── */
 @media (max-width: 1024px) {
   .nav-menu {
@@ -3610,20 +3745,9 @@ body.sponsor-modal-open {
     padding: 1rem 2.5rem 1.5rem;
   }
   .sponsors-logos {
-    gap: 2rem;
-  }
-  .sponsors-logos img {
-    height: 52px;
-  }
-  .sponsors-logos > a:nth-child(2) img {
-    height: 47px;
-  }
-  .sponsors-logos > a:nth-child(3) img {
-    width: 180px;
-    height: auto;
-  }
-  .sponsors-logos > a:nth-child(9) img {
-    height: 48px;
+    --mark-h: 42px;
+    --mark-w: 150px;
+    gap: 1.5rem 2.25rem;
   }
 
   .footer-grid {
@@ -3732,20 +3856,9 @@ body.sponsor-modal-open {
     padding: 1rem 1.5rem 1.5rem;
   }
   .sponsors-logos {
-    gap: 1.5rem;
-  }
-  .sponsors-logos img {
-    height: 44px;
-  }
-  .sponsors-logos > a:nth-child(2) img {
-    height: 40px;
-  }
-  .sponsors-logos > a:nth-child(3) img {
-    width: 150px;
-    height: auto;
-  }
-  .sponsors-logos > a:nth-child(9) img {
-    height: 42px;
+    --mark-h: 34px;
+    --mark-w: 122px;
+    gap: 1.1rem 1.6rem;
   }
 
   /* About */

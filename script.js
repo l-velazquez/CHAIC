@@ -210,29 +210,107 @@ function renderInitials() {
 
 renderInitials();
 
-/* ── Sponsor carousel: duplicate the base cards 3 more times ──
-   so the marquee loops seamlessly (track moves -25% per cycle). */
-function duplicateSponsorTrack() {
-  const track = document.getElementById('sponsors-track');
-  if (!track) return;
-  const originals = Array.from(track.children);
-  if (originals.length === 0) return;
+/* ── Sponsor carousel: duplicate each row's base cards 3 more times ──
+   so the marquee loops seamlessly (a track moves -25% per cycle). */
+function duplicateSponsorTracks() {
+  document.querySelectorAll('.sponsors-track').forEach(track => {
+    const originals = Array.from(track.children);
+    if (originals.length === 0) return;
 
-  for (let i = 0; i < 3; i++) {
-    originals.forEach(card => {
-      const clone = card.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      clone
-        .querySelectorAll('a')
-        .forEach(link => link.setAttribute('tabindex', '-1'));
-      const img = clone.querySelector('img');
-      if (img) img.removeAttribute('loading');
-      track.appendChild(clone);
-    });
-  }
+    for (let i = 0; i < 3; i++) {
+      originals.forEach(card => {
+        const clone = card.cloneNode(true);
+        clone.setAttribute('aria-hidden', 'true');
+        clone
+          .querySelectorAll('a')
+          .forEach(link => link.setAttribute('tabindex', '-1'));
+        const img = clone.querySelector('img');
+        if (img) img.removeAttribute('loading');
+        track.appendChild(clone);
+      });
+    }
+  });
 }
 
-duplicateSponsorTrack();
+duplicateSponsorTracks();
+
+/* Ease the sponsor marquee to a stop instead of hard-pausing mid-frame.
+   The CSS pause remains as a fallback when the Web Animations API is absent. */
+function initSponsorMarquee() {
+  const wrap = document.querySelector('.sponsors-carousel-wrap');
+  const tracks = Array.from(wrap?.querySelectorAll('.sponsors-track') || []);
+  if (!wrap || tracks.length === 0 || prefersReducedMotion) return;
+
+  const marqueeAnimations = tracks.flatMap(track =>
+    track
+      .getAnimations()
+      .filter(animation => animation.animationName?.startsWith('scroll-sponsors'))
+  );
+  if (
+    marqueeAnimations.length === 0 ||
+    marqueeAnimations.some(a => typeof a.updatePlaybackRate !== 'function')
+  ) {
+    return;
+  }
+
+  tracks.forEach(track => track.classList.add('is-smooth-controlled'));
+  let rateFrame = 0;
+  let pointerInside = false;
+  let focusInside = false;
+
+  function animatePlaybackRate(targetRate, duration) {
+    cancelAnimationFrame(rateFrame);
+
+    marqueeAnimations.forEach(animation => {
+      if (targetRate > 0 && animation.playState === 'paused') {
+        animation.updatePlaybackRate(0.001);
+        animation.play();
+      }
+    });
+
+    const startRate = marqueeAnimations[0].playbackRate;
+    const startTime = performance.now();
+
+    function step(now) {
+      const progress = Math.min((now - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const nextRate = startRate + (targetRate - startRate) * eased;
+      marqueeAnimations.forEach(a => a.updatePlaybackRate(nextRate));
+
+      if (progress < 1) {
+        rateFrame = requestAnimationFrame(step);
+      } else if (targetRate === 0) {
+        marqueeAnimations.forEach(a => a.pause());
+      }
+    }
+
+    rateFrame = requestAnimationFrame(step);
+  }
+
+  function syncMarqueeMotion() {
+    const shouldPause = pointerInside || focusInside;
+    animatePlaybackRate(shouldPause ? 0 : 1, shouldPause ? 360 : 480);
+  }
+
+  wrap.addEventListener('pointerenter', () => {
+    pointerInside = true;
+    syncMarqueeMotion();
+  });
+  wrap.addEventListener('pointerleave', () => {
+    pointerInside = false;
+    syncMarqueeMotion();
+  });
+  wrap.addEventListener('focusin', () => {
+    focusInside = true;
+    syncMarqueeMotion();
+  });
+  wrap.addEventListener('focusout', event => {
+    focusInside = wrap.contains(event.relatedTarget);
+    syncMarqueeMotion();
+  });
+}
+
+initSponsorMarquee();
 
 /* ── Speakers marquee: duplicate cards in each track once so the
    vertical (or horizontal on mobile) scroll loops seamlessly.
