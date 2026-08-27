@@ -1312,6 +1312,17 @@ html.early-bird-active .tickets-early-bird-note {
   max-width: calc(var(--mark-w) * 0.64);
 }
 
+/* Public-health partners use very different lockups: preserve the seal's
+   readable height while keeping the compact CNDPR wordmark optically even. */
+.sponsors-logos img.collaborator-logo--department {
+  max-height: calc(var(--mark-h) * 1.14);
+  max-width: calc(var(--mark-w) * 0.88);
+}
+
+.sponsors-logos img.collaborator-logo--wide {
+  max-height: calc(var(--mark-h) * 0.82);
+}
+
 
 /* ── SECTIONS ── */
 .section {
@@ -2908,6 +2919,16 @@ html.early-bird-active .tickets-early-bird-note {
 .sponsors-carousel-wrap .sponsor-card img.collaborator-logo--square {
   max-width: 76px;
   max-height: 76px;
+}
+
+.sponsors-carousel-wrap .sponsor-card img.collaborator-logo--department {
+  max-height: 82px;
+  max-width: 190px;
+}
+
+.sponsors-carousel-wrap .sponsor-card img.collaborator-logo--wide {
+  max-height: 54px;
+  max-width: 205px;
 }
 
 /* Logos that ship their own opaque plate (white pill or baked-in background)
