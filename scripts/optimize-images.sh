@@ -33,6 +33,7 @@ images/logos/RCM-UPR-Logo.webp|contain|420|156
 images/logos/SPE-White-Letters.webp|contain|420|156
 images/logos/ABAIM-logo-transparent.webp|contain|420|156
 images/logos/centro-unido.webp|contain|420|156
+images/logos/laboratorio-sagrado-corazon.webp|contain|420|156
 images/logos/AI-med.webp|contain|420|156
 images/logos/pmtl-institute.webp|contain|420|156
 images/logos/triple-s.webp|contain|420|156

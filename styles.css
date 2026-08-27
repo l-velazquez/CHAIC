@@ -1263,16 +1263,13 @@ html.early-bird-active .tickets-early-bird-note {
      overriding just these two values. */
   --mark-h: 48px;
   --mark-w: 176px;
-  /* Narrower than the 1272px the bar actually offers. The nine partner marks
-     measure ~1091px and the seven collaborator marks ~1097px, so capping here
-     is wide enough for either group but too narrow to pull a tenth mark up —
-     which pins the wrap to the 9/7 boundary instead of leaving it to whatever
-     the viewport happens to allow. */
-  max-width: 1160px;
+  /* Match the hero's available content width. With the current roster this
+     keeps a balanced 9/8 wrap instead of leaving the final mark orphaned. */
+  max-width: 1272px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 1.75rem 2.75rem;
+  gap: 1.75rem 2.25rem;
   flex-wrap: wrap;
 }
 
