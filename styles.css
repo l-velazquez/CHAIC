@@ -1814,6 +1814,11 @@ html.early-bird-active .tickets-early-bird-note {
   object-fit: cover;
   display: block;
 }
+.speaker-card img.speaker-photo--top,
+.speaker-detail-photo img.speaker-photo--top,
+.agenda-speaker-avatar img.speaker-photo--top {
+  object-position: center top;
+}
 .speaker-card-overlay {
   position: absolute;
   inset: auto 0 0 0;
