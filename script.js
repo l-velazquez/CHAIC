@@ -312,6 +312,137 @@ function initSponsorMarquee() {
 
 initSponsorMarquee();
 
+/* ── Hero sponsors dock (desktop pointers only) ──
+   macOS-style magnification: each mark eases toward a scale driven by its
+   distance to the cursor with a Gaussian falloff, and the flex width grows
+   with it so neighbours are pushed aside exactly like the Dock. The strip
+   scrolls horizontally when the full roster overflows; touch, small
+   viewports and reduced motion keep the static wrapped layout. */
+function initSponsorDock() {
+  const dock = document.querySelector('.sponsors-bar .sponsors-logos');
+  if (!dock || dock.dataset.dockBound) return;
+  dock.dataset.dockBound = 'true';
+
+  const items = Array.from(dock.children).filter(el => el.tagName === 'A');
+  const imgs = items.map(item => item.querySelector('img'));
+  if (items.length === 0) return;
+
+  const MAX_ADD = 0.6; // peak magnification directly under the cursor (1.6x)
+  const SIGMA = 110;   // px — width of the falloff bulge around the cursor
+  const EASE = 0.32;   // per-frame lerp toward the target scale
+
+  // Keep in sync with the CSS block that turns on .sponsors-bar dock mode.
+  const mql = window.matchMedia(
+    '(hover: hover) and (pointer: fine) and (min-width: 1025px)' +
+      ' and (prefers-reduced-motion: no-preference)'
+  );
+
+  const scales = new Float32Array(items.length).fill(1);
+  let mouseX = null;
+  let focusIndex = -1;
+  let frame = 0;
+
+  function targetFor(index, center) {
+    if (index === focusIndex) return 1 + MAX_ADD;
+    if (mouseX === null) return 1;
+    const distance = mouseX - center;
+    return 1 + MAX_ADD * Math.exp(-(distance * distance) / (2 * SIGMA * SIGMA));
+  }
+
+  function step() {
+    frame = 0;
+
+    // Batch every read before the writes so the frame costs one layout.
+    const rects = items.map(item => item.getBoundingClientRect());
+    const imgRects = imgs.map(img => img && img.getBoundingClientRect());
+    let settled = true;
+
+    items.forEach((item, i) => {
+      // The natural width comes from the mark's own rect, not the anchor's
+      // box: the image renders at its natural constrained size no matter
+      // what box it sits in, so a base measured before a lazy image loads
+      // (or after a resize) is corrected on the next frame instead of
+      // getting locked in. The anchor's uniform scale is divided back out.
+      const imgWidth = imgRects[i] ? imgRects[i].width : 0;
+      const base = imgWidth / scales[i];
+      const center = rects[i].left + rects[i].width / 2;
+      const target = targetFor(i, center);
+      const next = scales[i] + (target - scales[i]) * EASE;
+      scales[i] = next;
+      item.style.width = `${base * next}px`;
+      item.style.transform = `scale(${next})`;
+      if (Math.abs(next - target) > 0.0015) settled = false;
+    });
+
+    if (!settled) {
+      frame = requestAnimationFrame(step);
+    } else if (mouseX === null && focusIndex === -1) {
+      // Fully at rest — drop the inline styles so the strip returns to its
+      // pure CSS state instead of lingering at scale(0.999…).
+      scales.fill(1);
+      items.forEach(item => {
+        item.style.width = '';
+        item.style.transform = '';
+      });
+    }
+  }
+
+  function wake() {
+    if (!frame) frame = requestAnimationFrame(step);
+  }
+
+  function disable() {
+    if (frame) {
+      cancelAnimationFrame(frame);
+      frame = 0;
+    }
+    mouseX = null;
+    focusIndex = -1;
+    scales.fill(1);
+    items.forEach(item => {
+      item.style.width = '';
+      item.style.transform = '';
+    });
+  }
+
+  dock.addEventListener('pointermove', event => {
+    mouseX = event.clientX;
+    wake();
+  });
+
+  dock.addEventListener('pointerleave', () => {
+    mouseX = null;
+    wake();
+  });
+
+  dock.addEventListener('focusin', event => {
+    const index = items.indexOf(event.target);
+    if (index === -1) return;
+    focusIndex = index;
+    event.target.scrollIntoView({ block: 'nearest', inline: 'center' });
+    wake();
+  });
+
+  dock.addEventListener('focusout', event => {
+    if (!dock.contains(event.relatedTarget)) {
+      focusIndex = -1;
+      wake();
+    }
+  });
+
+  function syncMode() {
+    // Matching needs no JS setup — the CSS media query owns the layout.
+    // Leaving the range just clears any inline magnification.
+    if (!mql.matches) disable();
+  }
+
+  if (mql.addEventListener) mql.addEventListener('change', syncMode);
+  else mql.addListener(syncMode);
+  syncMode();
+}
+
+initSponsorDock();
+
 /* ── Speakers marquee: duplicate cards in each track once so the
    vertical (or horizontal on mobile) scroll loops seamlessly.
    The visible roster is the originals; clones are aria-hidden. */

@@ -1330,6 +1330,50 @@ html.early-bird-active .tickets-early-bird-note {
   max-height: calc(var(--mark-h) * 0.82);
 }
 
+/* ── Dock mode: desktop pointers get a macOS-style magnifying strip ──
+   The roster sits on a single line that scrolls horizontally when it
+   overflows (hidden scrollbar, faded edges); script.js drives the
+   magnification and push-apart spacing per mark. */
+@media (hover: hover) and (pointer: fine) and (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
+  .sponsors-bar .sponsors-logos {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* Headroom so a 1.6x magnified mark never clips vertically. */
+    min-height: calc(var(--mark-h) * 2.1);
+    padding-inline: 4rem;
+    scroll-padding-inline: 4rem;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 3.5rem,
+      #000 calc(100% - 3.5rem),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 3.5rem,
+      #000 calc(100% - 3.5rem),
+      transparent
+    );
+  }
+  .sponsors-bar .sponsors-logos::-webkit-scrollbar {
+    display: none;
+  }
+  .sponsors-bar .sponsors-logos > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    will-change: transform;
+  }
+}
 
 /* ── SECTIONS ── */
 .section {
