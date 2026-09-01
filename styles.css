@@ -1105,7 +1105,7 @@ html.early-bird-active .tickets-early-bird-note {
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  width: min(340px, calc(50% - 5rem));
+  width: min(430px, calc(50% - 5rem));
   padding: 0.9rem 1rem 1rem;
   background: rgba(5, 13, 30, 0.62);
   border: 1px solid rgba(255, 255, 255, 0.14);
@@ -1129,7 +1129,7 @@ html.early-bird-active .tickets-early-bird-note {
 
 .hero-sponsors-logos {
   display: grid;
-  grid-template-columns: 1fr 1.25fr;
+  grid-template-columns: 1fr 1.25fr 1fr;
   align-items: center;
   margin-top: 0.65rem;
 }
@@ -1167,6 +1167,10 @@ html.early-bird-active .tickets-early-bird-note {
   border-radius: 9px;
 }
 
+.hero-sponsor--rcm img {
+  max-height: 82px;
+}
+
 .hero-sponsor:hover img {
   opacity: 0.9;
   transform: translateY(-2px);
@@ -1174,7 +1178,7 @@ html.early-bird-active .tickets-early-bird-note {
 
 @media (min-width: 769px) {
   .hero-sponsors {
-    width: min(390px, calc(50% - 4rem));
+    width: min(520px, calc(50% - 4rem));
     padding: 0;
     background: transparent;
     border: 0;
@@ -1202,6 +1206,9 @@ html.early-bird-active .tickets-early-bird-note {
   }
   .hero-sponsor--triple-s img {
     max-height: 62px;
+  }
+  .hero-sponsor--rcm img {
+    max-height: 104px;
   }
 }
 
