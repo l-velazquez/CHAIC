@@ -1794,15 +1794,40 @@ html.early-bird-active .tickets-early-bird-note {
 
 /* RIGHT: two native, user-scrollable rows */
 .speakers-marquee {
+  --speakers-edge-fade: clamp(1.5rem, 5vw, 4rem);
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
   min-width: 0;
+  position: relative;
+}
+
+.speakers-marquee::before,
+.speakers-marquee::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  bottom: 0;
+  width: var(--speakers-edge-fade);
+  pointer-events: none;
+}
+
+.speakers-marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--light-bg), transparent);
+}
+
+.speakers-marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--light-bg), transparent);
 }
 
 .speakers-col {
+  contain: layout paint;
   overflow-x: auto;
   overflow-y: hidden;
+  overscroll-behavior-inline: contain;
   position: relative;
   padding: 0.25rem 0 0.8rem;
   scroll-snap-type: x proximity;
