@@ -503,7 +503,14 @@
 
         <div class="about-grid">
           <div class="about-image-col reveal">
-            <video class="about-img" autoplay muted loop playsinline>
+            <video
+              class="about-img"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
               <source src="images/videos/about-opt.mp4" type="video/mp4" />
             </video>
           </div>
@@ -710,9 +717,13 @@
           </div>
         </div>
 
-        <!-- RIGHT: dual vertical marquee -->
+        <!-- RIGHT: user-scrollable speaker rows -->
         <div class="speakers-marquee" aria-label="Featured speakers">
-          <div class="speakers-col speakers-col--up">
+          <div
+            class="speakers-col speakers-col--up"
+            tabindex="0"
+            aria-label="Featured speakers, row one"
+          >
             <div class="speakers-track" data-track="up">
               <article class="speaker-card">
                 <img
@@ -766,7 +777,11 @@
               </article>
             </div>
           </div>
-          <div class="speakers-col speakers-col--down">
+          <div
+            class="speakers-col speakers-col--down"
+            tabindex="0"
+            aria-label="Featured speakers, row two"
+          >
             <div class="speakers-track" data-track="down">
               <article class="speaker-card">
                 <img
@@ -2930,7 +2945,11 @@
       </div>
 
       <div class="sponsors-carousel-wrap">
-        <div class="sponsors-track">
+        <div
+          class="sponsors-track"
+          tabindex="0"
+          aria-label="Community partners, row one"
+        >
           <div class="sponsor-card">
             <a
               href="https://sopenet.org/"
@@ -3059,7 +3078,11 @@
             /></a>
           </div>
         </div>
-        <div class="sponsors-track sponsors-track--reverse">
+        <div
+          class="sponsors-track sponsors-track--reverse"
+          tabindex="0"
+          aria-label="Community partners, row two"
+        >
           <div class="sponsor-card">
             <a
               href="https://www.laboratoriosagradocorazon.com/"
@@ -3405,7 +3428,10 @@
             community.
           </p>
         </div>
-        <div id="soro-blog"></div>
+        <div
+          id="soro-blog"
+          data-embed-src="https://app.trysoro.com/api/embed/40ed19b5-41cf-4466-80de-457d5cf25217"
+        ></div>
       </div>
     </section>
 
@@ -3575,10 +3601,6 @@
     <script
       id="luma-checkout"
       src="https://embed.lu.ma/checkout-button.js"
-    ></script>
-    <script
-      src="https://app.trysoro.com/api/embed/40ed19b5-41cf-4466-80de-457d5cf25217"
-      defer
     ></script>
   </body>
 </html>
