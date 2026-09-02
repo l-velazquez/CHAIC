@@ -37,6 +37,7 @@ images/logos/laboratorio-sagrado-corazon.webp|contain|420|156
 images/logos/AI-med.webp|contain|420|156
 images/logos/pmtl-institute.webp|contain|420|156
 images/logos/triple-s.webp|contain|420|156
+images/logos/departamento-de-salud-puerto-rico.webp|contain|400|174
 images/logos/open-evidence.webp|contain|420|156
 images/logos/medgemma.webp|contain|420|156
 images/logos/google.webp|contain|176|176
