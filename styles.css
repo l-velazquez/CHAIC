@@ -1129,7 +1129,7 @@ html.early-bird-active .tickets-early-bird-note {
 
 .hero-sponsors-logos {
   display: grid;
-  grid-template-columns: 1fr 1.25fr 1fr;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: center;
   margin-top: 0.65rem;
 }
@@ -1143,8 +1143,12 @@ html.early-bird-active .tickets-early-bird-note {
   padding: 0.25rem 0.8rem;
 }
 
-.hero-sponsor + .hero-sponsor {
+.hero-sponsor:nth-child(even) {
   border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.hero-sponsor:nth-child(n + 3) {
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
 }
 
 .hero-sponsor img {
@@ -1171,6 +1175,10 @@ html.early-bird-active .tickets-early-bird-note {
   max-height: 82px;
 }
 
+.hero-sponsor--salud img {
+  max-height: 58px;
+}
+
 .hero-sponsor:hover img {
   opacity: 0.9;
   transform: translateY(-2px);
@@ -1178,7 +1186,8 @@ html.early-bird-active .tickets-early-bird-note {
 
 @media (min-width: 769px) {
   .hero-sponsors {
-    width: min(520px, calc(50% - 4rem));
+    top: 60%;
+    width: min(500px, calc(50% - 3rem));
     padding: 0;
     background: transparent;
     border: 0;
@@ -1192,23 +1201,31 @@ html.early-bird-active .tickets-early-bird-note {
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
   }
   .hero-sponsors-logos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
     margin-top: 0.75rem;
   }
   .hero-sponsor {
-    height: 108px;
+    height: clamp(124px, 9vw, 140px);
     padding: 0.25rem 1rem;
   }
-  .hero-sponsor + .hero-sponsor {
-    border-left-color: rgba(255, 255, 255, 0.25);
+  .hero-sponsor:nth-child(even) {
+    border-left: 0;
+  }
+  .hero-sponsor:nth-child(n + 2) {
+    border-top: 0;
   }
   .hero-sponsor--amrc img {
-    height: 118px;
+    height: clamp(108px, 9vw, 132px);
   }
   .hero-sponsor--triple-s img {
-    max-height: 62px;
+    max-height: clamp(60px, 5vw, 74px);
   }
   .hero-sponsor--rcm img {
-    max-height: 104px;
+    max-height: clamp(112px, 9.5vw, 136px);
+  }
+  .hero-sponsor--salud img {
+    max-height: clamp(74px, 6vw, 90px);
   }
 }
 
@@ -3799,17 +3816,31 @@ body.sponsor-modal-open {
     padding: 0.75rem 0.9rem 0.85rem;
   }
   .hero-sponsors-logos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     max-width: 310px;
     margin: 0.55rem auto 0;
   }
   .hero-sponsor {
     height: 62px;
+    padding-inline: 0.45rem;
+  }
+  .hero-sponsor:nth-child(odd) {
+    border-left: 0;
+  }
+  .hero-sponsor:nth-child(n + 3) {
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
   }
   .hero-sponsor--amrc img {
     height: 60px;
   }
   .hero-sponsor--triple-s img {
     max-height: 44px;
+  }
+  .hero-sponsor--rcm img {
+    max-height: 58px;
+  }
+  .hero-sponsor--salud img {
+    max-height: 54px;
   }
   /* Hero */
   .hero-body {
