@@ -1331,9 +1331,9 @@ html.early-bird-active .tickets-early-bird-note {
 }
 
 /* ── Dock mode: desktop pointers get a macOS-style magnifying strip ──
-   The roster sits on a single line that scrolls horizontally when it
-   overflows (hidden scrollbar, faded edges); script.js drives the
-   magnification and push-apart spacing per mark. */
+   The roster sits on one continuously travelling line (hidden scrollbar,
+   faded edges); script.js drives both the right-to-left loop and the
+   magnification/push-apart spacing per mark. */
 @media (hover: hover) and (pointer: fine) and (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
   .sponsors-bar .sponsors-logos {
     width: 100%;

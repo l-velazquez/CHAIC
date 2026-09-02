@@ -315,21 +315,22 @@ initSponsorMarquee();
 /* ── Hero sponsors dock (desktop pointers only) ──
    macOS-style magnification: each mark eases toward a scale driven by its
    distance to the cursor with a Gaussian falloff, and the flex width grows
-   with it so neighbours are pushed aside exactly like the Dock. The strip
-   scrolls horizontally when the full roster overflows; touch, small
-   viewports and reduced motion keep the static wrapped layout. */
+   with it so neighbours are pushed aside exactly like the Dock. A duplicate
+   visual set makes the roster travel continuously from right to left. The
+   travel pauses for hover/focus interaction; touch, small viewports and
+   reduced motion keep the static wrapped layout. */
 function initSponsorDock() {
   const dock = document.querySelector('.sponsors-bar .sponsors-logos');
   if (!dock || dock.dataset.dockBound) return;
   dock.dataset.dockBound = 'true';
 
-  const items = Array.from(dock.children).filter(el => el.tagName === 'A');
-  const imgs = items.map(item => item.querySelector('img'));
-  if (items.length === 0) return;
+  const originals = Array.from(dock.children).filter(el => el.tagName === 'A');
+  if (originals.length === 0) return;
 
   const MAX_ADD = 0.6; // peak magnification directly under the cursor (1.6x)
   const SIGMA = 110;   // px — width of the falloff bulge around the cursor
   const EASE = 0.32;   // per-frame lerp toward the target scale
+  const TRAVEL_SPEED = 34; // px per second, moving visually right to left
 
   // Keep in sync with the CSS block that turns on .sponsors-bar dock mode.
   const mql = window.matchMedia(
@@ -337,10 +338,40 @@ function initSponsorDock() {
       ' and (prefers-reduced-motion: no-preference)'
   );
 
-  const scales = new Float32Array(items.length).fill(1);
+  let items = originals;
+  let imgs = items.map(item => item.querySelector('img'));
+  let scales = new Float32Array(items.length).fill(1);
   let mouseX = null;
   let focusIndex = -1;
   let frame = 0;
+  let lastFrameTime = 0;
+  let pointerInside = false;
+  let travelPosition = 0;
+
+  function addLoopSet() {
+    if (dock.querySelector('[data-dock-clone]')) return;
+
+    originals.forEach(original => {
+      const clone = original.cloneNode(true);
+      clone.dataset.dockClone = 'true';
+      clone.setAttribute('aria-hidden', 'true');
+      clone.tabIndex = -1;
+      dock.appendChild(clone);
+    });
+
+    items = Array.from(dock.children).filter(el => el.tagName === 'A');
+    imgs = items.map(item => item.querySelector('img'));
+    scales = new Float32Array(items.length).fill(1);
+  }
+
+  function removeLoopSet() {
+    dock.querySelectorAll('[data-dock-clone]').forEach(clone => clone.remove());
+    items = originals;
+    imgs = items.map(item => item.querySelector('img'));
+    scales = new Float32Array(items.length).fill(1);
+    dock.scrollLeft = 0;
+    travelPosition = 0;
+  }
 
   function targetFor(index, center) {
     if (index === focusIndex) return 1 + MAX_ADD;
@@ -349,46 +380,70 @@ function initSponsorDock() {
     return 1 + MAX_ADD * Math.exp(-(distance * distance) / (2 * SIGMA * SIGMA));
   }
 
-  function step() {
-    frame = 0;
-
-    // Batch every read before the writes so the frame costs one layout.
-    const rects = items.map(item => item.getBoundingClientRect());
-    const imgRects = imgs.map(img => img && img.getBoundingClientRect());
-    let settled = true;
-
-    items.forEach((item, i) => {
-      // The natural width comes from the mark's own rect, not the anchor's
-      // box: the image renders at its natural constrained size no matter
-      // what box it sits in, so a base measured before a lazy image loads
-      // (or after a resize) is corrected on the next frame instead of
-      // getting locked in. The anchor's uniform scale is divided back out.
-      const imgWidth = imgRects[i] ? imgRects[i].width : 0;
-      const base = imgWidth / scales[i];
-      const center = rects[i].left + rects[i].width / 2;
-      const target = targetFor(i, center);
-      const next = scales[i] + (target - scales[i]) * EASE;
-      scales[i] = next;
-      item.style.width = `${base * next}px`;
-      item.style.transform = `scale(${next})`;
-      if (Math.abs(next - target) > 0.0015) settled = false;
-    });
-
-    if (!settled) {
-      frame = requestAnimationFrame(step);
-    } else if (mouseX === null && focusIndex === -1) {
-      // Fully at rest — drop the inline styles so the strip returns to its
-      // pure CSS state instead of lingering at scale(0.999…).
-      scales.fill(1);
-      items.forEach(item => {
-        item.style.width = '';
-        item.style.transform = '';
-      });
+  function step(time) {
+    if (!mql.matches) {
+      frame = 0;
+      return;
     }
+
+    const elapsed = lastFrameTime ? Math.min(time - lastFrameTime, 50) : 0;
+    lastFrameTime = time;
+    const isInteractive = pointerInside || focusIndex !== -1;
+    const needsMagnification =
+      isInteractive || scales.some(scale => Math.abs(scale - 1) > 0.0015);
+
+    if (needsMagnification) {
+      // Batch every read before the writes so the frame costs one layout.
+      const rects = items.map(item => item.getBoundingClientRect());
+      const imgRects = imgs.map(img => img && img.getBoundingClientRect());
+      let settled = true;
+
+      items.forEach((item, i) => {
+        // The natural width comes from the mark's own rect, not the anchor's
+        // box. Dividing out the current uniform scale recovers its base size.
+        const imgWidth = imgRects[i] ? imgRects[i].width : 0;
+        const base = imgWidth / scales[i];
+        const center = rects[i].left + rects[i].width / 2;
+        const target = targetFor(i, center);
+        const next = scales[i] + (target - scales[i]) * EASE;
+        scales[i] = next;
+        item.style.width = `${base * next}px`;
+        item.style.transform = `scale(${next})`;
+        if (Math.abs(next - target) > 0.0015) settled = false;
+      });
+
+      if (!isInteractive && settled) {
+        scales.fill(1);
+        items.forEach(item => {
+          item.style.width = '';
+          item.style.transform = '';
+        });
+      }
+    } else {
+      // Keep a sub-pixel accumulator because some browsers round scrollLeft
+      // assignments; adding each half-pixel frame directly can otherwise
+      // leave a slow marquee stuck at zero.
+      travelPosition += TRAVEL_SPEED * elapsed / 1000;
+      dock.scrollLeft = travelPosition;
+
+      const firstClone = dock.querySelector('[data-dock-clone]');
+      const loopWidth = firstClone
+        ? firstClone.offsetLeft - originals[0].offsetLeft
+        : 0;
+      if (loopWidth > 0 && dock.scrollLeft >= loopWidth) {
+        travelPosition -= loopWidth;
+        dock.scrollLeft = travelPosition;
+      }
+    }
+
+    frame = requestAnimationFrame(step);
   }
 
   function wake() {
-    if (!frame) frame = requestAnimationFrame(step);
+    if (!frame && mql.matches) {
+      lastFrameTime = 0;
+      frame = requestAnimationFrame(step);
+    }
   }
 
   function disable() {
@@ -398,12 +453,21 @@ function initSponsorDock() {
     }
     mouseX = null;
     focusIndex = -1;
+    pointerInside = false;
+    lastFrameTime = 0;
     scales.fill(1);
     items.forEach(item => {
       item.style.width = '';
       item.style.transform = '';
     });
+    removeLoopSet();
   }
+
+  dock.addEventListener('pointerenter', () => {
+    pointerInside = true;
+    travelPosition = dock.scrollLeft;
+    wake();
+  });
 
   dock.addEventListener('pointermove', event => {
     mouseX = event.clientX;
@@ -411,7 +475,9 @@ function initSponsorDock() {
   });
 
   dock.addEventListener('pointerleave', () => {
+    pointerInside = false;
     mouseX = null;
+    travelPosition = dock.scrollLeft;
     wake();
   });
 
@@ -419,6 +485,7 @@ function initSponsorDock() {
     const index = items.indexOf(event.target);
     if (index === -1) return;
     focusIndex = index;
+    travelPosition = dock.scrollLeft;
     event.target.scrollIntoView({ block: 'nearest', inline: 'center' });
     wake();
   });
@@ -426,14 +493,18 @@ function initSponsorDock() {
   dock.addEventListener('focusout', event => {
     if (!dock.contains(event.relatedTarget)) {
       focusIndex = -1;
+      travelPosition = dock.scrollLeft;
       wake();
     }
   });
 
   function syncMode() {
-    // Matching needs no JS setup — the CSS media query owns the layout.
-    // Leaving the range just clears any inline magnification.
-    if (!mql.matches) disable();
+    if (mql.matches) {
+      addLoopSet();
+      wake();
+    } else {
+      disable();
+    }
   }
 
   if (mql.addEventListener) mql.addEventListener('change', syncMode);
