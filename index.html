@@ -665,12 +665,18 @@
       </div>
     </section>
     <!-- Speakers -->
-    <section id="speakers" class="section-speakers-light">
+    <section
+      id="speakers"
+      class="section-speakers-light"
+      aria-labelledby="featured-speakers-title"
+    >
       <div class="speakers-layout">
         <!-- LEFT: intro + CTA -->
         <div class="speakers-intro">
           <span class="speakers-eyebrow">Speakers</span>
-          <h2 class="speakers-title">Featured Speakers</h2>
+          <h2 id="featured-speakers-title" class="speakers-title">
+            Featured Speakers
+          </h2>
           <p class="speakers-desc">
             Meet the global leaders and innovators shaping the future of AI in
             healthcare.
@@ -718,10 +724,11 @@
         </div>
 
         <!-- RIGHT: user-scrollable speaker rows -->
-        <div class="speakers-marquee" aria-label="Featured speakers">
+        <div class="speakers-marquee">
           <div
             class="speakers-col speakers-col--up"
             tabindex="0"
+            role="group"
             aria-label="Featured speakers, row one"
           >
             <div class="speakers-track" data-track="up">
@@ -730,6 +737,7 @@
                   src="images/people/DrOrvil-profile.webp"
                   alt="Dr. Orvil Martínez Rivera"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Orvil Martínez Rivera</h3>
@@ -743,6 +751,7 @@
                   src="images/people/arlen-meyers.webp"
                   alt="Dr. Arlen Meyers"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Arlen Meyers</h3>
@@ -756,6 +765,7 @@
                   src="images/people/dr-anthony-chang.webp"
                   alt="Dr. Anthony Chang"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Anthony Chang</h3>
@@ -769,6 +779,7 @@
                   src="images/people/daniel-golden.webp"
                   alt="Daniel Golden"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Daniel Golden</h3>
@@ -780,6 +791,7 @@
           <div
             class="speakers-col speakers-col--down"
             tabindex="0"
+            role="group"
             aria-label="Featured speakers, row two"
           >
             <div class="speakers-track" data-track="down">
@@ -788,6 +800,7 @@
                   src="images/people/yasmin-pedrogo.webp?v=20260831"
                   alt="Dra. Yasmin Pedrogo"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dra. Yasmin Pedrogo</h3>
@@ -801,6 +814,7 @@
                   src="images/people/dr-abiel-roche-lima.webp"
                   alt="Dr. Abiel Roche-Lima"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Abiel Roche-Lima</h3>
@@ -814,6 +828,7 @@
                   src="images/people/mariano-de-socarraz.webp"
                   alt="Mariano de Socarraz"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Mariano de Socarraz</h3>
@@ -827,6 +842,7 @@
                   src="images/people/dr-travis-zack.webp"
                   alt="Dr. Travis Zack"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Travis Zack</h3>
@@ -841,6 +857,7 @@
                   alt="Nesty Delgado, Ph.D., CAIC™️ (Dr. AI)"
                   class="speaker-photo--top"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Nesty Delgado, Ph.D., CAIC™️ (Dr. AI)</h3>

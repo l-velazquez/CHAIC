@@ -29,7 +29,7 @@ images/logos/chaic-agenda-profile-pic.webp|cover|88|88
 images/logos/AMRC.webp|cover|168|168
 images/logos/pr-usa-chamber-of-commerce.webp|cover|156|156
 images/logos/puerto-rico-ai-institute-and-consortium.webp|cover|120|120
-images/logos/RCM-UPR-Logo.webp|contain|420|156
+images/logos/RCM-UPR-Logo.webp|contain|336|312
 images/logos/SPE-White-Letters.webp|contain|420|156
 images/logos/ABAIM-logo-transparent.webp|contain|420|156
 images/logos/centro-unido.webp|contain|420|156
