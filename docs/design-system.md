@@ -210,7 +210,7 @@ Initials are rendered as text via JS (`script.js → renderInitials()`) unless a
 - `.hero-glow` — animated 520px teal radial blob, 18s drift cycle (disabled under `prefers-reduced-motion`).
 - `.hero-eyebrow` — pill chip with pulsing teal dot above the title.
 - `.hero-sponsors` — transparent AMRC and Triple-S lockup on desktop; becomes a shared full-width glass panel within the hero flow on mobile.
-- `.sponsors-bar` — "Partners & Collaborators" strip. On desktop pointers it becomes a **dock**: a single scrollable line (hidden scrollbar, edge-fade mask) where marks magnify under the cursor macOS-style; touch, ≤1024px and reduced motion keep the static wrapped layout.
+- `.sponsors-bar` — "Partners & Collaborators" strip, dock-styled on both pointer classes. On desktop pointers it becomes a **dock**: a single scrollable line (hidden scrollbar, edge-fade mask) where marks magnify under the cursor macOS-style. On coarse-pointer viewports (≤1024px) the strip keeps travelling but the screen centre replaces the cursor: the mark nearest the centre eases to ~1.14x, full opacity and a slight lift while edges dim; swiping is native scrolling and auto-travel pauses on touch, resuming once momentum settles. Reduced motion keeps the static wrapped layout.
 - Countdown units are glass cards with a gold-to-teal underline accent.
 - `.hero-accent` uses `--grad-headline` via `background-clip: text`.
 
