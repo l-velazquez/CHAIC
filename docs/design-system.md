@@ -210,6 +210,7 @@ Initials are rendered as text via JS (`script.js → renderInitials()`) unless a
 - `.hero-glow` — animated 520px teal radial blob, 18s drift cycle (disabled under `prefers-reduced-motion`).
 - `.hero-eyebrow` — pill chip with pulsing teal dot above the title.
 - `.hero-sponsors` — transparent AMRC and Triple-S lockup on desktop; becomes a shared full-width glass panel within the hero flow on mobile.
+- `.sponsors-bar` — "Partners & Collaborators" strip, dock-styled on both pointer classes. On desktop pointers it becomes a **dock**: a single scrollable line (hidden scrollbar, edge-fade mask) where marks magnify under the cursor macOS-style. On coarse-pointer viewports (≤1024px) the strip keeps travelling but the screen centre replaces the cursor: the mark nearest the centre eases to ~1.14x, full opacity and a slight lift while edges dim; swiping is native scrolling and auto-travel pauses on touch, resuming once momentum settles. Reduced motion keeps the static wrapped layout.
 - Countdown units are glass cards with a gold-to-teal underline accent.
 - `.hero-accent` uses `--grad-headline` via `background-clip: text`.
 
@@ -296,6 +297,7 @@ Motion is intentionally polished and calm. New effects should use `opacity` and
 | Hero glow drift | `@keyframes glow-drift` — 18s drift+scale cycle |
 | Hero eyebrow dot pulse | `@keyframes pulse-dot` — 2s scale cycle |
 | Partner carousel | `@keyframes scroll-sponsors` — 15s linear, seamless via JS-duplicated track |
+| Hero sponsors dock | `initSponsorDock()` — rAF lerp toward a Gaussian scale bulge under the cursor (peak 1.6x, σ 110px); flex widths grow so neighbours push aside. Desktop pointers only (`(hover: hover) and (pointer: fine) and (min-width: 1025px)`, no reduced motion) |
 | Day toggle pill | `transform: translateX(100%)` on `.agenda-day-tabs::before`, 0.4s `--ease` |
 | Day content swap | Fade out 180ms → swap → fade in (JS-driven) |
 | Scroll reveal | IntersectionObserver toggles `.is-visible` on `.reveal` and `.reveal-grid > *`; modifiers are `.reveal--fade` and `.reveal--scale`, with optional `--reveal-delay` |
@@ -335,6 +337,7 @@ All in `/images/`. Formats: **WebP** (logos, stills), **MP4** (videos), inline S
 | `tick()` | Updates the countdown every second |
 | `renderInitials()` | Walks `.speaker-avatar[data-initials]` & `.agenda-speaker-avatar[data-initials]`, injects `<span class="avatar-initials">` when no `<img>` is present |
 | `duplicateSponsorTrack()` | Clones the 8 base partner cards 3 more times into `#sponsors-track` for a seamless marquee and removes cloned links from keyboard navigation. HTML stays a 1-place edit. |
+| `initSponsorDock()` | Hero-strip dock magnification: measures mark boxes from live rects each frame (no stale caches), eases scale/width toward a Gaussian falloff target, magnifies keyboard-focused marks, and disables itself outside the desktop-pointer media query |
 | `computeDayStats(dayId)` | Counts `.agenda-card`s, sums `.agenda-duration` minutes, dedupes speakers — returns `{sessions, hours, speakers}` or `null` for placeholder days |
 | `renderDayStats(stats)` | Renders the 3-pill stats line, or a "Full program announcing · Aug 2026" line when `null` |
 | `switchDay(targetDay, label)` | Toggles active button, slides the segmented-control pill (`data-active`), fades content swap (180ms), updates title + stats |

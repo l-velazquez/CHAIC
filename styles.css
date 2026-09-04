@@ -1341,6 +1341,111 @@ html.early-bird-active .tickets-early-bird-note {
   max-height: calc(var(--mark-h) * 0.82);
 }
 
+/* ── Dock mode: desktop pointers get a macOS-style magnifying strip ──
+   The roster sits on one continuously travelling line (hidden scrollbar,
+   faded edges); script.js drives both the right-to-left loop and the
+   magnification/push-apart spacing per mark. */
+@media (hover: hover) and (pointer: fine) and (min-width: 1025px) and (prefers-reduced-motion: no-preference) {
+  .sponsors-bar .sponsors-logos {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* Headroom so a 1.6x magnified mark never clips vertically. */
+    min-height: calc(var(--mark-h) * 2.1);
+    padding-inline: 4rem;
+    scroll-padding-inline: 4rem;
+    scrollbar-width: none;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 3.5rem,
+      #000 calc(100% - 3.5rem),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 3.5rem,
+      #000 calc(100% - 3.5rem),
+      transparent
+    );
+  }
+  .sponsors-bar .sponsors-logos::-webkit-scrollbar {
+    display: none;
+  }
+  .sponsors-bar .sponsors-logos > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    will-change: transform;
+  }
+}
+
+/* ── Dock mode (mobile): centre-spotlight travelling strip ──
+   Touch keeps the dock but swaps the cursor for the screen's centre as the
+   focus point. The roster still travels right to left (script.js drives the
+   loop), and whichever mark crosses the middle eases to a gentle ~1.14x,
+   full opacity and a few pixels of lift while marks near the edges dim back
+   down. The strip stays a native scroller, so swiping works with momentum
+   while auto-travel pauses. Reduced motion keeps the static wrapped layout. */
+@media (hover: none) and (pointer: coarse) and (max-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .sponsors-bar .sponsors-logos {
+    width: 100%;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    /* Roughly one row of three marks on a phone, widening on tablets. */
+    --mark-h: clamp(28px, 8vw, 42px);
+    --mark-w: clamp(96px, 26vw, 150px);
+    gap: clamp(1rem, 3vw, 1.5rem);
+    overflow-x: auto;
+    overflow-y: hidden;
+    /* Headroom for the lifted, enlarged centre mark. */
+    min-height: calc(var(--mark-h) * 1.9);
+    padding-inline: 2rem;
+    scrollbar-width: none;
+    /* Don't chain a horizontal swipe into the page scroll at either end. */
+    overscroll-behavior-x: contain;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 2.5rem,
+      #000 calc(100% - 2.5rem),
+      transparent
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent,
+      #000 2.5rem,
+      #000 calc(100% - 2.5rem),
+      transparent
+    );
+  }
+  .sponsors-bar .sponsors-logos::-webkit-scrollbar {
+    display: none;
+  }
+  .sponsors-bar .sponsors-logos > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    will-change: transform;
+  }
+  /* script.js writes opacity/filter/transform every frame; the base
+     transitions would double-ease it, and a sticky touch-hover lift would
+     fight the scripted transform. */
+  .sponsors-bar .sponsors-logos img {
+    transition: none;
+  }
+  .sponsors-bar .sponsors-logos img:hover {
+    transform: none;
+  }
+}
 
 /* ── SECTIONS ── */
 .section {
