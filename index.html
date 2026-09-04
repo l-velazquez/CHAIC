@@ -112,7 +112,10 @@
           playsinline
           poster="images/assets/ai-brain-opt.webp"
         >
-          <source src="images/videos/ai-brain-opt.mp4" type="video/mp4" />
+          <source
+            src="images/videos/ai-brain-opt-blurred.mp4"
+            type="video/mp4"
+          />
         </video>
         <img
           class="hero-brain-img"
@@ -128,19 +131,6 @@
           <span class="hero-sponsors-label">Event Sponsors</span>
           <div class="hero-sponsors-logos">
             <a
-              class="hero-sponsor hero-sponsor--amrc"
-              href="https://www.advanceresearchpr.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Advance Medical Research Center"
-            >
-              <img
-                src="images/logos/AMRC.webp"
-                alt="Advance Medical Research Center"
-                decoding="async"
-              />
-            </a>
-            <a
               class="hero-sponsor hero-sponsor--triple-s"
               href="https://salud.grupotriples.com/en/"
               target="_blank"
@@ -154,6 +144,19 @@
               />
             </a>
             <a
+              class="hero-sponsor hero-sponsor--amrc"
+              href="https://www.advanceresearchpr.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Advance Medical Research Center"
+            >
+              <img
+                src="images/logos/AMRC.webp"
+                alt="Advance Medical Research Center"
+                decoding="async"
+              />
+            </a>
+            <a
               class="hero-sponsor hero-sponsor--rcm"
               href="http://www.rcm.upr.edu/"
               target="_blank"
@@ -163,6 +166,19 @@
               <img
                 src="images/logos/RCM-UPR-Logo.webp"
                 alt="Recinto de Ciencias Médicas — Universidad de Puerto Rico"
+                decoding="async"
+              />
+            </a>
+            <a
+              class="hero-sponsor hero-sponsor--salud"
+              href="https://www.salud.pr.gov/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Departamento de Salud de Puerto Rico"
+            >
+              <img
+                src="images/logos/departamento-de-salud-puerto-rico.webp"
+                alt="Departamento de Salud de Puerto Rico"
                 decoding="async"
               />
             </a>
@@ -490,7 +506,14 @@
 
         <div class="about-grid">
           <div class="about-image-col reveal">
-            <video class="about-img" autoplay muted loop playsinline>
+            <video
+              class="about-img"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            >
               <source src="images/videos/about-opt.mp4" type="video/mp4" />
             </video>
           </div>
@@ -645,12 +668,18 @@
       </div>
     </section>
     <!-- Speakers -->
-    <section id="speakers" class="section-speakers-light">
+    <section
+      id="speakers"
+      class="section-speakers-light"
+      aria-labelledby="featured-speakers-title"
+    >
       <div class="speakers-layout">
         <!-- LEFT: intro + CTA -->
         <div class="speakers-intro">
           <span class="speakers-eyebrow">Speakers</span>
-          <h2 class="speakers-title">Featured Speakers</h2>
+          <h2 id="featured-speakers-title" class="speakers-title">
+            Featured Speakers
+          </h2>
           <p class="speakers-desc">
             Meet the global leaders and innovators shaping the future of AI in
             healthcare.
@@ -697,15 +726,21 @@
           </div>
         </div>
 
-        <!-- RIGHT: dual vertical marquee -->
-        <div class="speakers-marquee" aria-label="Featured speakers">
-          <div class="speakers-col speakers-col--up">
+        <!-- RIGHT: user-scrollable speaker rows -->
+        <div class="speakers-marquee">
+          <div
+            class="speakers-col speakers-col--up"
+            tabindex="0"
+            role="group"
+            aria-label="Featured speakers, row one"
+          >
             <div class="speakers-track" data-track="up">
               <article class="speaker-card">
                 <img
                   src="images/people/DrOrvil-profile.webp"
                   alt="Dr. Orvil Martínez Rivera"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Orvil Martínez Rivera</h3>
@@ -719,6 +754,7 @@
                   src="images/people/arlen-meyers.webp"
                   alt="Dr. Arlen Meyers"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Arlen Meyers</h3>
@@ -732,6 +768,7 @@
                   src="images/people/dr-anthony-chang.webp"
                   alt="Dr. Anthony Chang"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Anthony Chang</h3>
@@ -745,6 +782,7 @@
                   src="images/people/daniel-golden.webp"
                   alt="Daniel Golden"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Daniel Golden</h3>
@@ -753,13 +791,19 @@
               </article>
             </div>
           </div>
-          <div class="speakers-col speakers-col--down">
+          <div
+            class="speakers-col speakers-col--down"
+            tabindex="0"
+            role="group"
+            aria-label="Featured speakers, row two"
+          >
             <div class="speakers-track" data-track="down">
               <article class="speaker-card">
                 <img
                   src="images/people/yasmin-pedrogo.webp?v=20260831"
                   alt="Dra. Yasmin Pedrogo"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dra. Yasmin Pedrogo</h3>
@@ -773,6 +817,7 @@
                   src="images/people/dr-abiel-roche-lima.webp"
                   alt="Dr. Abiel Roche-Lima"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Abiel Roche-Lima</h3>
@@ -786,6 +831,7 @@
                   src="images/people/mariano-de-socarraz.webp"
                   alt="Mariano de Socarraz"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Mariano de Socarraz</h3>
@@ -799,6 +845,7 @@
                   src="images/people/dr-travis-zack.webp"
                   alt="Dr. Travis Zack"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Dr. Travis Zack</h3>
@@ -813,6 +860,7 @@
                   alt="Nesty Delgado, Ph.D., CAIC™️ (Dr. AI)"
                   class="speaker-photo--top"
                   loading="lazy"
+                  decoding="async"
                 />
                 <div class="speaker-card-overlay">
                   <h3 class="speaker-card-name">Nesty Delgado, Ph.D., CAIC™️ (Dr. AI)</h3>
@@ -2917,7 +2965,11 @@
       </div>
 
       <div class="sponsors-carousel-wrap">
-        <div class="sponsors-track">
+        <div
+          class="sponsors-track"
+          tabindex="0"
+          aria-label="Community partners, row one"
+        >
           <div class="sponsor-card">
             <a
               href="https://sopenet.org/"
@@ -3046,7 +3098,11 @@
             /></a>
           </div>
         </div>
-        <div class="sponsors-track sponsors-track--reverse">
+        <div
+          class="sponsors-track sponsors-track--reverse"
+          tabindex="0"
+          aria-label="Community partners, row two"
+        >
           <div class="sponsor-card">
             <a
               href="https://www.laboratoriosagradocorazon.com/"
@@ -3392,7 +3448,10 @@
             community.
           </p>
         </div>
-        <div id="soro-blog"></div>
+        <div
+          id="soro-blog"
+          data-embed-src="https://app.trysoro.com/api/embed/40ed19b5-41cf-4466-80de-457d5cf25217"
+        ></div>
       </div>
     </section>
 
@@ -3562,10 +3621,6 @@
     <script
       id="luma-checkout"
       src="https://embed.lu.ma/checkout-button.js"
-    ></script>
-    <script
-      src="https://app.trysoro.com/api/embed/40ed19b5-41cf-4466-80de-457d5cf25217"
-      defer
     ></script>
   </body>
 </html>
