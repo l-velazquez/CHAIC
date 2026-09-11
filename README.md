@@ -49,6 +49,32 @@ images/           Logos, speaker photos, videos, icons
 scripts/          Image optimization tooling
 ```
 
+## Blog publishing
+
+The Soro widget loads immediately on `/blog/`. Articles use
+`/blog/?post=ARTICLE-SLUG`, which works on GitHub Pages without a 404 fallback.
+Previously shared homepage `?post=` links redirect to the dedicated blog.
+The homepage keeps a Blog introduction and link; navigation across the site
+points to `/blog/`.
+
+New published articles appear automatically in the widget. After publishing or
+unpublishing posts, refresh the static article directory and sitemap:
+
+```bash
+python3 scripts/update-blog-index.py
+```
+
+Commit and deploy the updated `blog/index.html` and `sitemap.xml` along with
+the site. This command reads Soro's public embed and requires no credentials
+or third-party Python dependencies. It depends on the embed's article-data
+format and stops with an error if that format changes.
+
+`robots.txt` advertises the sitemap. After deploying, submit
+`https://www.chaicpr.com/sitemap.xml` in Google Search Console and inspect an
+article URL to check its rendered content. Full article bodies still depend
+on Soro and JavaScript; this integration does not generate static article HTML
+or guarantee indexing. Serve the project over HTTP when testing `/blog/` locally.
+
 ## Credits
 
 Site design and development by [Luis Velázquez](https://github.com/l-velazquez) · Congress organized by the Advanced Medical Research Center (AMRC).

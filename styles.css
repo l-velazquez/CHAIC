@@ -5727,3 +5727,10 @@ body.sponsor-modal-open {
     transform: none;
   }
 }
+
+/* Dedicated blog: content loads immediately, below the fixed navigation. */
+.blog-page-main { padding-top: 150px; min-height: 70vh; }
+.blog-page-main .section-header { margin-bottom: 32px; }
+.blog-article-links { display: grid; gap: 16px; padding-left: 24px; color: var(--ink-1); }
+.blog-article-links a { color: var(--navy-btn); text-decoration: underline; }
+@media (max-width: 767px) { .blog-page-main { padding-top: 110px; } }
