@@ -37,6 +37,7 @@ images/logos/laboratorio-sagrado-corazon.webp|contain|420|156
 images/logos/AI-med.webp|contain|420|156
 images/logos/pmtl-institute.webp|contain|420|156
 images/logos/triple-s.webp|contain|420|156
+images/logos/revista-msp.webp|contain|420|156
 images/logos/departamento-de-salud-puerto-rico.webp|contain|400|174
 images/logos/open-evidence.webp|contain|420|156
 images/logos/medgemma.webp|contain|420|156
@@ -66,6 +67,7 @@ images/people/dr-jamboor-vishwanatha.webp|cover|440|550
 images/people/DrOrvil-profile.webp|cover|440|550
 images/people/erick-brieva.webp|cover|440|550
 images/people/mariano-de-socarraz.webp|cover|440|550
+images/people/steven-nunez.webp|cover|440|550
 images/people/yasmin-pedrogo.webp|cover|440|550
 EOF
 )

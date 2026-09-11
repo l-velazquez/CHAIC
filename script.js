@@ -869,38 +869,6 @@ initSpeakersMarquee();
 
 initViewportMotion();
 
-/* ── Deferred blog embed ── */
-function initDeferredBlogEmbed() {
-  const container = document.getElementById('soro-blog');
-  const src = container?.dataset.embedSrc;
-  if (!container || !src) return;
-
-  let loaded = false;
-  function loadEmbed() {
-    if (loaded) return;
-    loaded = true;
-    const script = document.createElement('script');
-    script.src = src;
-    script.async = true;
-    document.body.appendChild(script);
-  }
-
-  if (!('IntersectionObserver' in window)) {
-    loadEmbed();
-    return;
-  }
-
-  const observer = new IntersectionObserver(entries => {
-    if (!entries.some(entry => entry.isIntersecting)) return;
-    observer.disconnect();
-    loadEmbed();
-  }, { rootMargin: '1200px 0px' });
-
-  observer.observe(container);
-}
-
-initDeferredBlogEmbed();
-
 /* ── Agenda day tabs with sliding pill + fade swap + stats update ── */
 const dayTabs = document.querySelector('.agenda-day-tabs');
 const dayButtons = document.querySelectorAll('.agenda-day-btn');
