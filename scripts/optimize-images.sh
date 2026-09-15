@@ -27,6 +27,7 @@ images/logos/CHAIC-Logo.webp|cover|100|100
 images/logos/chaic-icon-3.webp|cover|88|88
 images/logos/chaic-agenda-profile-pic.webp|cover|88|88
 images/logos/AMRC.webp|cover|168|168
+images/logos/AMRC-onlight.webp|contain|160|150
 images/logos/pr-usa-chamber-of-commerce.webp|cover|156|156
 images/logos/puerto-rico-ai-institute-and-consortium.webp|cover|120|120
 images/logos/RCM-UPR-Logo.webp|contain|336|312
@@ -68,6 +69,14 @@ images/people/DrOrvil-profile.webp|cover|440|550
 images/people/erick-brieva.webp|cover|440|550
 images/people/mariano-de-socarraz.webp|cover|440|550
 images/people/steven-nunez.webp|cover|440|550
+images/people/steven-nunez-avatar.webp|cover|68|68
+images/people/nelson-ortiz-card.webp|cover|440|550
+images/people/eddie-perez-ruberte-card.webp|cover|440|550
+images/people/nelson-ortiz.webp|cover|68|68
+images/people/eddie-perez-ruberte.webp|cover|68|68
+images/people/steven-nunez-square.webp|cover|440|440
+images/people/nelson-ortiz-square.webp|cover|440|440
+images/people/eddie-perez-ruberte-square.webp|cover|440|440
 images/people/yasmin-pedrogo.webp|cover|440|550
 EOF
 )

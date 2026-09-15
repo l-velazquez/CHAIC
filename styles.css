@@ -1092,161 +1092,156 @@ html.early-bird-active .tickets-early-bird-note {
   transform: translateX(3px);
 }
 
-/* Compact event-sponsor lockup (right side of hero) */
+/* ── Event-sponsor lockup (hero, right of the headline) ──────────────
+   Six marks whose aspects run from 1:1 to 6:1, four of which ship with a
+   baked-in white background. Two rules keep them reading as one set:
+
+   1. Every mark sits on the same white tile. The four baked-white assets
+      blend into it seamlessly, and the two transparent ones (RCM's seal,
+      AMRC's recoloured wordmark) get the light ground they were drawn for.
+   2. One unit — --u — drives every size. Per-mark --mh/--mw are multiples
+      of it, precomputed as u * r^-0.25 and u * r^0.25 (r = aspect), which
+      lands between equal-height and equal-area sizing: equal-height lets a
+      6:1 bar dwarf a square, equal-area shrinks it until its type is
+      unreadable. A breakpoint retunes the row by changing --u alone.       */
+/* No panel chrome: the marks already sit on their own light ground, so a
+   dark card around them only nested a box in a box in a box. The label and
+   the plaque below it carry the block on their own. */
 .hero-sponsors {
   position: absolute;
   right: 4rem;
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  width: min(430px, calc(50% - 5rem));
-  padding: 0.9rem 1rem 1rem;
-  background: rgba(5, 13, 30, 0.62);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 18px;
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  box-shadow:
-    0 18px 45px -24px rgba(0, 0, 0, 0.8),
-    inset 0 1px rgba(255, 255, 255, 0.05);
+  width: fit-content;
+  max-width: min(520px, calc(50% - 4rem));
 }
 
 .hero-sponsors-label {
-  display: block;
-  color: rgba(255, 255, 255, 0.62);
-  font-size: 0.62rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.6rem;
   font-weight: 700;
-  letter-spacing: 0.18em;
-  text-align: center;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
+  white-space: nowrap;
+}
+/* Same hairline flanking as .sponsors-label, so the two sponsor blocks in
+   the hero read as one family. */
+.hero-sponsors-label::before,
+.hero-sponsors-label::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(255, 255, 255, 0.22),
+    transparent
+  );
 }
 
+/* One sheet, not six cards. The 1px gap shows the grid's own background
+   through as hairline rules, so the marks are separated without each one
+   getting its own border, radius and drop shadow. */
 .hero-sponsors-logos {
+  --u: 72px;
+  --pad: 0.7rem;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: center;
-  margin-top: 0.65rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(12, 26, 50, 0.13);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-top: 0.8rem;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.28),
+    0 30px 60px -30px rgba(0, 0, 0, 0.9);
 }
 
 .hero-sponsor {
   min-width: 0;
-  height: 76px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0.25rem 0.8rem;
+  padding: var(--pad);
+  /* #fff exactly: the baked-white assets must not show a seam against it. */
+  background: #fff;
+  transition: background-color 0.25s var(--ease);
 }
 
-.hero-sponsor:nth-child(even) {
-  border-left: 1px solid rgba(255, 255, 255, 0.14);
+/* Row height follows the tallest mark the row can hold, not each mark, so
+   tiles align even though the art inside them does not. */
+.hero-sponsor--amrc,
+.hero-sponsor--triple-s,
+.hero-sponsor--rcm,
+.hero-sponsor--salud {
+  min-height: calc(var(--u) * 1.12 + var(--pad) * 2);
 }
-
-.hero-sponsor:nth-child(n + 3) {
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
+.hero-sponsor--msp {
+  min-height: calc(var(--u) * 0.64 + var(--pad) * 2);
+}
+.hero-sponsor--trust {
+  min-height: calc(var(--u) * 0.9 + var(--pad) * 2);
 }
 
 .hero-sponsor img {
   display: block;
   width: auto;
-  max-width: 100%;
+  height: auto;
+  /* min() so a mark still fits when the tile is narrower than its target. */
+  max-width: min(100%, calc(var(--u) * var(--mw)));
+  max-height: calc(var(--u) * var(--mh));
   object-fit: contain;
-  filter: drop-shadow(0 5px 14px rgba(0, 0, 0, 0.28));
-  transition:
-    opacity 0.25s,
-    transform 0.25s var(--ease);
+  transition: transform 0.25s var(--ease);
 }
 
-.hero-sponsor--amrc img {
-  height: 84px;
-}
+.hero-sponsor--amrc     { --mh: 1.02; --mw: 1.09; }  /* aspect 1.06 */
+.hero-sponsor--triple-s { --mh: 0.78; --mw: 2.34; }  /* aspect 3.00 */
+.hero-sponsor--rcm      { --mh: 1.12; --mw: 1.21; }  /* aspect 1.07 — seal
+                              carries ring type, so it earns extra size */
+.hero-sponsor--salud    { --mh: 1.00; --mw: 1.52; }  /* aspect 1.51 */
+.hero-sponsor--trust    { --mh: 0.90; --mw: 2.72; }  /* aspect 3.03 — three
+                              stacked lines, so width is set from the type
+                              block, not the lockup's overall box */
+.hero-sponsor--msp      { --mh: 0.62; --mw: 3.25; }  /* aspect 5.23 */
 
-.hero-sponsor--triple-s img {
-  max-height: 54px;
-  border-radius: 9px;
-}
-
-.hero-sponsor--rcm img {
-  max-height: 82px;
-}
-
-.hero-sponsor--salud img {
-  max-height: 58px;
-}
-
-.hero-sponsor--eihub {
-  grid-column: span 2;
-}
-
-.hero-sponsor--eihub img {
-  max-width: 100%;
-  max-height: 56px;
-  border-radius: 9px;
-}
-
+/* The two ultra-wide lockups take the full row; at half width their type
+   would clamp to about 20px tall and stop being readable. */
+.hero-sponsor--trust,
 .hero-sponsor--msp {
   grid-column: span 2;
-  border-left: 0;
 }
 
-.hero-sponsor--msp img {
-  max-width: 100%;
-  max-height: 56px;
-  border-radius: 9px;
+/* The cell can't lift without tearing the sheet, so hover reads as a wash
+   under the mark plus a nudge of the mark itself. */
+.hero-sponsor:hover {
+  background: #f2f6fc;
 }
-
 .hero-sponsor:hover img {
-  opacity: 0.9;
-  transform: translateY(-2px);
+  transform: scale(1.045);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-sponsor,
+  .hero-sponsor img {
+    transition: none;
+  }
+  .hero-sponsor:hover img {
+    transform: none;
+  }
 }
 
 @media (min-width: 769px) {
   .hero-sponsors {
-    top: 60%;
-    width: min(500px, calc(50% - 3rem));
-    padding: 0;
-    background: transparent;
-    border: 0;
-    border-radius: 0;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    box-shadow: none;
-  }
-  .hero-sponsors-label {
-    color: rgba(255, 255, 255, 0.72);
-    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.65);
+    top: 58%;
+    max-width: min(560px, calc(50% - 3rem));
   }
   .hero-sponsors-logos {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-  }
-  .hero-sponsor {
-    height: clamp(124px, 9vw, 140px);
-    padding: 0.25rem 1rem;
-  }
-  .hero-sponsor:nth-child(even) {
-    border-left: 0;
-  }
-  .hero-sponsor:nth-child(n + 2) {
-    border-top: 0;
-  }
-  .hero-sponsor--amrc img {
-    height: clamp(108px, 9vw, 132px);
-  }
-  .hero-sponsor--triple-s img {
-    max-height: clamp(60px, 5vw, 74px);
-  }
-  .hero-sponsor--rcm img {
-    max-height: clamp(112px, 9.5vw, 136px);
-  }
-  .hero-sponsor--salud img {
-    max-height: clamp(74px, 6vw, 90px);
-  }
-  .hero-sponsor--eihub img {
-    max-height: 72px;
-  }
-  .hero-sponsor--msp img {
-    max-height: 72px;
+    --u: clamp(62px, 5.6vw, 92px);
+    --pad: 0.95rem;
   }
 }
 
@@ -2905,9 +2900,11 @@ html.early-bird-active .tickets-early-bird-note {
   max-height: 64px;
 }
 
-.event-sponsors-grid .sponsor-card--eihub img {
-  max-width: min(280px, 100%);
-  max-height: 72px;
+/* Three stacked type lines beside the mark: capped on height rather than
+   width, so the smallest line still clears the other marks' x-height. */
+.event-sponsors-grid .sponsor-card--trust img {
+  max-width: min(260px, 100%);
+  max-height: 96px;
 }
 
 .partner-heading {
@@ -3878,7 +3875,11 @@ body.sponsor-modal-open {
   }
   .hero-sponsors {
     right: 2.5rem;
-    width: min(350px, calc(50% - 3rem));
+    max-width: min(440px, calc(50% - 2rem));
+  }
+  .hero-sponsors-logos {
+    --u: clamp(56px, 7.4vw, 78px);
+    --pad: 0.8rem;
   }
   .cd-num {
     font-size: 3rem;
@@ -4009,43 +4010,14 @@ body.sponsor-modal-open {
     right: auto;
     transform: none;
     order: 3;
-    width: 100%;
-    margin-top: 0.25rem;
-    padding: 0.75rem 0.9rem 0.85rem;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0.5rem auto 0;
   }
   .hero-sponsors-logos {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-width: 380px;
-    margin: 0.65rem auto 0;
-  }
-  .hero-sponsor {
-    height: 62px;
-    padding-inline: 0.45rem;
-  }
-  .hero-sponsor:nth-child(odd),
-  .hero-sponsor--msp:nth-child(even) {
-    border-left: 0;
-  }
-  .hero-sponsor:nth-child(n + 3) {
-    border-top: 1px solid rgba(255, 255, 255, 0.14);
-  }
-  .hero-sponsor--amrc img {
-    height: 60px;
-  }
-  .hero-sponsor--triple-s img {
-    max-height: 44px;
-  }
-  .hero-sponsor--rcm img {
-    max-height: 58px;
-  }
-  .hero-sponsor--salud img {
-    max-height: 54px;
-  }
-  .hero-sponsor--eihub img {
-    max-height: 52px;
-  }
-  .hero-sponsor--msp img {
-    max-height: 52px;
+    --u: clamp(56px, 17.5vw, 88px);
+    --pad: 0.75rem;
+    margin-top: 0.7rem;
   }
   /* Hero */
   .hero-body {
@@ -4273,10 +4245,13 @@ body.sponsor-modal-open {
     max-width: min(260px, 100%);
     max-height: 72px;
   }
-  .event-sponsors-grid .sponsor-card--msp img,
-  .event-sponsors-grid .sponsor-card--eihub img {
+  .event-sponsors-grid .sponsor-card--msp img {
     max-width: min(300px, 100%);
     max-height: 60px;
+  }
+  .event-sponsors-grid .sponsor-card--trust img {
+    max-width: min(280px, 100%);
+    max-height: 80px;
   }
   .event-sponsors-grid .sponsor-tier-badge {
     font-size: 0.58rem;
