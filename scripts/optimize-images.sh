@@ -46,6 +46,7 @@ images/logos/google.webp|contain|176|176
 images/logos/nabla.webp|contain|420|156
 images/logos/himss.webp|contain|176|176
 images/logos/parallel18.webp|contain|420|156
+images/logos/new-era-compounding.webp|contain|420|156
 images/logos/UPenn.webp|cover|68|68
 images/logos/upenn-full.webp|contain|420|156
 images/people/DrOrvil-profile-small.webp|cover|68|68
