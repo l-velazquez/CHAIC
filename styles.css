@@ -1186,6 +1186,9 @@ html.early-bird-active .tickets-early-bird-note {
 .hero-sponsor--trust {
   min-height: calc(var(--u) * 0.9 + var(--pad) * 2);
 }
+.hero-sponsor--newera {
+  min-height: calc(var(--u) * 0.95 + var(--pad) * 2);
+}
 
 .hero-sponsor img {
   display: block;
@@ -1207,11 +1210,14 @@ html.early-bird-active .tickets-early-bird-note {
                               stacked lines, so width is set from the type
                               block, not the lockup's overall box */
 .hero-sponsor--msp      { --mh: 0.62; --mw: 3.25; }  /* aspect 5.23 */
+.hero-sponsor--newera   { --mh: 0.95; --mw: 1.79; }  /* aspect 1.83 */
 
 /* The two ultra-wide lockups take the full row; at half width their type
-   would clamp to about 20px tall and stop being readable. */
+   would clamp to about 20px tall and stop being readable. New Era joins
+   them here too, since it's the row's odd one out otherwise. */
 .hero-sponsor--trust,
-.hero-sponsor--msp {
+.hero-sponsor--msp,
+.hero-sponsor--newera {
   grid-column: span 2;
 }
 
