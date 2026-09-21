@@ -905,6 +905,58 @@ html.early-bird-active .tickets-early-bird-note {
   font-variant-numeric: tabular-nums;
 }
 
+/* Transitions.dev-inspired number pop-in */
+.t-digit-group {
+  --digit-dur: 720ms;
+  --digit-distance: 5px;
+  --digit-stagger: 70ms;
+  --digit-blur: 3px;
+  --digit-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --digit-dir-x: 0;
+  --digit-dir-y: 1;
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.t-digit {
+  display: inline-block;
+  will-change: transform, opacity, filter;
+}
+
+.t-digit-group.is-animating .t-digit.is-changing {
+  animation: t-digit-pop-in var(--digit-dur) var(--digit-ease) both;
+}
+
+.t-digit-group.is-animating .t-digit.is-changing[data-stagger="1"] {
+  animation-delay: var(--digit-stagger);
+}
+
+.t-digit-group.is-animating .t-digit.is-changing[data-stagger="2"] {
+  animation-delay: calc(var(--digit-stagger) * 2);
+}
+
+@keyframes t-digit-pop-in {
+  from {
+    transform: translate(
+      calc(var(--digit-distance) * var(--digit-dir-x)),
+      calc(var(--digit-distance) * var(--digit-dir-y))
+    );
+    opacity: 0.25;
+    filter: blur(var(--digit-blur));
+  }
+  to {
+    transform: translate(0, 0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-digit-group .t-digit {
+    animation: none !important;
+  }
+}
+
 .cd-label {
   font-size: 0.62rem;
   font-weight: 600;
