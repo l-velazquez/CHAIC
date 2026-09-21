@@ -75,6 +75,7 @@ images/people/steven-nunez-avatar.webp|cover|68|68
 images/people/nelson-ortiz-card.webp|cover|440|550
 images/people/eddie-perez-ruberte-card.webp|cover|440|550
 images/people/dr-william-felix.webp|cover|440|550
+images/people/ana-fuertes.webp|cover|440|550
 images/people/jose-aponte.webp|cover|440|550
 images/people/nelson-ortiz.webp|cover|68|68
 images/people/eddie-perez-ruberte.webp|cover|68|68
