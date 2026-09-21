@@ -72,6 +72,34 @@ function pad(n, len) {
   return String(n).padStart(len, '0');
 }
 
+function renderAnimatedDigits(el, value) {
+  if (!el || el.dataset.digitValue === value) return;
+
+  const previousValue = el.dataset.digitValue || '';
+  let changedDigitIndex = 0;
+  const digits = Array.from(value, (character, index) => {
+    const digit = document.createElement('span');
+    digit.className = 't-digit';
+    digit.textContent = character;
+
+    if (previousValue[index] !== character) {
+      digit.classList.add('is-changing');
+      if (changedDigitIndex > 0) {
+        digit.dataset.stagger = String(changedDigitIndex);
+      }
+      changedDigitIndex += 1;
+    }
+
+    return digit;
+  });
+
+  el.classList.remove('is-animating');
+  el.replaceChildren(...digits);
+  el.dataset.digitValue = value;
+  void el.offsetWidth;
+  el.classList.add('t-digit-group', 'is-animating');
+}
+
 /* ── Early-bird promotion (ends August 1 at 12:00 a.m. AST) ── */
 const promotion = window.CHAICPromotion;
 const promotionCountdown = document.querySelector('[data-early-bird-countdown]');
@@ -95,7 +123,7 @@ function renderPromotionCountdown(nowMs) {
 
   Object.entries(values).forEach(([selector, value]) => {
     const el = promotionCountdown.querySelector(selector);
-    if (el) el.textContent = value;
+    renderAnimatedDigits(el, value);
   });
 }
 
@@ -148,10 +176,10 @@ function tick() {
   const diff = TARGET - Date.now();
 
   if (diff <= 0) {
-    elDays.textContent    = '000';
-    elHours.textContent   = '00';
-    elMinutes.textContent = '00';
-    elSeconds.textContent = '00';
+    renderAnimatedDigits(elDays, '000');
+    renderAnimatedDigits(elHours, '00');
+    renderAnimatedDigits(elMinutes, '00');
+    renderAnimatedDigits(elSeconds, '00');
     return;
   }
 
@@ -160,10 +188,10 @@ function tick() {
   const minutes = Math.floor((diff % 3600000)  / 60000);
   const seconds = Math.floor((diff % 60000)    / 1000);
 
-  elDays.textContent    = pad(days, 3);
-  elHours.textContent   = pad(hours, 2);
-  elMinutes.textContent = pad(minutes, 2);
-  elSeconds.textContent = pad(seconds, 2);
+  renderAnimatedDigits(elDays, pad(days, 3));
+  renderAnimatedDigits(elHours, pad(hours, 2));
+  renderAnimatedDigits(elMinutes, pad(minutes, 2));
+  renderAnimatedDigits(elSeconds, pad(seconds, 2));
 }
 
 if (elDays && elHours && elMinutes && elSeconds) {
