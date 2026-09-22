@@ -50,7 +50,7 @@ images/logos/new-era-compounding.webp|contain|420|156
 images/logos/UPenn.webp|cover|68|68
 images/logos/upenn-full.webp|contain|420|156
 images/people/DrOrvil-profile-small.webp|cover|68|68
-images/people/dr-alfonso-limon.webp|cover|68|68
+images/people/dr-alfonso-limon.webp|cover|440|440
 images/people/yasmin-pedrogo-profile.webp|cover|68|68
 images/people/arlen-meyers.webp|cover|440|550
 images/people/dr-abiel-roche-lima.webp|cover|440|550
