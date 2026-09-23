@@ -1145,12 +1145,12 @@ html.early-bird-active .tickets-early-bird-note {
 }
 
 /* ── Event-sponsor lockup (hero, right of the headline) ──────────────
-   Six marks whose aspects run from 1:1 to 6:1, four of which ship with a
+   Eight marks whose aspects run from 1:1 to 6:1, several of which ship with a
    baked-in white background. Two rules keep them reading as one set:
 
-   1. Every mark sits on the same white tile. The four baked-white assets
-      blend into it seamlessly, and the two transparent ones (RCM's seal,
-      AMRC's recoloured wordmark) get the light ground they were drawn for.
+   1. Supporting marks sit on the same white tile. ABAIM gets a dark lead-
+      sponsor band so its horizontal white lockup stays crisp and establishes
+      the sponsor hierarchy before the supporting grid.
    2. One unit — --u — drives every size. Per-mark --mh/--mw are multiples
       of it, precomputed as u * r^-0.25 and u * r^0.25 (r = aspect), which
       lands between equal-height and equal-area sizing: equal-height lets a
@@ -1165,8 +1165,7 @@ html.early-bird-active .tickets-early-bird-note {
   top: 50%;
   transform: translateY(-50%);
   z-index: 20;
-  width: fit-content;
-  max-width: min(520px, calc(50% - 4rem));
+  width: min(520px, calc(50% - 4rem));
 }
 
 .hero-sponsors-label {
@@ -1195,14 +1194,17 @@ html.early-bird-active .tickets-early-bird-note {
   );
 }
 
-/* One sheet, not six cards. The 1px gap shows the grid's own background
+/* One compact sheet, not a tall stack of cards. A 12-column grid fits the
+   four compact marks and three wider marks into two supporting rows, keeping
+   the entire sheet inside .hero-body and clear of the collaborator rail.
+   The 1px gap shows the grid's own background
    through as hairline rules, so the marks are separated without each one
    getting its own border, radius and drop shadow. */
 .hero-sponsors-logos {
   --u: 72px;
   --pad: 0.7rem;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1px;
   background: rgba(12, 26, 50, 0.13);
   border-radius: 18px;
@@ -1230,19 +1232,17 @@ html.early-bird-active .tickets-early-bird-note {
 .hero-sponsor--triple-s,
 .hero-sponsor--rcm,
 .hero-sponsor--salud {
-  min-height: calc(var(--u) * 1.12 + var(--pad) * 2);
+  grid-column: span 3;
+  min-height: calc(var(--u) * 0.92 + var(--pad) * 2);
 }
 .hero-sponsor--abaim {
   min-height: calc(var(--u) * 1.12 + var(--pad) * 2);
 }
-.hero-sponsor--msp {
-  min-height: calc(var(--u) * 0.64 + var(--pad) * 2);
-}
-.hero-sponsor--trust {
-  min-height: calc(var(--u) * 0.9 + var(--pad) * 2);
-}
+.hero-sponsor--msp,
+.hero-sponsor--trust,
 .hero-sponsor--newera {
-  min-height: calc(var(--u) * 0.95 + var(--pad) * 2);
+  grid-column: span 4;
+  min-height: calc(var(--u) * 0.76 + var(--pad) * 2);
 }
 
 .hero-sponsor img {
@@ -1268,23 +1268,60 @@ html.early-bird-active .tickets-early-bird-note {
 .hero-sponsor--msp      { --mh: 0.62; --mw: 3.25; }  /* aspect 5.23 */
 .hero-sponsor--newera   { --mh: 0.95; --mw: 1.79; }  /* aspect 1.83 */
 
-/* The two ultra-wide lockups take the full row; at half width their type
-   would clamp to about 20px tall and stop being readable. New Era joins
-   them here too, since it's the row's odd one out otherwise. */
-.hero-sponsor--trust,
-.hero-sponsor--msp,
-.hero-sponsor--newera {
-  grid-column: span 2;
+.hero-sponsor--abaim {
+  grid-column: span 12;
+  position: relative;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding-block: calc(var(--pad) * 1.15);
+  background:
+    radial-gradient(circle at 12% 15%, rgba(17, 174, 218, 0.2), transparent 32%),
+    radial-gradient(circle at 88% 90%, rgba(235, 126, 161, 0.17), transparent 34%),
+    linear-gradient(135deg, #07162c 0%, #0b2342 55%, #102b4d 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
 }
 
-.hero-sponsor--abaim {
-  grid-column: span 2;
+.hero-sponsor--abaim::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.055),
+    transparent
+  );
+}
+
+.hero-sponsor--abaim img {
+  position: relative;
+  width: min(82%, calc(var(--u) * 3.6));
+  max-width: none;
+  max-height: calc(var(--u) * 0.82);
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.22));
+}
+
+.hero-sponsor-kicker {
+  position: relative;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: clamp(0.5rem, 0.7vw, 0.62rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 /* The cell can't lift without tearing the sheet, so hover reads as a wash
    under the mark plus a nudge of the mark itself. */
 .hero-sponsor:hover {
   background: #f2f6fc;
+}
+.hero-sponsor--abaim:hover {
+  background:
+    radial-gradient(circle at 12% 15%, rgba(17, 174, 218, 0.26), transparent 32%),
+    radial-gradient(circle at 88% 90%, rgba(235, 126, 161, 0.22), transparent 34%),
+    linear-gradient(135deg, #0a1c36 0%, #0e294b 55%, #143458 100%);
 }
 .hero-sponsor:hover img {
   transform: scale(1.045);
@@ -1303,7 +1340,7 @@ html.early-bird-active .tickets-early-bird-note {
 @media (min-width: 769px) {
   .hero-sponsors {
     top: 58%;
-    max-width: min(560px, calc(50% - 3rem));
+    width: min(560px, calc(50% - 3rem));
   }
   .hero-sponsors-logos {
     --u: clamp(62px, 5.6vw, 92px);
@@ -3951,7 +3988,7 @@ body.sponsor-modal-open {
   }
   .hero-sponsors {
     right: 2.5rem;
-    max-width: min(440px, calc(50% - 2rem));
+    width: min(440px, calc(50% - 2rem));
   }
   .hero-sponsors-logos {
     --u: clamp(56px, 7.4vw, 78px);
@@ -4086,14 +4123,27 @@ body.sponsor-modal-open {
     right: auto;
     transform: none;
     order: 3;
-    width: fit-content;
+    width: min(100%, 560px);
     max-width: 100%;
     margin: 0.5rem auto 0;
   }
   .hero-sponsors-logos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     --u: clamp(56px, 17.5vw, 88px);
     --pad: 0.75rem;
     margin-top: 0.7rem;
+  }
+  .hero-sponsor--abaim,
+  .hero-sponsor--trust,
+  .hero-sponsor--msp,
+  .hero-sponsor--newera {
+    grid-column: span 2;
+  }
+  .hero-sponsor--amrc,
+  .hero-sponsor--triple-s,
+  .hero-sponsor--rcm,
+  .hero-sponsor--salud {
+    grid-column: span 1;
   }
   /* Hero */
   .hero-body {
