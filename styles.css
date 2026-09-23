@@ -2953,6 +2953,16 @@ html.early-bird-active .tickets-early-bird-note {
   max-height: 90px;
 }
 
+.event-sponsors-grid .sponsor-card--primary {
+  grid-column: 1 / -1;
+  height: 180px;
+}
+
+.event-sponsors-grid .sponsor-card--abaim img {
+  max-width: min(420px, 100%);
+  max-height: 96px;
+}
+
 .event-sponsors-grid .sponsor-card--msp img {
   max-width: min(280px, 100%);
   max-height: 64px;
@@ -4299,9 +4309,16 @@ body.sponsor-modal-open {
     height: 112px;
     padding: 1.1rem 1rem;
   }
+  .event-sponsors-grid .sponsor-card--primary {
+    height: 132px;
+  }
   .event-sponsors-grid .sponsor-card img {
     max-width: min(260px, 100%);
     max-height: 72px;
+  }
+  .event-sponsors-grid .sponsor-card--abaim img {
+    max-width: min(360px, 100%);
+    max-height: 84px;
   }
   .event-sponsors-grid .sponsor-card--msp img {
     max-width: min(300px, 100%);
