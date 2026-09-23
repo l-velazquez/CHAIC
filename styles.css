@@ -1232,6 +1232,9 @@ html.early-bird-active .tickets-early-bird-note {
 .hero-sponsor--salud {
   min-height: calc(var(--u) * 1.12 + var(--pad) * 2);
 }
+.hero-sponsor--abaim {
+  min-height: calc(var(--u) * 1.12 + var(--pad) * 2);
+}
 .hero-sponsor--msp {
   min-height: calc(var(--u) * 0.64 + var(--pad) * 2);
 }
@@ -1254,6 +1257,7 @@ html.early-bird-active .tickets-early-bird-note {
 }
 
 .hero-sponsor--amrc     { --mh: 1.02; --mw: 1.09; }  /* aspect 1.06 */
+.hero-sponsor--abaim    { --mh: 1.12; --mw: 1.12; }  /* compact square mark */
 .hero-sponsor--triple-s { --mh: 0.78; --mw: 2.34; }  /* aspect 3.00 */
 .hero-sponsor--rcm      { --mh: 1.12; --mw: 1.21; }  /* aspect 1.07 — seal
                               carries ring type, so it earns extra size */
@@ -1270,6 +1274,10 @@ html.early-bird-active .tickets-early-bird-note {
 .hero-sponsor--trust,
 .hero-sponsor--msp,
 .hero-sponsor--newera {
+  grid-column: span 2;
+}
+
+.hero-sponsor--abaim {
   grid-column: span 2;
 }
 
