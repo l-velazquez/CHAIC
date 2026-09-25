@@ -60,9 +60,15 @@ window.addEventListener('pageshow', () => {
   document.documentElement.classList.remove('is-page-leaving');
 });
 
-/* ── Countdown to September 25, 2026 ── */
-const TARGET = new Date('2026-09-25T00:00:00');
+/* ── Congress dates use Puerto Rico time (AST, UTC−4) for every visitor ── */
+const EVENT_START = Date.parse('2026-09-25T07:00:00-04:00');
+const DAY_1_END = Date.parse('2026-09-25T19:10:00-04:00');
+const DAY_2_START = Date.parse('2026-09-26T07:00:00-04:00');
+const EVENT_END = Date.parse('2026-09-26T18:25:00-04:00');
+const TARGET = EVENT_START;
 
+const countdownEl = document.querySelector('.countdown');
+const eventStatus = document.getElementById('event-status');
 const elDays    = document.getElementById('cd-days');
 const elHours   = document.getElementById('cd-hours');
 const elMinutes = document.getElementById('cd-minutes');
@@ -172,16 +178,47 @@ document.querySelectorAll('[data-early-bird-cta]').forEach(cta => {
   });
 });
 
-function tick() {
-  const diff = TARGET - Date.now();
+let lastEventPhase = null;
+function eventPhase(nowMs) {
+  if (nowMs < EVENT_START) return 'before';
+  if (nowMs < DAY_1_END) return 'day1';
+  if (nowMs < DAY_2_START) return 'between';
+  if (nowMs < EVENT_END) return 'day2';
+  return 'ended';
+}
 
-  if (diff <= 0) {
-    renderAnimatedDigits(elDays, '000');
-    renderAnimatedDigits(elHours, '00');
-    renderAnimatedDigits(elMinutes, '00');
-    renderAnimatedDigits(elSeconds, '00');
-    return;
-  }
+function renderEventStatus(nowMs) {
+  if (!eventStatus || !countdownEl) return;
+  const phase = eventPhase(nowMs);
+  if (phase === lastEventPhase) return;
+  lastEventPhase = phase;
+
+  countdownEl.hidden = phase !== 'before';
+  eventStatus.hidden = phase === 'before';
+  document.documentElement.classList.toggle('event-active', phase !== 'before');
+  document.documentElement.classList.toggle('event-ended', phase === 'ended');
+  const registerButton = document.querySelector('.hero-cta-row .btn-register');
+  if (registerButton) registerButton.hidden = phase === 'ended';
+  if (phase === 'before') return;
+
+  const messages = {
+    day1: ['Happening today · Day 1', 'The September 25 program is underway at the Centro de Convenciones de Puerto Rico.', "View today's agenda"],
+    between: ['Day 2 is next', 'The September 26 program begins at 7:00 AM Puerto Rico time.', 'View Day 2 agenda'],
+    day2: ['Happening today · Day 2', 'The September 26 program is underway at the Centro de Convenciones de Puerto Rico.', "View today's agenda"],
+    ended: ['CHAIC 2026 has concluded', 'Thank you for joining us in San Juan.', 'Explore the program'],
+  };
+  const [label, copy, agendaLabel] = messages[phase];
+  document.getElementById('event-status-label').textContent = label;
+  document.getElementById('event-status-copy').textContent = copy;
+  document.getElementById('event-status-agenda').firstChild.textContent = `${agendaLabel} `;
+  eventStatus.querySelector('.event-status-links a:last-child').hidden = phase === 'ended';
+}
+
+function tick() {
+  const nowMs = Date.now();
+  renderEventStatus(nowMs);
+  const diff = TARGET - nowMs;
+  if (diff <= 0) return;
 
   const days    = Math.floor(diff / 86400000);
   const hours   = Math.floor((diff % 86400000) / 3600000);
@@ -966,7 +1003,7 @@ function renderDayStats(stats) {
   `;
 }
 
-function switchDay(targetDay, label, accent) {
+function switchDay(targetDay, label, accent, immediate = false) {
   dayButtons.forEach(b => {
     const active = b.dataset.day === targetDay;
     b.classList.toggle('active', active);
@@ -1000,7 +1037,7 @@ function switchDay(targetDay, label, accent) {
     next.classList.remove('is-fading');
   };
 
-  if (current && !prefersReducedMotion) {
+  if (current && !prefersReducedMotion && !immediate) {
     current.classList.add('is-fading');
     setTimeout(swap, 180);
   } else {
@@ -1008,14 +1045,39 @@ function switchDay(targetDay, label, accent) {
   }
 }
 
+let agendaDayManuallySelected = false;
 dayButtons.forEach(btn => {
   btn.addEventListener('click', () => {
+    agendaDayManuallySelected = true;
     switchDay(btn.dataset.day, btn.dataset.label, btn.dataset.accent);
   });
 });
 
-// Initialize stats on load
-renderDayStats(computeDayStats('day1'));
+function syncAgendaDay() {
+  if (!dayTabs || agendaDayManuallySelected) return;
+  const dayId = Date.now() >= DAY_1_END ? 'day2' : 'day1';
+  if (dayTabs.dataset.active === dayId) {
+    renderDayStats(computeDayStats(dayId));
+    return;
+  }
+  const button = [...dayButtons].find(btn => btn.dataset.day === dayId);
+  if (button) switchDay(dayId, button.dataset.label, button.dataset.accent, true);
+}
+
+syncAgendaDay();
+document.getElementById('event-status-agenda')?.addEventListener('click', () => {
+  const dayId = Date.now() >= DAY_1_END ? 'day2' : 'day1';
+  const button = [...dayButtons].find(btn => btn.dataset.day === dayId);
+  if (!button) return;
+  agendaDayManuallySelected = true;
+  switchDay(dayId, button.dataset.label, button.dataset.accent, true);
+});
+if (dayTabs) {
+  window.setInterval(syncAgendaDay, 60000);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') syncAgendaDay();
+  });
+}
 
 /* ── Scroll-reveal observer ── */
 const revealEls = document.querySelectorAll('.reveal, .reveal-grid > *');

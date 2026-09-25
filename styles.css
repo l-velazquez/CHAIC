@@ -868,6 +868,75 @@ html.early-bird-active .tickets-early-bird-note {
   align-items: stretch;
 }
 
+.countdown[hidden],
+.event-status[hidden],
+.event-status-links a[hidden] {
+  display: none;
+}
+
+.event-status {
+  width: min(100%, 470px);
+  padding: 1.25rem 1.4rem;
+  border: 1px solid rgba(34, 211, 238, 0.38);
+  border-radius: 16px;
+  background: rgba(5, 19, 37, 0.84);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: #fff;
+}
+
+.event-status-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--accent-2);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.event-status-dot {
+  width: 9px;
+  height: 9px;
+  flex: none;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 0 5px rgba(34, 211, 238, 0.14);
+}
+
+.event-status p {
+  margin: 0.7rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.event-status-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.5rem;
+  margin-top: 1rem;
+}
+
+.event-status-links a {
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-color: var(--accent-2);
+  text-underline-offset: 4px;
+}
+
+.event-status-links a:hover {
+  color: var(--accent-2);
+}
+
+.hero-cta-row .btn-register[hidden] {
+  display: none;
+}
+
 .cd-unit {
   display: flex;
   flex-direction: column;
@@ -4081,6 +4150,9 @@ body.sponsor-modal-open {
     gap: 0.65rem;
     margin-top: 0.5rem;
   }
+  html.event-ended .hero-cta-row {
+    grid-template-columns: 1fr;
+  }
   .hero-cta-row .btn-register,
   .hero-cta-row .btn-agenda {
     justify-content: space-between;
@@ -4201,6 +4273,17 @@ body.sponsor-modal-open {
     order: 3;
     gap: 0.55rem;
     margin-top: 1.25rem;
+  }
+  .event-status {
+    order: 3;
+    padding: 1rem;
+  }
+  html.event-active .event-status {
+    order: 2;
+    margin-bottom: 1rem;
+  }
+  html.event-active .hero-bottom-left {
+    order: 3;
   }
   .cd-label {
     font-size: 0.55rem;
