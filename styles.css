@@ -1649,8 +1649,8 @@ html.early-bird-active .tickets-early-bird-note {
 }
 
 .agenda-section {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 5600px;
+  /* Its real height keeps jumps to later sections aligned on the first click. */
+  content-visibility: visible;
 }
 
 .section-speakers-light,
