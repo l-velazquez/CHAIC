@@ -41,7 +41,8 @@ tickets.html      Pricing and registration
 workshops.html    Pre-congress workshops
 privacy.html      Privacy notice and cookie inventory
 styles.css        All styles, driven by design tokens
-script.js         Countdown, agenda tabs, nav, reveals, page transitions
+nav.js            Shared navigation used by every page
+script.js         Countdown, agenda tabs, mobile nav controls, reveals, page transitions
 promotion.js      Early-bird promotion state (loads in <head>)
 consent.js        Consent Mode v2 defaults + consent banner (loads in <head>)
 docs/             Design system and privacy/consent documentation
